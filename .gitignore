@@ -1,0 +1,5 @@
+.streamlit/secrets.toml
+.env
+__pycache__/
+data/apple-page-*.json
+*.pyc
