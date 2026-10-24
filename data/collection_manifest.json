@@ -1,0 +1,22 @@
+{
+  "captured_at": "2026-10-24",
+  "apple_pages_fetched": 10,
+  "apple_unique_records_screened": 500,
+  "pilot_records": 38,
+  "apple_selected": 33,
+  "reddit_selected": 3,
+  "tradingqna_selected": 2,
+  "selection": "Purposive relevance screening, not representative sampling. Includes positive and ambiguous records.",
+  "not_yet_collected": [
+    "YouTube",
+    "social media"
+  ],
+  "play_store": "Inspected publicly visible listing; no records included in pilot because visible text was low-specificity/near-duplicate.",
+  "limits": [
+    "Only one explicit first-SIP example in pilot",
+    "Review dates do not establish investor tenure",
+    "Historic competitor posts separate from current INDmoney evidence",
+    "No observed 12-month retention denominator",
+    "Raw reviews excluded from distributed package; rerun collection for audit"
+  ]
+}
