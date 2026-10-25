@@ -75,7 +75,7 @@ def bar(df, x, y, title=None, color="#2b6cb0"):
         st.caption("No data in this lens.")
         return
     ch = alt.Chart(df).mark_bar(color=color).encode(
-        x=alt.X(f"{x}:Q", title=None), y=alt.Y(f"{y}:N", sort="-x", title=None),
+        x=alt.X(f"{x}:Q", title=None), y=alt.Y(f"{y}:N", sort="-x", title=None, axis=alt.Axis(labelLimit=340)),
         tooltip=list(df.columns)).properties(height=max(120, 28 * len(df)), title=title or "")
     st.altair_chart(ch, width="stretch")
 
@@ -153,7 +153,7 @@ with tabs[2]:
         top = df.head(20)
         ch = alt.Chart(top).mark_bar().encode(
             x=alt.X("difference_pts:Q", title="At-risk minus continuing (pct points)"),
-            y=alt.Y("Label:N", sort="-x", title=None),
+            y=alt.Y("Label:N", sort="-x", title=None, axis=alt.Axis(labelLimit=340)),
             color=alt.condition(alt.datum.difference_pts > 0, alt.value("#b54708"), alt.value("#2b6cb0")),
             tooltip=["Label", "at_risk_n", "at_risk_share", "continuing_n", "continuing_share", "low_sample"]
         ).properties(height=28 * len(top))
