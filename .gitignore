@@ -5,3 +5,4 @@ __pycache__/
 data/raw/
 data/eval/golden_labels_draft*
 .venv/
+.DS_Store

@@ -1,0 +1,633 @@
+{
+ "items_labelled": 20,
+ "items_fully_agreed": 2,
+ "field_level_agreement": 0.457,
+ "per_field": {
+  "relevance": {
+   "n": 20,
+   "agree": 11,
+   "agreement": 0.55,
+   "kappa": 0.39
+  },
+  "product": {
+   "n": 20,
+   "agree": 16,
+   "agreement": 0.8,
+   "kappa": 0.68
+  },
+  "investor_experience": {
+   "n": 20,
+   "agree": 4,
+   "agreement": 0.2,
+   "kappa": -0.016
+  },
+  "journey_stage": {
+   "n": 20,
+   "agree": 4,
+   "agreement": 0.2,
+   "kappa": 0.135
+  },
+  "drop_trigger": {
+   "n": 20,
+   "agree": 11,
+   "agreement": 0.55,
+   "kappa": 0.221
+  },
+  "unmet_need": {
+   "n": 20,
+   "agree": 7,
+   "agreement": 0.35,
+   "kappa": -0.02
+  },
+  "continuation_risk": {
+   "n": 20,
+   "agree": 11,
+   "agreement": 0.55,
+   "kappa": 0.241
+  }
+ },
+ "by_model": {
+  "claude-opus-5-5 (in-session)": {
+   "items": 7,
+   "pairs": 49,
+   "agree": 22,
+   "agreement": 0.449
+  },
+  "code prefilter": {
+   "items": 2,
+   "pairs": 14,
+   "agree": 14,
+   "agreement": 1.0
+  },
+  "openai/gpt-oss-120b": {
+   "items": 11,
+   "pairs": 77,
+   "agree": 28,
+   "agreement": 0.364
+  }
+ },
+ "items": [
+  {
+   "id": "PL-3f7bd9e9-680a-47e8-b6ea-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=3f7bd9e9-680a-47e8-b6ea-6a41dc29a918",
+   "text": "One day changes not showing. Requesting you to bring Indicators like Jenson's Alpha, Sortino Ratio etc. to evaluate the portfolio.",
+   "ai_quote": "One day changes not showing.",
+   "ai_reason": "labelled in-session against codebook",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "core",
+     "ai": "adjacent"
+    },
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    },
+    "unmet_need": {
+     "human": "understand_volatility",
+     "ai": "none"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "0"
+    }
+   }
+  },
+  {
+   "id": "TR-144644-19",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/do-we-get-compounding-benefits-in-case-of-lumpsum-investment-in-mutual-funds/144644/19",
+   "text": "AlgoEye: It can work for debt I second that. only debt and death are certain. A 2060 6.99% GOI bond will give you assured returns even if we are at war, recession or even existential event even if govt. is insolvent. equity mutual funds has a chance to outperform, over the past it has outdid every single year if a 5 year period is considered. But its only a chance. Imagine if we are in Ukraine now",
+   "ai_quote": "only debt and death are certain",
+   "ai_reason": "labelled in-session against codebook",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "core",
+     "ai": "adjacent"
+    },
+    "investor_experience": {
+     "human": "first_time_explicit",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "considering_start",
+     "ai": "unknown"
+    },
+    "unmet_need": {
+     "human": "understand_volatility",
+     "ai": "none"
+    }
+   }
+  },
+  {
+   "id": "YO-UgwA3s_Jko0X9XsWLAt4AaABAg",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=QFVffpBj4NU&lc=UgwA3s_Jko0X9XsWLAt4AaABAg",
+   "text": "Opportunity's hindi word is Absar or Mouka",
+   "ai_quote": null,
+   "ai_reason": "no SIP/MF terms",
+   "ai_model": "code prefilter",
+   "ai_status": "prefilter_excluded",
+   "all_fields_agree": true,
+   "disagreements": {}
+  },
+  {
+   "id": "PL-2b28184b-ab0d-4b70-8e4f-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=2b28184b-ab0d-4b70-8e4f-ccf49b8954e4",
+   "text": "Poor application except for investment of mutual fund in SOA format it is not of much use. If you get trouble No customer care... Only template based AI answers. Investment in indmoney to be done cautiously other wise just asking for trouble.",
+   "ai_quote": "Only template based AI answers.",
+   "ai_reason": "labelled in-session against codebook",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    },
+    "drop_trigger": {
+     "human": "distrust_platform",
+     "ai": "none"
+    },
+    "unmet_need": {
+     "human": "trust_support",
+     "ai": "none"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "0"
+    }
+   }
+  },
+  {
+   "id": "TR-20939-1",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/sip-elss-lock-in-period/20939/1",
+   "text": "ELSS comes with 3 years lock in period. In case of SIP, does every single SIP - monthly can be withdrawn only after three year (i.e if i make a SIP on 1 january 2017 and second on 1st feb 2017 and so on, i will be able to withdraw my first SIP on 1st jan 2021 ane 1st feb 2021 and so on ) or entire sum that is accumulated at the end of three years can be withdrawn???",
+   "ai_quote": null,
+   "ai_reason": null,
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "rejected",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "core",
+     "ai": "MISSING"
+    },
+    "product": {
+     "human": "general",
+     "ai": "MISSING"
+    },
+    "investor_experience": {
+     "human": "early",
+     "ai": "MISSING"
+    },
+    "journey_stage": {
+     "human": "considering_start",
+     "ai": "MISSING"
+    },
+    "drop_trigger": {
+     "human": "none",
+     "ai": "MISSING"
+    },
+    "unmet_need": {
+     "human": "understand_volatility",
+     "ai": "MISSING"
+    },
+    "continuation_risk": {
+     "human": "0",
+     "ai": "MISSING"
+    }
+   }
+  },
+  {
+   "id": "YO-Ugx3m90x1bFgwSGYsHx4AaABAg",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=hbgQcxPt3Gk&lc=Ugx3m90x1bFgwSGYsHx4AaABAg",
+   "text": "I want to know if the mutual fund decrease and I have 1year plan and that day decrease so what happen ?",
+   "ai_quote": "I want to know if the mutual fund decrease and I have 1year plan and that day decrease so what happen ?",
+   "ai_reason": "User worries about negative returns, indicating consideration to stop SIP.",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "first_time_explicit",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "first_months",
+     "ai": "considering_stop"
+    },
+    "drop_trigger": {
+     "human": "market_fall_red_portfolio",
+     "ai": "returns_below_expectation"
+    },
+    "unmet_need": {
+     "human": "understand_volatility",
+     "ai": "none"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "2"
+    }
+   }
+  },
+  {
+   "id": "PL-478c0630-c109-4455-8b1e-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=478c0630-c109-4455-8b1e-7f9867a117f7",
+   "text": "very good app for mf and stock",
+   "ai_quote": "very good app for mf and stock",
+   "ai_reason": "labelled in-session against codebook",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    }
+   }
+  },
+  {
+   "id": "TR-13579-6",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/non-listing-of-direct-funds/13579/6",
+   "text": "@Bikram Oh. Yeah… that makes sense. So Coins is good but not fully equipped to handle all mutual fund cases. I would like to point out one thing. My previous mf broker used to give me Flexi SIP and adjustable SIP options with Pause and Switch options too. Still it managed to process NACH/ECS direct from my bank according to my SIP modification. Though they do not allow any change to current months",
+   "ai_quote": "My previous mf broker used to give me Flexi SIP and adjustable SIP options with Pause and Switch options too",
+   "ai_reason": "User discusses platform features, not personal SIP activity; product is another platform (Coins); relevance is adjacent.",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_on_retry",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "core",
+     "ai": "adjacent"
+    },
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    },
+    "drop_trigger": {
+     "human": "switching",
+     "ai": "none"
+    },
+    "unmet_need": {
+     "human": "flexible_control",
+     "ai": "none"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "0"
+    }
+   }
+  },
+  {
+   "id": "YO-UgyWOUcVLzcgdbFHa6B4AaABAg.ANA",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=GT2O65ob7mU&lc=UgyWOUcVLzcgdbFHa6B4AaABAg.ANA0u6Qo5uLANFDASfsy-L",
+   "text": "Hi Jeevan, Thank you so much for your feedback! We will definitely consider your suggestions. Keep watching and supporting the channel!",
+   "ai_quote": null,
+   "ai_reason": "no SIP/MF terms",
+   "ai_model": "code prefilter",
+   "ai_status": "prefilter_excluded",
+   "all_fields_agree": true,
+   "disagreements": {}
+  },
+  {
+   "id": "PL-82ea0c5d-bb11-49f6-b4bb-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=82ea0c5d-bb11-49f6-b4bb-6d0b1badb4bb",
+   "text": "pathetic useless app. keeps updating ui and mess up portfolio tracking.",
+   "ai_quote": null,
+   "ai_reason": null,
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "rejected",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "core",
+     "ai": "MISSING"
+    },
+    "product": {
+     "human": "indmoney",
+     "ai": "MISSING"
+    },
+    "investor_experience": {
+     "human": "unknown",
+     "ai": "MISSING"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "MISSING"
+    },
+    "drop_trigger": {
+     "human": "app_confusion",
+     "ai": "MISSING"
+    },
+    "unmet_need": {
+     "human": "know_if_on_track",
+     "ai": "MISSING"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "MISSING"
+    }
+   }
+  },
+  {
+   "id": "TR-145104-4",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/why-trading-actively-in-stockmarket-is-pointless/145104/4",
+   "text": "Such a clickbait of a title! gsecgsec: infact my analysis is based on numbers I continued reading hoping you’d share some here!! gsecgsec: Cut my stock market investment by half and move the remaining half to index funds Sounds like stock market investing to me!!! gsecgsec: Nobody should even think of stock market unless their NW is &gt;1 crore. Does the market behave differently if you ‘invest’ w",
+   "ai_quote": "",
+   "ai_reason": "Content discusses stock market, not SIP/MF; thus not relevant and all other fields set to unknown/default.",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_on_retry",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "core",
+     "ai": "not_relevant"
+    },
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "restarted",
+     "ai": "unknown"
+    }
+   }
+  },
+  {
+   "id": "YO-Ugy3Rn-OwzszvwIsoKV4AaABAg",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=CPEatoLkXNI&lc=Ugy3Rn-OwzszvwIsoKV4AaABAg",
+   "text": "बच्चे के नाम sip था जिसे बंद करना pada (निजी कारण से), वो पैसा वापस कैसे मिलेगा",
+   "ai_quote": "बच्चे के नाम sip था जिसे बंद करना pada (निजी कारण से), वो पैसा वापस कैसे मिलेगा",
+   "ai_reason": "User states SIP was closed for personal reason and asks about refund, indicating stopped stage",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "early",
+     "ai": "unknown"
+    },
+    "drop_trigger": {
+     "human": "income_cashflow",
+     "ai": "needs_money_goal"
+    },
+    "unmet_need": {
+     "human": "flexible_control",
+     "ai": "none"
+    }
+   }
+  },
+  {
+   "id": "PL-bbde2476-6f7b-40b1-9e6e-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=bbde2476-6f7b-40b1-9e6e-07c30018cd21",
+   "text": "I 5 starred it earlier for their feature in tracking the portfolios and wealth management but when it comes to supports / services, I completely misjudged and they are too poor at handling support. There is no live chat option and everything is a basic AI Slop reply to queries. No customer care toll free! This is completely useless. Think of a critical issue while trading in US Stocks and all we c",
+   "ai_quote": "",
+   "ai_reason": "not about SIP/MF continuation",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "adjacent",
+     "ai": "not_relevant"
+    },
+    "product": {
+     "human": "indmoney",
+     "ai": "general"
+    },
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    },
+    "drop_trigger": {
+     "human": "distrust_platform",
+     "ai": "none"
+    },
+    "unmet_need": {
+     "human": "trust_support",
+     "ai": "none"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "0"
+    }
+   }
+  },
+  {
+   "id": "TR-171612-1",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/how-to-pay-using-the-payment-gateway-method-for-amc-sips/171612/1",
+   "text": "I chose the payment gateway method for funding my AMC SIPs instead of the mandate. But I couldn’t figure out how to make the payment. Please help. Screenshot_2024-08-10-15-46-28-49_4e36d33e4de36f27fb3cebd15b086981 1080×1813 133 KB",
+   "ai_quote": "I chose the payment gateway method for funding my AMC SIPs instead of the mandate. But I couldn’t figure out how to make the payment.",
+   "ai_reason": "User cannot figure out payment gateway, core SIP issue, app confusion with autopay.",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "early",
+     "ai": "unknown"
+    },
+    "unmet_need": {
+     "human": "reliable_payments",
+     "ai": "none"
+    }
+   }
+  },
+  {
+   "id": "PL-7b8c2138-25ec-432e-b065-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=7b8c2138-25ec-432e-b065-f741c895e435",
+   "text": "The newly introduced section in US equities - Tax Implication(What happens if you sell today), it's super useful 👌. I can see the STCG, LTGC and Gross Profit at one place, made life easier now without navigating too much.",
+   "ai_quote": "Tax Implication(What happens if you sell today)",
+   "ai_reason": "labelled in-session against codebook",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "not_relevant",
+     "ai": "adjacent"
+    },
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    }
+   }
+  },
+  {
+   "id": "TR-111699-5",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/about-mf-regular-plan/111699/5",
+   "text": "but one big advantage of regular mutual fund is you can use it as collateral ( non elss ) , so if you count the actual returns it will be much higher - of course if you use the margin .for normal users who just want to invest direct is much better",
+   "ai_quote": "but one big advantage of regular mutual fund is you can use it as collateral",
+   "ai_reason": "Discusses MF collateral, no SIP start/continue, no platform, so adjacent and general with unknown other fields",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_on_retry",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    }
+   }
+  },
+  {
+   "id": "PL-85463a37-357e-4781-b37c-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=85463a37-357e-4781-b37c-40a08ddd4cbe",
+   "text": "they changed their reward redemption immediately, ylearlier you could pay cc bills but all of a sudden you can only invest them in us stocks, lost 2000 rs because of this, shame on them.",
+   "ai_quote": "",
+   "ai_reason": "Not about SIP/MF; set all other fields to unknown/none per guidelines.",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_on_retry",
+   "all_fields_agree": false,
+   "disagreements": {
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    },
+    "drop_trigger": {
+     "human": "distrust_platform",
+     "ai": "none"
+    },
+    "unmet_need": {
+     "human": "trust_support",
+     "ai": "none"
+    },
+    "continuation_risk": {
+     "human": "1",
+     "ai": "0"
+    }
+   }
+  },
+  {
+   "id": "TR-21935-15",
+   "source": "tradingqna",
+   "url": "https://tradingqna.com/t/issues-of-smallcase/21935/15",
+   "text": "Hi @Gowri-from-smallcase , Thanks for assuring AMO order support. Please bring this feature at the earliest as it is the need of the hour for many. Why is there a SIP fee for AWI &amp; beta small cases? If I do a weekly SIP on these small cases, it would easily cost me around 1000 rupees per month which is way too high considering the returns from these small cases. Please remove the SIP fee for A",
+   "ai_quote": null,
+   "ai_reason": null,
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "rejected",
+   "all_fields_agree": false,
+   "disagreements": {
+    "relevance": {
+     "human": "not_relevant",
+     "ai": "MISSING"
+    },
+    "product": {
+     "human": "other_platform",
+     "ai": "MISSING"
+    },
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "MISSING"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "MISSING"
+    },
+    "drop_trigger": {
+     "human": "none",
+     "ai": "MISSING"
+    },
+    "unmet_need": {
+     "human": "none",
+     "ai": "MISSING"
+    },
+    "continuation_risk": {
+     "human": "0",
+     "ai": "MISSING"
+    }
+   }
+  },
+  {
+   "id": "YO-UgwsgNtC1Yyp-jXqr5Z4AaABAg",
+   "source": "youtube",
+   "url": "https://www.youtube.com/watch?v=x4P6luERcgA&lc=UgwsgNtC1Yyp-jXqr5Z4AaABAg",
+   "text": "Raju bhaiya yeh baat bataiye Jo SIP calculator amount batata hai wo data sahi hai ....?",
+   "ai_quote": "Raju bhaiya yeh baat bataiye Jo SIP calculator amount batata hai wo data sahi hai ....?",
+   "ai_reason": "User asks if SIP calculator data is correct, indicating need to know if SIP is on track; no platform mentioned, so product=general",
+   "ai_model": "openai/gpt-oss-120b",
+   "ai_status": "passed_on_retry",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "early",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "considering_start",
+     "ai": "unknown"
+    },
+    "unmet_need": {
+     "human": "none",
+     "ai": "know_if_on_track"
+    }
+   }
+  },
+  {
+   "id": "PL-6198597c-80ad-4d29-a403-",
+   "source": "play_store",
+   "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=6198597c-80ad-4d29-a403-b77f2b0fbb59",
+   "text": "What started as my go-to platform for Mutual funds and US stocks has quickly turned into my primary money management tool. The sheer feature set is incredible - I can track my external banks accounts and NPS portfolio and open FDs all in one place. On top of that, handling daily utility bills and UPI payments directly on the app with cashback reward is a massive bonus.",
+   "ai_quote": "my go-to platform for Mutual funds and US stocks",
+   "ai_reason": "labelled in-session against codebook",
+   "ai_model": "claude-opus-5-5 (in-session)",
+   "ai_status": "passed_first_try",
+   "all_fields_agree": false,
+   "disagreements": {
+    "investor_experience": {
+     "human": "experienced",
+     "ai": "unknown"
+    },
+    "journey_stage": {
+     "human": "ongoing",
+     "ai": "unknown"
+    }
+   }
+  }
+ ]
+}

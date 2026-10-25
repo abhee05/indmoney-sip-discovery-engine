@@ -65,6 +65,9 @@ def run():
               "| Field | Agree / labelled | Agreement | Cohen's kappa |", "|---|---|---|---|"]
         for f, v in gold["per_field"].items():
             L.append(f"| {f} | {v['agree']} / {v['n']} | {round(100 * (v['agreement'] or 0))}% | {v['kappa']} |")
+        L += ["", "| AI labeller | Items | Field agreement |", "|---|---|---|"]
+        for m, v in gold.get("by_model", {}).items():
+            L.append(f"| {m} | {v['items']} | {round(100 * (v['agreement'] or 0))}% |")
         L += ["", "### Where the engine failed", ""]
         for it in gold["items"]:
             if it["disagreements"]:

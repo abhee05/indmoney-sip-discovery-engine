@@ -65,60 +65,67 @@ def app_store():
                     author=e.get("author", {}).get("name", {}).get("label"),
                     kind="review", query=sort))
             if not entries:
+                errors.append(f"{sort} page {page}: no review entries (feed keys: {list(feed)[:6]})")
                 break
     return save("app_store", rows, errors)
 
 
 # ------------------------------------------------------------------ Reddit
+# Reddit blocks anonymous JSON access, so we read the public Arctic Shift
+# archive of Reddit (no login): https://arctic-shift.photon-reddit.com
+AS = "https://arctic-shift.photon-reddit.com/api"
+
+
 def _reddit_ts(t):
     import datetime as dt
-    return dt.datetime.utcfromtimestamp(t).isoformat() + "Z" if t else ""
+    try:
+        return dt.datetime.utcfromtimestamp(int(t)).isoformat() + "Z"
+    except Exception:  # noqa: BLE001
+        return ""
 
 
 def reddit():
     s, rows, errors, threads = requests.Session(), [], [], {}
-    base = "https://www.reddit.com"
     for sub in C.SUBREDDITS:
         for q in C.REDDIT_QUERIES:
-            try:
-                data = get_json(s, f"{base}/r/{sub}/search.json",
-                                {"q": q, "restrict_sr": 1, "sort": "relevance",
-                                 "t": "all", "limit": C.REDDIT_POSTS_PER_QUERY})
-            except Exception as e:  # noqa: BLE001
-                errors.append(str(e))
+            data = None
+            for key in ("query", "title"):
+                try:
+                    data = get_json(s, f"{AS}/posts/search",
+                                    {"subreddit": sub, key: q, "limit": 100}, pause=0.6)
+                    break
+                except Exception as e:  # noqa: BLE001
+                    err = str(e)
+            if data is None:
+                errors.append(err)
                 continue
-            for child in data.get("data", {}).get("children", []):
-                p = child["data"]
+            for p in (data.get("data") or [])[:C.REDDIT_POSTS_PER_QUERY]:
                 pid = p["id"]
+                link = "https://www.reddit.com" + (p.get("permalink") or f"/comments/{pid}/")
                 rows.append(record(
-                    "reddit", pid, p.get("selftext", ""), base + p["permalink"],
+                    "reddit", pid, p.get("selftext", "") or "", link,
                     title=p.get("title", ""), published_at=_reddit_ts(p.get("created_utc")),
                     thread_id=pid, author=p.get("author"), query=f"r/{sub}: {q}",
                     score=p.get("score")))
-                threads.setdefault(pid, (p.get("num_comments", 0), p["permalink"]))
-        print(f"  r/{sub}: {len(rows)} posts so far")
-    # comments from the most-discussed threads (where the "why" usually lives)
+                threads.setdefault(pid, (p.get("num_comments") or 0, link))
+        print(f"  r/{sub}: {len(rows)} posts so far ({len(errors)} errors)")
     top = sorted(threads.items(), key=lambda kv: -kv[1][0])[:C.REDDIT_COMMENT_THREADS]
     for i, (pid, (_, link)) in enumerate(top, 1):
         try:
-            data = get_json(s, f"{base}{link}.json",
-                            {"limit": C.REDDIT_COMMENTS_PER_THREAD, "depth": 2, "sort": "top"})
+            data = get_json(s, f"{AS}/comments/search",
+                            {"link_id": pid, "limit": 100}, pause=0.6)
         except Exception as e:  # noqa: BLE001
             errors.append(str(e))
             continue
-        stack = list(data[1]["data"]["children"]) if len(data) > 1 else []
-        while stack:
-            c = stack.pop()
-            if c.get("kind") != "t1":
+        cs = sorted(data.get("data") or [], key=lambda c: -(c.get("score") or 0))
+        for c in cs[:C.REDDIT_COMMENTS_PER_THREAD]:
+            body = c.get("body", "")
+            if body in ("[deleted]", "[removed]"):
                 continue
-            d = c["data"]
             rows.append(record(
-                "reddit", d["id"], d.get("body", ""), base + d.get("permalink", link),
-                published_at=_reddit_ts(d.get("created_utc")), thread_id=pid,
-                author=d.get("author"), kind="comment", score=d.get("score")))
-            rep = d.get("replies")
-            if isinstance(rep, dict):
-                stack.extend(rep["data"]["children"])
+                "reddit", c["id"], body, f"{link.rstrip('/')}/{c['id']}/",
+                published_at=_reddit_ts(c.get("created_utc")), thread_id=pid,
+                author=c.get("author"), kind="comment", score=c.get("score")))
         if i % 20 == 0:
             print(f"  comments: {i}/{len(top)} threads")
     return save("reddit", rows, errors)

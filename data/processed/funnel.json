@@ -1,0 +1,32 @@
+{
+  "app_store": {
+    "collected": 243,
+    "after_dedupe": 237,
+    "candidates": 30
+  },
+  "play_store": {
+    "collected": 2572,
+    "after_dedupe": 2389,
+    "candidates": 203
+  },
+  "reddit": {
+    "collected": 8406,
+    "after_dedupe": 8112,
+    "candidates": 3652
+  },
+  "tradingqna": {
+    "collected": 1450,
+    "after_dedupe": 1440,
+    "candidates": 994
+  },
+  "youtube": {
+    "collected": 2866,
+    "after_dedupe": 2638,
+    "candidates": 634
+  },
+  "_total": {
+    "collected": 15537,
+    "after_dedupe": 14816,
+    "candidates": 5513
+  }
+}

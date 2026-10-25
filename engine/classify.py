@@ -59,14 +59,19 @@ def validate(item, rec):
     errs = []
     for name, f in CB.FIELDS.items():
         v = item.get(name)
+        empty = "unknown" if "unknown" in f["values"] else ("none" if "none" in f["values"] else "0")
         if f["multi"]:
             if isinstance(v, str):
                 v = [v]
+            if isinstance(v, list) and not v:  # format repair: [] means "not stated"
+                v = [empty]
             if not isinstance(v, list) or not v or any(x not in f["values"] for x in v):
                 errs.append(f"{name}: must be a list of allowed values")
             else:
                 item[name] = sorted(set(v))
         else:
+            if isinstance(v, list) and len(v) == 1:  # format repair: ["x"] -> "x"
+                v = v[0]
             v = str(v) if v is not None else None
             if v not in f["values"]:
                 errs.append(f"{name}: '{v}' not allowed")
@@ -120,7 +125,8 @@ def classify(rows, client=None, limit=None, batch_size=C.BATCH_SIZE, log=print, 
     if not client.available:
         raise LLMUnavailable("Set GROQ_API_KEY to run AI coding.")
     done = load_done()
-    todo = [r for r in _order(rows) if r["id"] not in done]
+    # rejected outputs are retried on the next run (their old rejection stays in the log)
+    todo = [r for r in _order(rows) if r["id"] not in done or done[r["id"]].get("status") == "rejected"]
     pri = set(priority)  # e.g. golden-set ids are always coded first
     todo = [r for r in todo if r["id"] in pri] + [r for r in todo if r["id"] not in pri]
     if limit:
@@ -161,7 +167,7 @@ def classify(rows, client=None, limit=None, batch_size=C.BATCH_SIZE, log=print, 
                 out.write(json.dumps(item, ensure_ascii=False) + "\n")
             out.flush()
             n = i + len(batch)
-            if n % (batch_size * 10) == 0 or n == len(todo):
+            if n % (batch_size * 5) == 0 or n == len(todo):
                 rate = n / max(time.monotonic() - t0, 1) * 60
                 log(f"  {n}/{len(todo)} coded ({rate:.0f}/min) {stats}")
     stats.update(calls=client.calls, tokens=client.tokens,

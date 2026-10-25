@@ -57,12 +57,15 @@ class Groq:
         if not self.key:
             raise LLMUnavailable("GROQ_API_KEY is not set.")
         last = "unknown error"
-        for attempt in range(30):
+        for attempt in range(12):
             model = self.model()
-            body = {"model": model, "temperature": temperature, "max_tokens": max_tokens,
+            body = {"model": model, "temperature": temperature,
+                    "max_tokens": max_tokens * 2 if "gpt-oss" in model else max_tokens,
                     "response_format": {"type": "json_object"},
                     "messages": [{"role": "system", "content": system},
                                  {"role": "user", "content": user}]}
+            if "gpt-oss" in model:
+                body["reasoning_effort"] = "low"
             t0 = time.monotonic()
             try:
                 r = requests.post(URL, json=body, timeout=90,
@@ -81,15 +84,19 @@ class Groq:
                 wait = r.headers.get("retry-after")
                 m = re.search(r"try again in ([\d.]+)s", msg)
                 wait = float(wait) if wait else (float(m.group(1)) if m else 15)
+                print(f"  (rate limit, waiting {wait:.0f}s)")
                 time.sleep(min(wait + 1, 90))
                 continue
+            if r.status_code in (401, 403):
+                raise LLMUnavailable("Groq rejected the API key (check .env).")
             if r.status_code == 404 or (r.status_code == 400 and "decommission" in r.text.lower()):
                 print(f"  ! {model} not available on this account; skipping")
                 self.exhausted.add(model)
                 continue
             if r.status_code >= 400:
                 last = f"HTTP {r.status_code}: {r.text[:200]}"
-                time.sleep(min(3 * (attempt + 1), 60))
+                print(f"  ! {model}: {last}")
+                time.sleep(min(3 * (attempt + 1), 20))
                 continue
             data = r.json()
             self.calls += 1
@@ -99,5 +106,6 @@ class Groq:
                 return json.loads(content), model
             except json.JSONDecodeError:
                 last = "model returned invalid JSON"
+                print(f"  ! {model}: invalid JSON, retrying")
                 continue
         raise LLMUnavailable(f"Groq request failed after retries: {last}")

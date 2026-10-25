@@ -1,0 +1,3201 @@
+{
+ "coverage": {
+  "coded": 545,
+  "rejected_by_gates": 3,
+  "relevance": {
+   "adjacent": 312,
+   "core": 168,
+   "not_relevant": 62
+  },
+  "core_by_source": {
+   "play_store": 14,
+   "tradingqna": 17,
+   "youtube": 32,
+   "reddit": 101,
+   "app_store": 4
+  },
+  "core_by_product": {
+   "indmoney": 22,
+   "general": 126,
+   "other_platform": 20
+  },
+  "core_threads": 151,
+  "first_year_core": 38,
+  "models": {
+   "claude-opus-5-5 (in-session)": 534,
+   "openai/gpt-oss-120b": 11
+  },
+  "status": {
+   "passed_first_try": 536,
+   "passed_on_retry": 6,
+   "rejected": 3
+  }
+ },
+ "funnel": {
+  "app_store": {
+   "collected": 243,
+   "after_dedupe": 237,
+   "candidates": 30
+  },
+  "play_store": {
+   "collected": 2572,
+   "after_dedupe": 2389,
+   "candidates": 203
+  },
+  "reddit": {
+   "collected": 8406,
+   "after_dedupe": 8112,
+   "candidates": 3652
+  },
+  "tradingqna": {
+   "collected": 1450,
+   "after_dedupe": 1440,
+   "candidates": 994
+  },
+  "youtube": {
+   "collected": 2866,
+   "after_dedupe": 2638,
+   "candidates": 634
+  },
+  "_total": {
+   "collected": 15537,
+   "after_dedupe": 14816,
+   "candidates": 5513
+  }
+ },
+ "questions": [
+  {
+   "question": "Why do people start a SIP, and what do they expect?",
+   "fields": {
+    "start_motivation": [
+     {
+      "value": "specific_goal",
+      "label": "A named goal (house, child, emergency fund, trip)",
+      "n": 14,
+      "threads": 14,
+      "share": 0.083,
+      "quotes": [
+       {
+        "id": "RE-1u347it",
+        "source": "reddit",
+        "quote": "current XIRR is11.2% but it was 19% 6 months ago",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1u347it/sip_in_small_cap_for_7_yrswhen_does_stay_invested/"
+       },
+       {
+        "id": "RE-1vckn0q",
+        "source": "reddit",
+        "quote": "I have increased the SIP amount with respect to the salary increase.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1vckn0q/need_advice/"
+       },
+       {
+        "id": "RE-1vpm1dc",
+        "source": "reddit",
+        "quote": "I’ve a very minimal knowledge of funds and the above funds selected by CHATGPT",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1vpm1dc/portfolio_review/"
+       },
+       {
+        "id": "RE-1wljb40",
+        "source": "reddit",
+        "quote": "I’m relatively new to mutual fund investing",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wljb40/10k_monthly_sip_looking_for_feedback_on_my/"
+       }
+      ]
+     },
+     {
+      "value": "long_term_wealth",
+      "label": "Build wealth / beat inflation / retirement",
+      "n": 6,
+      "threads": 6,
+      "share": 0.036,
+      "quotes": [
+       {
+        "id": "YO-UgwGYyIjn6ystPftZzZ4AaABAg",
+        "source": "youtube",
+        "quote": "इसलिए sip बहुत जरूरी है",
+        "url": "https://www.youtube.com/watch?v=oIhGHb30rWo&lc=UgwGYyIjn6ystPftZzZ4AaABAg"
+       },
+       {
+        "id": "RE-1x8bu4z",
+        "source": "reddit",
+        "quote": "This is the first time doing SIP.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1x8bu4z/portfolio_review/"
+       },
+       {
+        "id": "RE-1vpm1dc",
+        "source": "reddit",
+        "quote": "I’ve a very minimal knowledge of funds and the above funds selected by CHATGPT",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1vpm1dc/portfolio_review/"
+       },
+       {
+        "id": "RE-1w2b22n",
+        "source": "reddit",
+        "quote": "Goal: Marriage, Car and Long Term",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1w2b22n/risk_appetite_aggressive_23_1yr_into_first_job/"
+       }
+      ]
+     },
+     {
+      "value": "tax_saving",
+      "label": "ELSS / tax saving",
+      "n": 3,
+      "threads": 3,
+      "share": 0.018,
+      "quotes": [
+       {
+        "id": "RE-1w1on1z",
+        "source": "reddit",
+        "quote": "I picked it because I needed to save tax",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1w1on1z/7_years_investment_journey_reached_eight_figure/"
+       },
+       {
+        "id": "RE-1uuj8vs",
+        "source": "reddit",
+        "quote": "I'm considering stopping my SIP into Mirae ELSS",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1uuj8vs/should_i_stop_investing_in_elss_because_of/"
+       },
+       {
+        "id": "RE-1vo2rbx",
+        "source": "reddit",
+        "quote": "i only saw last 5 years CAGR which i now know was not the best decision",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1vo2rbx/did_i_go_wrong_somewhere_or_should_diversify_more/"
+       }
+      ]
+     },
+     {
+      "value": "trend",
+      "label": "Started because 'everyone is doing it'",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "YO-UgwGYyIjn6ystPftZzZ4AaABAg",
+        "source": "youtube",
+        "quote": "इसलिए sip बहुत जरूरी है",
+        "url": "https://www.youtube.com/watch?v=oIhGHb30rWo&lc=UgwGYyIjn6ystPftZzZ4AaABAg"
+       }
+      ]
+     }
+    ],
+    "expectation": [
+     {
+      "value": "quick_visible_gains",
+      "label": "Expected noticeable gains within months",
+      "n": 4,
+      "threads": 4,
+      "share": 0.024,
+      "quotes": [
+       {
+        "id": "RE-ngsr08q",
+        "source": "reddit",
+        "quote": "who told you that SIP is high growth, will surely beat inflation without risk",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1ntcmbi/the_harsh_reality_of_sips_not_what_you_think/ngsr08q/"
+       },
+       {
+        "id": "RE-1o0kwt0",
+        "source": "reddit",
+        "quote": "I choosed this mf randomly.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1o0kwt0/pls_review_my_portfolio_and_suggest_if_i_should/"
+       },
+       {
+        "id": "RE-1mr24lr",
+        "source": "reddit",
+        "quote": "I want the money to grow fast",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1mr24lr/unable_to_manage_money/"
+       },
+       {
+        "id": "TR-62033-15",
+        "source": "tradingqna",
+        "quote": "not even disciplined investment like SIP",
+        "url": "https://tradingqna.com/t/is-sip-really-a-good-investment-method/62033/15"
+       }
+      ]
+     },
+     {
+      "value": "steady_long_term",
+      "label": "Expected slow, long-term compounding",
+      "n": 2,
+      "threads": 2,
+      "share": 0.012,
+      "quotes": [
+       {
+        "id": "RE-1xcfdvd",
+        "source": "reddit",
+        "quote": "First time investing in SIP.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xcfdvd/first_time_investing_in_sip_can_someone_review/"
+       },
+       {
+        "id": "RE-1vyr3ad",
+        "source": "reddit",
+        "quote": "to get consistent returns of say 12 to 13% per year",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vyr3ad/portfolio_review_risk_appetite_is_aggressive_and/"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What changes in the months after starting?",
+   "fields": {
+    "journey_stage": [
+     {
+      "value": "ongoing",
+      "label": "Continuing an existing SIP",
+      "n": 55,
+      "threads": 52,
+      "share": 0.327,
+      "quotes": [
+       {
+        "id": "RE-1vz8whl",
+        "source": "reddit",
+        "quote": "Started with 5k sip around 2021.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vz8whl/80l_milestone_achieved_next_one_crore/"
+       },
+       {
+        "id": "RE-1sgj4te",
+        "source": "reddit",
+        "quote": "i started with a ₹70k/month sip, and have now increased it to ₹150k/month.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1sgj4te/how_i_reached_25_lakhs_in_this_market/"
+       },
+       {
+        "id": "RE-1w1on1z",
+        "source": "reddit",
+        "quote": "I picked it because I needed to save tax",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1w1on1z/7_years_investment_journey_reached_eight_figure/"
+       },
+       {
+        "id": "RE-1mtew9a",
+        "source": "reddit",
+        "quote": "will all transactions go through?",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1mtew9a/is_this_per_transaction_or_per_day_please_check/"
+       }
+      ]
+     },
+     {
+      "value": "considering_start",
+      "label": "Thinking about starting",
+      "n": 23,
+      "threads": 23,
+      "share": 0.137,
+      "quotes": [
+       {
+        "id": "RE-1xdrnwu",
+        "source": "reddit",
+        "quote": "Now it’s time to invest.",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1xdrnwu/thank_you_delhi_cleared_all_my_dads_debts_this/"
+       },
+       {
+        "id": "RE-1wwr7lu",
+        "source": "reddit",
+        "quote": "As a beginner your comments and suggestions helps me",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1wwr7lu/i_need_a_straight_forward_answer_risk/"
+       },
+       {
+        "id": "RE-1wh52tv",
+        "source": "reddit",
+        "quote": "I recently received the first salary of my life",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wh52tv/first_salary_of_life_how_to_start_financial/"
+       },
+       {
+        "id": "RE-1wm28sc",
+        "source": "reddit",
+        "quote": "I want to start fresh with mutual funds",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wm28sc/regret_buying_a_ulip_via_policybazaar_want_to/"
+       }
+      ]
+     },
+     {
+      "value": "considering_stop",
+      "label": "Asking or thinking about pausing, reducing or stopping (not yet done)",
+      "n": 21,
+      "threads": 19,
+      "share": 0.125,
+      "quotes": [
+       {
+        "id": "RE-1xd27xx",
+        "source": "reddit",
+        "quote": "Should i continue my SIPs and not worry about it",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+       },
+       {
+        "id": "RE-1hcck6p",
+        "source": "reddit",
+        "quote": "I cannot edit the sip amount to zero",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1hcck6p/what_if_i_cancel_my_sip/"
+       },
+       {
+        "id": "RE-1uuj8vs",
+        "source": "reddit",
+        "quote": "I'm considering stopping my SIP into Mirae ELSS",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1uuj8vs/should_i_stop_investing_in_elss_because_of/"
+       },
+       {
+        "id": "RE-1jktepi",
+        "source": "reddit",
+        "quote": "i thought adding a new sip will overwrite old one",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1jktepi/multiple_sip_in_sme_fund/"
+       }
+      ]
+     },
+     {
+      "value": "onboarding",
+      "label": "Setting up account / KYC / first SIP",
+      "n": 14,
+      "threads": 14,
+      "share": 0.083,
+      "quotes": [
+       {
+        "id": "RE-1fn0wic",
+        "source": "reddit",
+        "quote": "Starting my investing journey.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1fn0wic/request_starting_my_investing_journey_kindly/"
+       },
+       {
+        "id": "RE-7qsaa9",
+        "source": "reddit",
+        "quote": "I have recently started my first job and have started a SIP.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/7qsaa9/direct_investing_in_mutual_funds_am_i_doing_it/"
+       },
+       {
+        "id": "RE-1vhwonx",
+        "source": "reddit",
+        "quote": "first year engineering student in hostel. No income.",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1vhwonx/18m_student_just_trying_to_set_finances_from/"
+       },
+       {
+        "id": "RE-1uut63h",
+        "source": "reddit",
+        "quote": "Just started working, first real paycheck",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1uut63h/24ish_first_job_65kmonth_to_invest_tear_my/"
+       }
+      ]
+     },
+     {
+      "value": "reduced_or_paused",
+      "label": "Has reduced, skipped or paused",
+      "n": 8,
+      "threads": 8,
+      "share": 0.048,
+      "quotes": [
+       {
+        "id": "RE-1vxbqz7",
+        "source": "reddit",
+        "quote": "stopped elss tax saver sip",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vxbqz7/suggestions_can_do_upto_50k/"
+       },
+       {
+        "id": "RE-m8c3nmd",
+        "source": "reddit",
+        "quote": "it's just a little less investment for a month",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1i6frhb/pause_sip/m8c3nmd/"
+       },
+       {
+        "id": "RE-oa0o4gr",
+        "source": "reddit",
+        "quote": "Did the mistake of stopping SIP in one of the funds during earlier 2021.",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1rrikls/markets_are_crashing_are_you_guys_still/oa0o4gr/"
+       },
+       {
+        "id": "RE-1uvzo4x",
+        "source": "reddit",
+        "quote": "The red ones i have paused recently",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1uvzo4x/portfolio_analysis/"
+       }
+      ]
+     },
+     {
+      "value": "stopped",
+      "label": "Has stopped/cancelled or let it lapse",
+      "n": 8,
+      "threads": 8,
+      "share": 0.048,
+      "quotes": [
+       {
+        "id": "RE-j8ng5ym",
+        "source": "reddit",
+        "quote": "I have stopped Axis bluechip fund SIP of 3 years and switched to index fund.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/112xwd0/advice_needed_questions_for_people_with_long_term/j8ng5ym/"
+       },
+       {
+        "id": "RE-1vzltga",
+        "source": "reddit",
+        "quote": "The screenshot includes both my active and stopped SIPs",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1vzltga/looking_for_advice_on_rebalancing_my_mf_portfolio/"
+       },
+       {
+        "id": "RE-1kr7wvi",
+        "source": "reddit",
+        "quote": "I started my first SIP in ELSS (Axis) in 2014 and stopped in 2023.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1kr7wvi/need_perspective_on_my_mutual_funds/"
+       },
+       {
+        "id": "RE-odvjenw",
+        "source": "reddit",
+        "quote": "I stopped SIP long time ago.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1saar6q/one_of_the_best_decision_in_my_mf_investment/odvjenw/"
+       }
+      ]
+     },
+     {
+      "value": "first_months",
+      "label": "Explicitly in the first ~3 months",
+      "n": 8,
+      "threads": 8,
+      "share": 0.048,
+      "quotes": [
+       {
+        "id": "RE-1wbbqy9",
+        "source": "reddit",
+        "quote": "seeing the loss has made me anxious",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+       },
+       {
+        "id": "RE-1cqui8x",
+        "source": "reddit",
+        "quote": "canara bank has cut 177rs from my account stating ECS mandate SC",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1cqui8x/what_are_ecs_mandate_sc_charges_and_should_i_pay/"
+       },
+       {
+        "id": "RE-1xcfdvd",
+        "source": "reddit",
+        "quote": "First time investing in SIP.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xcfdvd/first_time_investing_in_sip_can_someone_review/"
+       },
+       {
+        "id": "RE-1x5ri4s",
+        "source": "reddit",
+        "quote": "I've been investing in MF for 5 months.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1x5ri4s/review_my_portfolio/"
+       }
+      ]
+     },
+     {
+      "value": "restarted",
+      "label": "Stopped earlier and started again",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "RE-1w7vfpp",
+        "source": "reddit",
+        "quote": "I recently ran into issues with Groww’s KYC process",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7vfpp/need_help_resuming_sips_after_moving_out_of_groww/"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What leads investors to pause, reduce or stop?",
+   "fields": {
+    "drop_trigger": [
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 12,
+      "threads": 12,
+      "share": 0.071,
+      "quotes": [
+       {
+        "id": "RE-j8ng5ym",
+        "source": "reddit",
+        "quote": "I have stopped Axis bluechip fund SIP of 3 years and switched to index fund.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/112xwd0/advice_needed_questions_for_people_with_long_term/j8ng5ym/"
+       },
+       {
+        "id": "RE-1qasb1y",
+        "source": "reddit",
+        "quote": "I’m confused whether to continue the SIP hoping it’ll bounce back",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1qasb1y/stuck_with_quant_mid_cap_hold_or_exit/"
+       },
+       {
+        "id": "RE-1uvzo4x",
+        "source": "reddit",
+        "quote": "The red ones i have paused recently",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1uvzo4x/portfolio_analysis/"
+       },
+       {
+        "id": "RE-1qa14si",
+        "source": "reddit",
+        "quote": "I took some wrong decision while selecting MFs for SIP and hence my returns are wrong.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1qa14si/please_help_me_review_my_mf_portfolio/"
+       }
+      ]
+     },
+     {
+      "value": "market_fall_red_portfolio",
+      "label": "Portfolio shows losses / market fell",
+      "n": 9,
+      "threads": 9,
+      "share": 0.054,
+      "quotes": [
+       {
+        "id": "RE-1wbbqy9",
+        "source": "reddit",
+        "quote": "seeing the loss has made me anxious",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+       },
+       {
+        "id": "RE-1xd27xx",
+        "source": "reddit",
+        "quote": "Should i continue my SIPs and not worry about it",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+       },
+       {
+        "id": "RE-1x1sbbo",
+        "source": "reddit",
+        "quote": "But some times doubts creep in, about my current strategy.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1x1sbbo/started_investing_since_last_one_year_and_the/"
+       },
+       {
+        "id": "RE-o18luwp",
+        "source": "reddit",
+        "quote": "I won't stop it now. This too shall pass.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1qkpf8q/what_the_hell_is_wrong_with_motilal_oswal/o18luwp/"
+       }
+      ]
+     },
+     {
+      "value": "switching",
+      "label": "Moving to another platform or fund (not quitting investing)",
+      "n": 8,
+      "threads": 8,
+      "share": 0.048,
+      "quotes": [
+       {
+        "id": "RE-1vxbqz7",
+        "source": "reddit",
+        "quote": "stopped elss tax saver sip",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vxbqz7/suggestions_can_do_upto_50k/"
+       },
+       {
+        "id": "RE-1uuj8vs",
+        "source": "reddit",
+        "quote": "I'm considering stopping my SIP into Mirae ELSS",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1uuj8vs/should_i_stop_investing_in_elss_because_of/"
+       },
+       {
+        "id": "RE-1wo8i2w",
+        "source": "reddit",
+        "quote": "I also plan to stop the two regular plan SIPs",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wo8i2w/mid_cap_or_multi_cap_for_my_4th_sip_40_already_in/"
+       },
+       {
+        "id": "RE-1xbsl7i",
+        "source": "reddit",
+        "quote": "I've been investing for around 10 months",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xbsl7i/profile_review_moderate/"
+       }
+      ]
+     },
+     {
+      "value": "distrust_platform",
+      "label": "Lost trust in the platform / money stuck / support",
+      "n": 7,
+      "threads": 7,
+      "share": 0.042,
+      "quotes": [
+       {
+        "id": "RE-1w7vfpp",
+        "source": "reddit",
+        "quote": "I recently ran into issues with Groww’s KYC process",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7vfpp/need_help_resuming_sips_after_moving_out_of_groww/"
+       },
+       {
+        "id": "PL-4d6b5bb4-5a5b-4429-9a85-",
+        "source": "play_store",
+        "quote": "you deduct the amount twice and i didn't even know that",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=4d6b5bb4-5a5b-4429-9a85-a7a194626b84"
+       },
+       {
+        "id": "PL-b5b4ab1d-bdba-472a-9621-",
+        "source": "play_store",
+        "quote": "Funds deducted but MF not credited or even shown as pending.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=b5b4ab1d-bdba-472a-9621-53429237dbd7"
+       },
+       {
+        "id": "PL-15744a50-001f-4047-bd3f-",
+        "source": "play_store",
+        "quote": "One thing I know now that they only value their own profit.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=15744a50-001f-4047-bd3f-70c6e05d3379"
+       }
+      ]
+     },
+     {
+      "value": "payment_mandate_failure",
+      "label": "Autopay/mandate/instalment failed, often unnoticed",
+      "n": 6,
+      "threads": 6,
+      "share": 0.036,
+      "quotes": [
+       {
+        "id": "RE-b4j439",
+        "source": "reddit",
+        "quote": "in Kuvera I was having multiple payment failure for SIPs",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/b4j439/mfu_has_stopped_epayeezz_how_to_start_new_sip_for/"
+       },
+       {
+        "id": "YO-Ugw4tI4ZqaCNrxKo-7h4AaABAg",
+        "source": "youtube",
+        "quote": "Sip has been put on hold for last 6 months, no red flag was given, no call , no mail",
+        "url": "https://www.youtube.com/watch?v=QS21r1IE7ZA&lc=Ugw4tI4ZqaCNrxKo-7h4AaABAg"
+       },
+       {
+        "id": "TR-125471-3",
+        "source": "tradingqna",
+        "quote": "Looks like my SIP’s got deleted as well for this fund",
+        "url": "https://tradingqna.com/t/motilal-oswal-temporary-suspension-of-lumpsum-investments/125471/3"
+       },
+       {
+        "id": "PL-706ff4dd-3043-4187-9a5b-",
+        "source": "play_store",
+        "quote": "when you complete almost 9 month, it says Autopay is not supported",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=706ff4dd-3043-4187-9a5b-88b1c5e0f39c"
+       }
+      ]
+     },
+     {
+      "value": "income_cashflow",
+      "label": "Job loss, salary delay, expenses, can't afford instalment",
+      "n": 5,
+      "threads": 5,
+      "share": 0.03,
+      "quotes": [
+       {
+        "id": "RE-1tqciar",
+        "source": "reddit",
+        "quote": "Shall i stop my MF for some time( maybe a year of two) just to pay my loan little earlier",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1tqciar/shall_i_stop_mf_for_loan/"
+       },
+       {
+        "id": "RE-1mr24lr",
+        "source": "reddit",
+        "quote": "I want the money to grow fast",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1mr24lr/unable_to_manage_money/"
+       },
+       {
+        "id": "TR-120657-1",
+        "source": "tradingqna",
+        "quote": "penalty over missed SIP due to insufficient balance",
+        "url": "https://tradingqna.com/t/penalty-over-missed-sip/120657/1"
+       },
+       {
+        "id": "TR-198998-11",
+        "source": "tradingqna",
+        "quote": "A fixed commitment makes me nervous.",
+        "url": "https://tradingqna.com/t/freelancers-fixed-monthly-sip-or-investing-only-when-income-is-good/198998/11"
+       }
+      ]
+     },
+     {
+      "value": "needs_money_goal",
+      "label": "Needed the money or goal reached",
+      "n": 3,
+      "threads": 3,
+      "share": 0.018,
+      "quotes": [
+       {
+        "id": "RE-1vhvpz8",
+        "source": "reddit",
+        "quote": "Should I withdraw my mutual funds and start over from scratch?",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vhvpz8/should_i_withdraw_my_mutual_funds_and_start_over/"
+       },
+       {
+        "id": "RE-phv4pwz",
+        "source": "reddit",
+        "quote": "Should I pause SIP? Will it not delay compounding?",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1x9z1fl/30y_m_combined_income_35lpm_purchasing_a_house/phv4pwz/"
+       },
+       {
+        "id": "YO-Ugy3Rn-OwzszvwIsoKV4AaABAg",
+        "source": "youtube",
+        "quote": "बच्चे के नाम sip था जिसे बंद करना pada (निजी कारण से), वो पैसा वापस कैसे मिलेगा",
+        "url": "https://www.youtube.com/watch?v=CPEatoLkXNI&lc=Ugy3Rn-OwzszvwIsoKV4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "advice_to_stop",
+      "label": "Someone (person or creator) told them to stop or switch",
+      "n": 2,
+      "threads": 2,
+      "share": 0.012,
+      "quotes": [
+       {
+        "id": "TR-62033-1",
+        "source": "tradingqna",
+        "quote": "I found this via a WhatsApp forward",
+        "url": "https://tradingqna.com/t/is-sip-really-a-good-investment-method/62033/1"
+       },
+       {
+        "id": "YO-UgyRWaBZxwD7nlyXwHp4AaABAg",
+        "source": "youtube",
+        "quote": "ye Paisa dooba dega vo ab mujhe pe vishwas nhi karte",
+        "url": "https://www.youtube.com/watch?v=x4P6luERcgA&lc=UgyRWaBZxwD7nlyXwHp4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "app_confusion",
+      "label": "Couldn't understand app, returns or how to modify",
+      "n": 2,
+      "threads": 2,
+      "share": 0.012,
+      "quotes": [
+       {
+        "id": "PL-fde1d1df-ddf7-4bc0-b78e-",
+        "source": "play_store",
+        "quote": "by mistake redeemed my folio that I wanted to redeem the least",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=fde1d1df-ddf7-4bc0-b78e-8204c147973c"
+       },
+       {
+        "id": "PL-d83e571b-b7d9-4b8a-b085-",
+        "source": "play_store",
+        "quote": "i am unable to unpause the SIP, when I click on the paused SIP the app instantly closes.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=d83e571b-b7d9-4b8a-b085-36f01d2f5233"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What do investors check, and how often?",
+   "fields": {
+    "check_frequency": [],
+    "what_checked": [
+     {
+      "value": "total_returns",
+      "label": "Total gain/loss or current value",
+      "n": 19,
+      "threads": 18,
+      "share": 0.113,
+      "quotes": [
+       {
+        "id": "RE-1wbbqy9",
+        "source": "reddit",
+        "quote": "seeing the loss has made me anxious",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+       },
+       {
+        "id": "RE-1xd27xx",
+        "source": "reddit",
+        "quote": "Should i continue my SIPs and not worry about it",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+       },
+       {
+        "id": "YO-Ugzo2xXbmSkTH4TqgxV4AaABAg",
+        "source": "youtube",
+        "quote": "my portfolis all funds (8) are green.",
+        "url": "https://www.youtube.com/watch?v=QFVffpBj4NU&lc=Ugzo2xXbmSkTH4TqgxV4AaABAg"
+       },
+       {
+        "id": "RE-1x1sbbo",
+        "source": "reddit",
+        "quote": "But some times doubts creep in, about my current strategy.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1x1sbbo/started_investing_since_last_one_year_and_the/"
+       }
+      ]
+     },
+     {
+      "value": "xirr_cagr",
+      "label": "XIRR / CAGR / annualised return",
+      "n": 9,
+      "threads": 9,
+      "share": 0.054,
+      "quotes": [
+       {
+        "id": "RE-1vz8whl",
+        "source": "reddit",
+        "quote": "Started with 5k sip around 2021.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vz8whl/80l_milestone_achieved_next_one_crore/"
+       },
+       {
+        "id": "YO-UgxapFp8Ku95EYQAX1l4AaABAg",
+        "source": "youtube",
+        "quote": "Currently my portfolio since last 1.5yr is 7-8℅ XIRR",
+        "url": "https://www.youtube.com/watch?v=oIhGHb30rWo&lc=UgxapFp8Ku95EYQAX1l4AaABAg"
+       },
+       {
+        "id": "RE-1u347it",
+        "source": "reddit",
+        "quote": "current XIRR is11.2% but it was 19% 6 months ago",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1u347it/sip_in_small_cap_for_7_yrswhen_does_stay_invested/"
+       },
+       {
+        "id": "RE-1uuj8vs",
+        "source": "reddit",
+        "quote": "I'm considering stopping my SIP into Mirae ELSS",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1uuj8vs/should_i_stop_investing_in_elss_because_of/"
+       }
+      ]
+     },
+     {
+      "value": "compare_others",
+      "label": "Comparing with others / other funds / FD",
+      "n": 4,
+      "threads": 4,
+      "share": 0.024,
+      "quotes": [
+       {
+        "id": "RE-1qasb1y",
+        "source": "reddit",
+        "quote": "I’m confused whether to continue the SIP hoping it’ll bounce back",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1qasb1y/stuck_with_quant_mid_cap_hold_or_exit/"
+       },
+       {
+        "id": "RE-1qperk1",
+        "source": "reddit",
+        "quote": "pause for now and shifted to 150 index fund",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1qperk1/motilal_oswal_large_and_midcap_funds_should_i_buy/"
+       },
+       {
+        "id": "PL-3d447320-7344-4d61-a68b-",
+        "source": "play_store",
+        "quote": "same mutual fund but profit showing different 1,3 and 5year",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=3d447320-7344-4d61-a68b-b45882133876"
+       },
+       {
+        "id": "PL-791e4736-804e-4607-bd1f-",
+        "source": "play_store",
+        "quote": "no way to flag off-track or underperforming",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=791e4736-804e-4607-bd1f-a7b68e4d01c5"
+       }
+      ]
+     },
+     {
+      "value": "daily_change",
+      "label": "1-day change",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "AP-14594614357",
+        "source": "app_store",
+        "quote": "the 1D Return and Total returns in mutual funds can’t be viewed simultaneously",
+        "url": "https://apps.apple.com/in/app/id1450178837?see-all=reviews#review-14594614357"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What confuses or worries them inside the app?",
+   "fields": {
+    "in_app_pain": [
+     {
+      "value": "modify_pause_flow",
+      "label": "Hard to pause/skip/reduce/stop or unclear what it does",
+      "n": 14,
+      "threads": 13,
+      "share": 0.083,
+      "quotes": [
+       {
+        "id": "RE-1hcck6p",
+        "source": "reddit",
+        "quote": "I cannot edit the sip amount to zero",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1hcck6p/what_if_i_cancel_my_sip/"
+       },
+       {
+        "id": "RE-1jktepi",
+        "source": "reddit",
+        "quote": "i thought adding a new sip will overwrite old one",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1jktepi/multiple_sip_in_sme_fund/"
+       },
+       {
+        "id": "YO-Ugzzq6tB4c9m0uL9Z7p4AaABAg",
+        "source": "youtube",
+        "quote": "solution bolo kaise aur kahan se sip stop hoga",
+        "url": "https://www.youtube.com/watch?v=N8rRW54UdBk&lc=Ugzzq6tB4c9m0uL9Z7p4AaABAg"
+       },
+       {
+        "id": "RE-15qp5it",
+        "source": "reddit",
+        "quote": "Is this offline mode the only way to cancel first SIP?",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/15qp5it/kfinkart_showing_this_message_on_cancelling_first/"
+       }
+      ]
+     },
+     {
+      "value": "failed_or_missed_instalment",
+      "label": "Instalment failed, skipped, or deducted wrongly",
+      "n": 13,
+      "threads": 13,
+      "share": 0.077,
+      "quotes": [
+       {
+        "id": "PL-4d6b5bb4-5a5b-4429-9a85-",
+        "source": "play_store",
+        "quote": "you deduct the amount twice and i didn't even know that",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=4d6b5bb4-5a5b-4429-9a85-a7a194626b84"
+       },
+       {
+        "id": "PL-b5b4ab1d-bdba-472a-9621-",
+        "source": "play_store",
+        "quote": "Funds deducted but MF not credited or even shown as pending.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=b5b4ab1d-bdba-472a-9621-53429237dbd7"
+       },
+       {
+        "id": "RE-b4j439",
+        "source": "reddit",
+        "quote": "in Kuvera I was having multiple payment failure for SIPs",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/b4j439/mfu_has_stopped_epayeezz_how_to_start_new_sip_for/"
+       },
+       {
+        "id": "YO-Ugw4tI4ZqaCNrxKo-7h4AaABAg",
+        "source": "youtube",
+        "quote": "Sip has been put on hold for last 6 months, no red flag was given, no call , no mail",
+        "url": "https://www.youtube.com/watch?v=QS21r1IE7ZA&lc=Ugw4tI4ZqaCNrxKo-7h4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "charges_transparency",
+      "label": "Hidden charges, regular vs direct, unclear fees",
+      "n": 10,
+      "threads": 10,
+      "share": 0.06,
+      "quotes": [
+       {
+        "id": "RE-1cqui8x",
+        "source": "reddit",
+        "quote": "canara bank has cut 177rs from my account stating ECS mandate SC",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1cqui8x/what_are_ecs_mandate_sc_charges_and_should_i_pay/"
+       },
+       {
+        "id": "RE-1wo8i2w",
+        "source": "reddit",
+        "quote": "I also plan to stop the two regular plan SIPs",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wo8i2w/mid_cap_or_multi_cap_for_my_4th_sip_40_already_in/"
+       },
+       {
+        "id": "RE-1wm28sc",
+        "source": "reddit",
+        "quote": "I want to start fresh with mutual funds",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wm28sc/regret_buying_a_ulip_via_policybazaar_want_to/"
+       },
+       {
+        "id": "RE-1vyr3ad",
+        "source": "reddit",
+        "quote": "to get consistent returns of say 12 to 13% per year",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vyr3ad/portfolio_review_risk_appetite_is_aggressive_and/"
+       }
+      ]
+     },
+     {
+      "value": "mandate_autopay",
+      "label": "Setting up / limits / errors with autopay or mandate",
+      "n": 9,
+      "threads": 9,
+      "share": 0.054,
+      "quotes": [
+       {
+        "id": "RE-1mtew9a",
+        "source": "reddit",
+        "quote": "will all transactions go through?",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1mtew9a/is_this_per_transaction_or_per_day_please_check/"
+       },
+       {
+        "id": "RE-1cqui8x",
+        "source": "reddit",
+        "quote": "canara bank has cut 177rs from my account stating ECS mandate SC",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1cqui8x/what_are_ecs_mandate_sc_charges_and_should_i_pay/"
+       },
+       {
+        "id": "PL-4d6b5bb4-5a5b-4429-9a85-",
+        "source": "play_store",
+        "quote": "you deduct the amount twice and i didn't even know that",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=4d6b5bb4-5a5b-4429-9a85-a7a194626b84"
+       },
+       {
+        "id": "RE-1nagki6",
+        "source": "reddit",
+        "quote": "I'm not sure about having funds to invest for monthly SIP",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1nagki6/i_just_wanted_to_invest_some_extra_money_1000_rs/"
+       }
+      ]
+     },
+     {
+      "value": "returns_display",
+      "label": "Returns, XIRR or P&L shown confusingly or changed",
+      "n": 9,
+      "threads": 9,
+      "share": 0.054,
+      "quotes": [
+       {
+        "id": "PL-e81f84d2-71b8-48bb-b451-",
+        "source": "play_store",
+        "quote": "I don't get to see XIRR, Net P&L etc. easily now on INDmoney easily.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=e81f84d2-71b8-48bb-b451-af7a5ebdec76"
+       },
+       {
+        "id": "YO-UgzWZUYdlukbpJ0V4ZB4AaABAg",
+        "source": "youtube",
+        "quote": "IndMoney par mutual fund ki total units kha par show krta ha",
+        "url": "https://www.youtube.com/watch?v=Db9vZOArQqc&lc=UgzWZUYdlukbpJ0V4ZB4AaABAg"
+       },
+       {
+        "id": "YO-UgxRtan_fNN44Ck9nVx4AaABAg",
+        "source": "youtube",
+        "quote": "Mara do sip dikaha rara ha bhai help karo",
+        "url": "https://www.youtube.com/watch?v=BLKf4oOxTwE&lc=UgxRtan_fNN44Ck9nVx4AaABAg"
+       },
+       {
+        "id": "PL-1bbb49ff-0b4b-43f7-b6e9-",
+        "source": "play_store",
+        "quote": "Ind money simply displays absolute without any mention making is believe it's cagr",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=1bbb49ff-0b4b-43f7-b6e9-42e7721578a0"
+       }
+      ]
+     },
+     {
+      "value": "support",
+      "label": "Support slow/unhelpful, money stuck",
+      "n": 8,
+      "threads": 8,
+      "share": 0.048,
+      "quotes": [
+       {
+        "id": "RE-1w7vfpp",
+        "source": "reddit",
+        "quote": "I recently ran into issues with Groww’s KYC process",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7vfpp/need_help_resuming_sips_after_moving_out_of_groww/"
+       },
+       {
+        "id": "PL-fde1d1df-ddf7-4bc0-b78e-",
+        "source": "play_store",
+        "quote": "by mistake redeemed my folio that I wanted to redeem the least",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=fde1d1df-ddf7-4bc0-b78e-8204c147973c"
+       },
+       {
+        "id": "PL-b5b4ab1d-bdba-472a-9621-",
+        "source": "play_store",
+        "quote": "Funds deducted but MF not credited or even shown as pending.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=b5b4ab1d-bdba-472a-9621-53429237dbd7"
+       },
+       {
+        "id": "YO-Ugw4tI4ZqaCNrxKo-7h4AaABAg",
+        "source": "youtube",
+        "quote": "Sip has been put on hold for last 6 months, no red flag was given, no call , no mail",
+        "url": "https://www.youtube.com/watch?v=QS21r1IE7ZA&lc=Ugw4tI4ZqaCNrxKo-7h4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "kyc_onboarding",
+      "label": "KYC, account opening, verification",
+      "n": 3,
+      "threads": 3,
+      "share": 0.018,
+      "quotes": [
+       {
+        "id": "RE-1w7vfpp",
+        "source": "reddit",
+        "quote": "I recently ran into issues with Groww’s KYC process",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7vfpp/need_help_resuming_sips_after_moving_out_of_groww/"
+       },
+       {
+        "id": "YO-Ugw4tI4ZqaCNrxKo-7h4AaABAg",
+        "source": "youtube",
+        "quote": "Sip has been put on hold for last 6 months, no red flag was given, no call , no mail",
+        "url": "https://www.youtube.com/watch?v=QS21r1IE7ZA&lc=Ugw4tI4ZqaCNrxKo-7h4AaABAg"
+       },
+       {
+        "id": "PL-eaa87c79-437a-4098-b0b1-",
+        "source": "play_store",
+        "quote": "it failed saying kyc is not valid and there's no option for rekyc",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=eaa87c79-437a-4098-b0b1-dec776854aa4"
+       }
+      ]
+     },
+     {
+      "value": "bugs_ui_change",
+      "label": "App bugs, crashes, unwanted UI changes",
+      "n": 3,
+      "threads": 3,
+      "share": 0.018,
+      "quotes": [
+       {
+        "id": "RE-1q5ggt4",
+        "source": "reddit",
+        "quote": "The UI has finally broken me",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1q5ggt4/moving_on_from_paytm_money_after_5_years_the_ui/"
+       },
+       {
+        "id": "PL-1cf5c121-9321-4798-a5b8-",
+        "source": "play_store",
+        "quote": "I am not able to add extra amount in mutual fund which I have",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=1cf5c121-9321-4798-a5b8-303109c665bd"
+       },
+       {
+        "id": "PL-d83e571b-b7d9-4b8a-b085-",
+        "source": "play_store",
+        "quote": "i am unable to unpause the SIP, when I click on the paused SIP the app instantly closes.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=d83e571b-b7d9-4b8a-b085-36f01d2f5233"
+       }
+      ]
+     },
+     {
+      "value": "tracking_sync",
+      "label": "External portfolio sync/tracking wrong or missing",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "RE-1bk5ama",
+        "source": "reddit",
+        "quote": "i want to keep my mutual funds in one app",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1bk5ama/want_to_get_my_mutual_funds_under_one_app_to_keep/"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What do they do outside the app when unsure?",
+   "fields": {
+    "outside_app": [
+     {
+      "value": "reddit_forum",
+      "label": "Asks on Reddit or a forum",
+      "n": 37,
+      "threads": 37,
+      "share": 0.22,
+      "quotes": [
+       {
+        "id": "RE-1fn0wic",
+        "source": "reddit",
+        "quote": "Starting my investing journey.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1fn0wic/request_starting_my_investing_journey_kindly/"
+       },
+       {
+        "id": "RE-1wbbqy9",
+        "source": "reddit",
+        "quote": "seeing the loss has made me anxious",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+       },
+       {
+        "id": "RE-1xd27xx",
+        "source": "reddit",
+        "quote": "Should i continue my SIPs and not worry about it",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+       },
+       {
+        "id": "RE-1v9mzwx",
+        "source": "reddit",
+        "quote": "whether I'm on the right track",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1v9mzwx/29m_india_bank_employee_looking_for_advice_on/"
+       }
+      ]
+     },
+     {
+      "value": "youtube_creator",
+      "label": "Watches YouTube / finfluencers",
+      "n": 17,
+      "threads": 13,
+      "share": 0.101,
+      "quotes": [
+       {
+        "id": "RE-1wwvay1",
+        "source": "reddit",
+        "quote": "I want to start investing in SIP from 2027",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wwvay1/tips_on_where_to_start_learning_for_investing/"
+       },
+       {
+        "id": "RE-1w7u2x1",
+        "source": "reddit",
+        "quote": "the factor allocation is largely influenced by fin-influencers",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7u2x1/portfolio_review_aggressive_long_term_15_years/"
+       },
+       {
+        "id": "YO-UgwViuQxTECDaLlx4Jh4AaABAg",
+        "source": "youtube",
+        "quote": "Mera 1cr ka portfolio 83 lakh ka rah gaya hai",
+        "url": "https://www.youtube.com/watch?v=va_xLp76GkA&lc=UgwViuQxTECDaLlx4Jh4AaABAg"
+       },
+       {
+        "id": "YO-UgyevBMQ2H3I06bUqXh4AaABAg",
+        "source": "youtube",
+        "quote": "Thik hai ya galat 20 25 saal ke liye",
+        "url": "https://www.youtube.com/watch?v=XSusqbVVb8o&lc=UgyevBMQ2H3I06bUqXh4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "friends_family",
+      "label": "Asks friends, family, colleagues",
+      "n": 3,
+      "threads": 3,
+      "share": 0.018,
+      "quotes": [
+       {
+        "id": "RE-j0tllf8",
+        "source": "reddit",
+        "quote": "I do not know what to do or how to decide?",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/zol1dp/i_still_see_people_asking_whether_to_wait_for_a/j0tllf8/"
+       },
+       {
+        "id": "TR-62033-1",
+        "source": "tradingqna",
+        "quote": "I found this via a WhatsApp forward",
+        "url": "https://tradingqna.com/t/is-sip-really-a-good-investment-method/62033/1"
+       },
+       {
+        "id": "YO-UgyRWaBZxwD7nlyXwHp4AaABAg",
+        "source": "youtube",
+        "quote": "ye Paisa dooba dega vo ab mujhe pe vishwas nhi karte",
+        "url": "https://www.youtube.com/watch?v=x4P6luERcgA&lc=UgyRWaBZxwD7nlyXwHp4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "other_tool",
+      "label": "Uses another app, calculator or spreadsheet",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "RE-1vpm1dc",
+        "source": "reddit",
+        "quote": "I’ve a very minimal knowledge of funds and the above funds selected by CHATGPT",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1vpm1dc/portfolio_review/"
+       }
+      ]
+     },
+     {
+      "value": "professional",
+      "label": "Asks an advisor / CA / MFD",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "RE-1kr7wvi",
+        "source": "reddit",
+        "quote": "I started my first SIP in ELSS (Axis) in 2014 and stopped in 2023.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1kr7wvi/need_perspective_on_my_mutual_funds/"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What keeps continuers going?",
+   "fields": {
+    "continuation_driver": [
+     {
+      "value": "long_term_belief",
+      "label": "Believes in staying invested long term",
+      "n": 10,
+      "threads": 10,
+      "share": 0.06,
+      "quotes": [
+       {
+        "id": "RE-1sgj4te",
+        "source": "reddit",
+        "quote": "i started with a ₹70k/month sip, and have now increased it to ₹150k/month.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1sgj4te/how_i_reached_25_lakhs_in_this_market/"
+       },
+       {
+        "id": "YO-UgxapFp8Ku95EYQAX1l4AaABAg",
+        "source": "youtube",
+        "quote": "Currently my portfolio since last 1.5yr is 7-8℅ XIRR",
+        "url": "https://www.youtube.com/watch?v=oIhGHb30rWo&lc=UgxapFp8Ku95EYQAX1l4AaABAg"
+       },
+       {
+        "id": "RE-1x1sbbo",
+        "source": "reddit",
+        "quote": "But some times doubts creep in, about my current strategy.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1x1sbbo/started_investing_since_last_one_year_and_the/"
+       },
+       {
+        "id": "RE-j0p35m6",
+        "source": "reddit",
+        "quote": "Every time there was bloodbath, I simply doubled my SIP for the whole period.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/zol1dp/i_still_see_people_asking_whether_to_wait_for_a/j0p35m6/"
+       }
+      ]
+     },
+     {
+      "value": "automation_habit",
+      "label": "It's automatic / forgot about it in a good way",
+      "n": 2,
+      "threads": 2,
+      "share": 0.012,
+      "quotes": [
+       {
+        "id": "RE-lblxzyi",
+        "source": "reddit",
+        "quote": "If you miss one, you will miss next and it become habit of missing an SIP.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1dv7xh5/i_started_my_first_sip_very_very_small_some/lblxzyi/"
+       },
+       {
+        "id": "RE-p3ddqhm",
+        "source": "reddit",
+        "quote": "You don't need 4–5 mutual funds just because the app gives you 100 options.",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1vj08n1/21f_earning_12lmonth_i_can_invest_2030k_every/p3ddqhm/"
+       }
+      ]
+     },
+     {
+      "value": "affordable_amount",
+      "label": "Amount is small enough not to hurt",
+      "n": 2,
+      "threads": 2,
+      "share": 0.012,
+      "quotes": [
+       {
+        "id": "YO-UgweMTaTzhtOTknOE1p4AaABAg.A_-",
+        "source": "youtube",
+        "quote": "better to invest little then not investing at all",
+        "url": "https://www.youtube.com/watch?v=8eI6zoGyRM4&lc=UgweMTaTzhtOTknOE1p4AaABAg.A_-Mhjm6c8kA_v9CMspWU7"
+       },
+       {
+        "id": "YO-UgzCKYMMOrMIA9pOaEt4AaABAg",
+        "source": "youtube",
+        "quote": "Humlog chhota sip karte hai",
+        "url": "https://www.youtube.com/watch?v=hIHu0_pet_g&lc=UgzCKYMMOrMIA9pOaEt4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "reassurance_education",
+      "label": "Was reassured or learned volatility is normal",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "RE-pcq2wjk",
+        "source": "reddit",
+        "quote": "Hang in there my brother.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1wspnxq/after_2_years_of_disciplines_sip_investment_net/pcq2wjk/"
+       }
+      ]
+     },
+     {
+      "value": "goal_progress",
+      "label": "Sees progress toward a goal",
+      "n": 1,
+      "threads": 1,
+      "share": 0.006,
+      "quotes": [
+       {
+        "id": "RE-1vz8whl",
+        "source": "reddit",
+        "quote": "Started with 5k sip around 2021.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1vz8whl/80l_milestone_achieved_next_one_crore/"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "question": "What unmet needs emerge consistently?",
+   "fields": {
+    "unmet_need": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 61,
+      "threads": 61,
+      "share": 0.363,
+      "quotes": [
+       {
+        "id": "RE-1xdrnwu",
+        "source": "reddit",
+        "quote": "Now it’s time to invest.",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1xdrnwu/thank_you_delhi_cleared_all_my_dads_debts_this/"
+       },
+       {
+        "id": "RE-1fn0wic",
+        "source": "reddit",
+        "quote": "Starting my investing journey.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1fn0wic/request_starting_my_investing_journey_kindly/"
+       },
+       {
+        "id": "RE-1wwr7lu",
+        "source": "reddit",
+        "quote": "As a beginner your comments and suggestions helps me",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1wwr7lu/i_need_a_straight_forward_answer_risk/"
+       },
+       {
+        "id": "RE-7qsaa9",
+        "source": "reddit",
+        "quote": "I have recently started my first job and have started a SIP.",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/7qsaa9/direct_investing_in_mutual_funds_am_i_doing_it/"
+       }
+      ]
+     },
+     {
+      "value": "flexible_control",
+      "label": "Pause/skip/reduce without losing the habit or penalties",
+      "n": 23,
+      "threads": 21,
+      "share": 0.137,
+      "quotes": [
+       {
+        "id": "RE-1w0umcg",
+        "source": "reddit",
+        "quote": "I don’t do fixed SIPs for most of my portfolio.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1w0umcg/29_working_on_a_cruise_ship_portfolio_review/"
+       },
+       {
+        "id": "RE-1hcck6p",
+        "source": "reddit",
+        "quote": "I cannot edit the sip amount to zero",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1hcck6p/what_if_i_cancel_my_sip/"
+       },
+       {
+        "id": "RE-1jktepi",
+        "source": "reddit",
+        "quote": "i thought adding a new sip will overwrite old one",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1jktepi/multiple_sip_in_sme_fund/"
+       },
+       {
+        "id": "YO-Ugzzq6tB4c9m0uL9Z7p4AaABAg",
+        "source": "youtube",
+        "quote": "solution bolo kaise aur kahan se sip stop hoga",
+        "url": "https://www.youtube.com/watch?v=N8rRW54UdBk&lc=Ugzzq6tB4c9m0uL9Z7p4AaABAg"
+       }
+      ]
+     },
+     {
+      "value": "reliable_payments",
+      "label": "Instalments that just work, and clear alerts when they don't",
+      "n": 15,
+      "threads": 15,
+      "share": 0.089,
+      "quotes": [
+       {
+        "id": "RE-1mtew9a",
+        "source": "reddit",
+        "quote": "will all transactions go through?",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1mtew9a/is_this_per_transaction_or_per_day_please_check/"
+       },
+       {
+        "id": "PL-4d6b5bb4-5a5b-4429-9a85-",
+        "source": "play_store",
+        "quote": "you deduct the amount twice and i didn't even know that",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=4d6b5bb4-5a5b-4429-9a85-a7a194626b84"
+       },
+       {
+        "id": "PL-61e5cdcd-424c-4a84-8e82-",
+        "source": "play_store",
+        "quote": "do manual sip. then no option to pay in one shot",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=61e5cdcd-424c-4a84-8e82-97907926fafc"
+       },
+       {
+        "id": "RE-1trqwed",
+        "source": "reddit",
+        "quote": "But the mandate show amount as full 1L INR.",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1trqwed/help_me_understand_autopaymandate/"
+       }
+      ]
+     },
+     {
+      "value": "know_if_on_track",
+      "label": "Know whether my SIP is doing OK / on track for my goal",
+      "n": 14,
+      "threads": 13,
+      "share": 0.083,
+      "quotes": [
+       {
+        "id": "RE-1v9mzwx",
+        "source": "reddit",
+        "quote": "whether I'm on the right track",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1v9mzwx/29m_india_bank_employee_looking_for_advice_on/"
+       },
+       {
+        "id": "PL-e81f84d2-71b8-48bb-b451-",
+        "source": "play_store",
+        "quote": "I don't get to see XIRR, Net P&L etc. easily now on INDmoney easily.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=e81f84d2-71b8-48bb-b451-af7a5ebdec76"
+       },
+       {
+        "id": "RE-1xb1bsb",
+        "source": "reddit",
+        "quote": "I'm still relatively early in my investing journey",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1xb1bsb/hey_im_looking_for_some_honest_feedback_on_my_mf/"
+       },
+       {
+        "id": "RE-1bk5ama",
+        "source": "reddit",
+        "quote": "i want to keep my mutual funds in one app",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1bk5ama/want_to_get_my_mutual_funds_under_one_app_to_keep/"
+       }
+      ]
+     },
+     {
+      "value": "understand_volatility",
+      "label": "Understand why returns look like this and what is normal",
+      "n": 13,
+      "threads": 13,
+      "share": 0.077,
+      "quotes": [
+       {
+        "id": "RE-1wbbqy9",
+        "source": "reddit",
+        "quote": "seeing the loss has made me anxious",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+       },
+       {
+        "id": "RE-1xd27xx",
+        "source": "reddit",
+        "quote": "Should i continue my SIPs and not worry about it",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+       },
+       {
+        "id": "RE-1x1sbbo",
+        "source": "reddit",
+        "quote": "But some times doubts creep in, about my current strategy.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1x1sbbo/started_investing_since_last_one_year_and_the/"
+       },
+       {
+        "id": "RE-ngsr08q",
+        "source": "reddit",
+        "quote": "who told you that SIP is high growth, will surely beat inflation without risk",
+        "url": "https://www.reddit.com/r/personalfinanceindia/comments/1ntcmbi/the_harsh_reality_of_sips_not_what_you_think/ngsr08q/"
+       }
+      ]
+     },
+     {
+      "value": "trust_support",
+      "label": "Trustworthy platform and responsive support",
+      "n": 7,
+      "threads": 7,
+      "share": 0.042,
+      "quotes": [
+       {
+        "id": "RE-1w7vfpp",
+        "source": "reddit",
+        "quote": "I recently ran into issues with Groww’s KYC process",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7vfpp/need_help_resuming_sips_after_moving_out_of_groww/"
+       },
+       {
+        "id": "PL-fde1d1df-ddf7-4bc0-b78e-",
+        "source": "play_store",
+        "quote": "by mistake redeemed my folio that I wanted to redeem the least",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=fde1d1df-ddf7-4bc0-b78e-8204c147973c"
+       },
+       {
+        "id": "PL-b5b4ab1d-bdba-472a-9621-",
+        "source": "play_store",
+        "quote": "Funds deducted but MF not credited or even shown as pending.",
+        "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=b5b4ab1d-bdba-472a-9621-53429237dbd7"
+       },
+       {
+        "id": "RE-1q5ggt4",
+        "source": "reddit",
+        "quote": "The UI has finally broken me",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1q5ggt4/moving_on_from_paytm_money_after_5_years_the_ui/"
+       }
+      ]
+     },
+     {
+      "value": "goal_link",
+      "label": "See the SIP connected to a personal goal",
+      "n": 4,
+      "threads": 4,
+      "share": 0.024,
+      "quotes": [
+       {
+        "id": "RE-1u347it",
+        "source": "reddit",
+        "quote": "current XIRR is11.2% but it was 19% 6 months ago",
+        "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1u347it/sip_in_small_cap_for_7_yrswhen_does_stay_invested/"
+       },
+       {
+        "id": "RE-1w2b22n",
+        "source": "reddit",
+        "quote": "Goal: Marriage, Car and Long Term",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1w2b22n/risk_appetite_aggressive_23_1yr_into_first_job/"
+       },
+       {
+        "id": "RE-1wg512e",
+        "source": "reddit",
+        "quote": "Aged 22, 1Lakh/month investment guidance",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wg512e/aged_22_1lakhmonth_investment_guidance/"
+       },
+       {
+        "id": "RE-1loqrht",
+        "source": "reddit",
+        "quote": "Something in me urged me to skip the SIP instalment this month.",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1loqrht/tired_of_mf_sips/"
+       }
+      ]
+     },
+     {
+      "value": "clear_costs",
+      "label": "Clear costs and plan type",
+      "n": 4,
+      "threads": 4,
+      "share": 0.024,
+      "quotes": [
+       {
+        "id": "RE-1cqui8x",
+        "source": "reddit",
+        "quote": "canara bank has cut 177rs from my account stating ECS mandate SC",
+        "url": "https://www.reddit.com/r/IndiaInvestments/comments/1cqui8x/what_are_ecs_mandate_sc_charges_and_should_i_pay/"
+       },
+       {
+        "id": "RE-1wo8i2w",
+        "source": "reddit",
+        "quote": "I also plan to stop the two regular plan SIPs",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wo8i2w/mid_cap_or_multi_cap_for_my_4th_sip_40_already_in/"
+       },
+       {
+        "id": "RE-1wm28sc",
+        "source": "reddit",
+        "quote": "I want to start fresh with mutual funds",
+        "url": "https://www.reddit.com/r/mutualfunds/comments/1wm28sc/regret_buying_a_ulip_via_policybazaar_want_to/"
+       },
+       {
+        "id": "TR-34124-1",
+        "source": "tradingqna",
+        "quote": "I am very new in this field",
+        "url": "https://tradingqna.com/t/zerodha-new-account-opening/34124/1"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "trigger_x_stage": {
+  "income_cashflow": {
+   "ongoing": 1,
+   "considering_stop": 1,
+   "unknown": 3
+  },
+  "returns_below_expectation": {
+   "reduced_or_paused": 1,
+   "stopped": 2,
+   "considering_stop": 5,
+   "ongoing": 2,
+   "unknown": 2
+  },
+  "market_fall_red_portfolio": {
+   "reduced_or_paused": 3,
+   "ongoing": 4,
+   "considering_stop": 1,
+   "first_months": 1
+  },
+  "payment_mandate_failure": {
+   "ongoing": 1,
+   "stopped": 1,
+   "reduced_or_paused": 1,
+   "unknown": 1,
+   "onboarding": 2
+  },
+  "app_confusion": {
+   "unknown": 1,
+   "reduced_or_paused": 1
+  },
+  "needs_money_goal": {
+   "considering_stop": 2,
+   "stopped": 1
+  },
+  "distrust_platform": {
+   "unknown": 4,
+   "restarted": 1,
+   "considering_start": 1,
+   "onboarding": 1
+  },
+  "advice_to_stop": {
+   "ongoing": 2
+  },
+  "switching": {
+   "ongoing": 5,
+   "considering_stop": 2,
+   "reduced_or_paused": 1
+  }
+ },
+ "continuers_vs_at_risk": {
+  "group_sizes": {
+   "at_risk": 38,
+   "continuing": 64
+  },
+  "rows": [
+   {
+    "field": "what_checked",
+    "value": "total_returns",
+    "label": "Total gain/loss or current value",
+    "at_risk_n": 3,
+    "at_risk_share": 0.079,
+    "continuing_n": 15,
+    "continuing_share": 0.234,
+    "difference_pts": -15.5,
+    "low_sample": false
+   },
+   {
+    "field": "in_app_pain",
+    "value": "modify_pause_flow",
+    "label": "Hard to pause/skip/reduce/stop or unclear what it does",
+    "at_risk_n": 8,
+    "at_risk_share": 0.211,
+    "continuing_n": 4,
+    "continuing_share": 0.062,
+    "difference_pts": 14.8,
+    "low_sample": true
+   },
+   {
+    "field": "in_app_pain",
+    "value": "returns_display",
+    "label": "Returns, XIRR or P&L shown confusingly or changed",
+    "at_risk_n": 0,
+    "at_risk_share": 0.0,
+    "continuing_n": 7,
+    "continuing_share": 0.109,
+    "difference_pts": -10.9,
+    "low_sample": true
+   },
+   {
+    "field": "outside_app",
+    "value": "reddit_forum",
+    "label": "Asks on Reddit or a forum",
+    "at_risk_n": 6,
+    "at_risk_share": 0.158,
+    "continuing_n": 17,
+    "continuing_share": 0.266,
+    "difference_pts": -10.8,
+    "low_sample": false
+   },
+   {
+    "field": "income_stability",
+    "value": "stable_salaried",
+    "label": "Salaried / stable",
+    "at_risk_n": 1,
+    "at_risk_share": 0.026,
+    "continuing_n": 8,
+    "continuing_share": 0.125,
+    "difference_pts": -9.9,
+    "low_sample": true
+   },
+   {
+    "field": "continuation_driver",
+    "value": "long_term_belief",
+    "label": "Believes in staying invested long term",
+    "at_risk_n": 1,
+    "at_risk_share": 0.026,
+    "continuing_n": 8,
+    "continuing_share": 0.125,
+    "difference_pts": -9.9,
+    "low_sample": true
+   },
+   {
+    "field": "in_app_pain",
+    "value": "failed_or_missed_instalment",
+    "label": "Instalment failed, skipped, or deducted wrongly",
+    "at_risk_n": 4,
+    "at_risk_share": 0.105,
+    "continuing_n": 1,
+    "continuing_share": 0.016,
+    "difference_pts": 9.0,
+    "low_sample": true
+   },
+   {
+    "field": "investor_experience",
+    "value": "first_time_explicit",
+    "label": "Says this is their first SIP / first time investing in MFs",
+    "at_risk_n": 1,
+    "at_risk_share": 0.026,
+    "continuing_n": 7,
+    "continuing_share": 0.109,
+    "difference_pts": -8.3,
+    "low_sample": true
+   },
+   {
+    "field": "investor_experience",
+    "value": "early",
+    "label": "Says they started within the last ~12 months, first-time status unclear",
+    "at_risk_n": 4,
+    "at_risk_share": 0.105,
+    "continuing_n": 11,
+    "continuing_share": 0.172,
+    "difference_pts": -6.7,
+    "low_sample": false
+   },
+   {
+    "field": "investor_experience",
+    "value": "experienced",
+    "label": "States multi-year or prior investing history",
+    "at_risk_n": 7,
+    "at_risk_share": 0.184,
+    "continuing_n": 16,
+    "continuing_share": 0.25,
+    "difference_pts": -6.6,
+    "low_sample": false
+   },
+   {
+    "field": "what_checked",
+    "value": "xirr_cagr",
+    "label": "XIRR / CAGR / annualised return",
+    "at_risk_n": 2,
+    "at_risk_share": 0.053,
+    "continuing_n": 7,
+    "continuing_share": 0.109,
+    "difference_pts": -5.7,
+    "low_sample": true
+   },
+   {
+    "field": "in_app_pain",
+    "value": "charges_transparency",
+    "label": "Hidden charges, regular vs direct, unclear fees",
+    "at_risk_n": 1,
+    "at_risk_share": 0.026,
+    "continuing_n": 4,
+    "continuing_share": 0.062,
+    "difference_pts": -3.6,
+    "low_sample": true
+   },
+   {
+    "field": "start_motivation",
+    "value": "specific_goal",
+    "label": "A named goal (house, child, emergency fund, trip)",
+    "at_risk_n": 2,
+    "at_risk_share": 0.053,
+    "continuing_n": 5,
+    "continuing_share": 0.078,
+    "difference_pts": -2.5,
+    "low_sample": true
+   },
+   {
+    "field": "outside_app",
+    "value": "youtube_creator",
+    "label": "Watches YouTube / finfluencers",
+    "at_risk_n": 5,
+    "at_risk_share": 0.132,
+    "continuing_n": 7,
+    "continuing_share": 0.109,
+    "difference_pts": 2.2,
+    "low_sample": true
+   }
+  ]
+ },
+ "segments": {
+  "investor_experience": [
+   {
+    "value": "experienced",
+    "label": "States multi-year or prior investing history",
+    "n": 24,
+    "at_risk_share": 0.292,
+    "top_triggers": [
+     {
+      "value": "switching",
+      "label": "Moving to another platform or fund (not quitting investing)",
+      "n": 4
+     },
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 3
+     },
+     {
+      "value": "market_fall_red_portfolio",
+      "label": "Portfolio shows losses / market fell",
+      "n": 2
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 5
+     },
+     {
+      "value": "understand_volatility",
+      "label": "Understand why returns look like this and what is normal",
+      "n": 2
+     },
+     {
+      "value": "trust_support",
+      "label": "Trustworthy platform and responsive support",
+      "n": 2
+     }
+    ],
+    "low_sample": false
+   },
+   {
+    "value": "first_time_explicit",
+    "label": "Says this is their first SIP / first time investing in MFs",
+    "n": 23,
+    "at_risk_share": 0.043,
+    "top_triggers": [
+     {
+      "value": "market_fall_red_portfolio",
+      "label": "Portfolio shows losses / market fell",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 19
+     },
+     {
+      "value": "clear_costs",
+      "label": "Clear costs and plan type",
+      "n": 2
+     },
+     {
+      "value": "flexible_control",
+      "label": "Pause/skip/reduce without losing the habit or penalties",
+      "n": 1
+     }
+    ],
+    "low_sample": false
+   },
+   {
+    "value": "early",
+    "label": "Says they started within the last ~12 months, first-time status unclear",
+    "n": 15,
+    "at_risk_share": 0.267,
+    "top_triggers": [
+     {
+      "value": "market_fall_red_portfolio",
+      "label": "Portfolio shows losses / market fell",
+      "n": 3
+     },
+     {
+      "value": "switching",
+      "label": "Moving to another platform or fund (not quitting investing)",
+      "n": 1
+     },
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 8
+     },
+     {
+      "value": "understand_volatility",
+      "label": "Understand why returns look like this and what is normal",
+      "n": 3
+     },
+     {
+      "value": "know_if_on_track",
+      "label": "Know whether my SIP is doing OK / on track for my goal",
+      "n": 1
+     }
+    ],
+    "low_sample": false
+   }
+  ],
+  "income_stability": [
+   {
+    "value": "stable_salaried",
+    "label": "Salaried / stable",
+    "n": 19,
+    "at_risk_share": 0.053,
+    "top_triggers": [
+     {
+      "value": "switching",
+      "label": "Moving to another platform or fund (not quitting investing)",
+      "n": 1
+     },
+     {
+      "value": "income_cashflow",
+      "label": "Job loss, salary delay, expenses, can't afford instalment",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 15
+     },
+     {
+      "value": "know_if_on_track",
+      "label": "Know whether my SIP is doing OK / on track for my goal",
+      "n": 1
+     },
+     {
+      "value": "goal_link",
+      "label": "See the SIP connected to a personal goal",
+      "n": 1
+     }
+    ],
+    "low_sample": false
+   },
+   {
+    "value": "student_no_income",
+    "label": "Student or no income",
+    "n": 5,
+    "at_risk_share": 0.0,
+    "top_triggers": [
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 3
+     },
+     {
+      "value": "understand_volatility",
+      "label": "Understand why returns look like this and what is normal",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   },
+   {
+    "value": "variable_income",
+    "label": "Freelance, business, gig",
+    "n": 4,
+    "at_risk_share": 0.0,
+    "top_triggers": [
+     {
+      "value": "income_cashflow",
+      "label": "Job loss, salary delay, expenses, can't afford instalment",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "flexible_control",
+      "label": "Pause/skip/reduce without losing the habit or penalties",
+      "n": 3
+     },
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   }
+  ],
+  "age_band": [
+   {
+    "value": "under_25",
+    "label": "Under 25 / student / first job",
+    "n": 24,
+    "at_risk_share": 0.042,
+    "top_triggers": [
+     {
+      "value": "switching",
+      "label": "Moving to another platform or fund (not quitting investing)",
+      "n": 1
+     },
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 19
+     },
+     {
+      "value": "goal_link",
+      "label": "See the SIP connected to a personal goal",
+      "n": 2
+     },
+     {
+      "value": "know_if_on_track",
+      "label": "Know whether my SIP is doing OK / on track for my goal",
+      "n": 1
+     }
+    ],
+    "low_sample": false
+   },
+   {
+    "value": "25_34",
+    "label": "25-34",
+    "n": 13,
+    "at_risk_share": 0.231,
+    "top_triggers": [
+     {
+      "value": "switching",
+      "label": "Moving to another platform or fund (not quitting investing)",
+      "n": 1
+     },
+     {
+      "value": "income_cashflow",
+      "label": "Job loss, salary delay, expenses, can't afford instalment",
+      "n": 1
+     },
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 8
+     },
+     {
+      "value": "know_if_on_track",
+      "label": "Know whether my SIP is doing OK / on track for my goal",
+      "n": 1
+     },
+     {
+      "value": "flexible_control",
+      "label": "Pause/skip/reduce without losing the habit or penalties",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   },
+   {
+    "value": "35_plus",
+    "label": "35+",
+    "n": 1,
+    "at_risk_share": 0.0,
+    "top_triggers": [],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   }
+  ],
+  "money_source": [
+   {
+    "value": "salary",
+    "label": "Monthly salary",
+    "n": 5,
+    "at_risk_share": 0.0,
+    "top_triggers": [],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 4
+     },
+     {
+      "value": "know_if_on_track",
+      "label": "Know whether my SIP is doing OK / on track for my goal",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   },
+   {
+    "value": "family_money",
+    "label": "Parents / pocket money",
+    "n": 2,
+    "at_risk_share": 0.0,
+    "top_triggers": [],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   }
+  ],
+  "influencer": [
+   {
+    "value": "friends_colleagues",
+    "label": "Friends or colleagues",
+    "n": 2,
+    "at_risk_share": 0.0,
+    "top_triggers": [],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 2
+     }
+    ],
+    "low_sample": true
+   },
+   {
+    "value": "family",
+    "label": "Family",
+    "n": 2,
+    "at_risk_share": 0.0,
+    "top_triggers": [],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   },
+   {
+    "value": "creator_media",
+    "label": "YouTube/Instagram/media",
+    "n": 2,
+    "at_risk_share": 0.5,
+    "top_triggers": [
+     {
+      "value": "returns_below_expectation",
+      "label": "Returns flat/underwhelming vs what they expected",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "neutral_help_when_unsure",
+      "label": "Neutral, non-advisory help at a moment of doubt",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   },
+   {
+    "value": "self_research",
+    "label": "Own research",
+    "n": 1,
+    "at_risk_share": 0.0,
+    "top_triggers": [
+     {
+      "value": "market_fall_red_portfolio",
+      "label": "Portfolio shows losses / market fell",
+      "n": 1
+     }
+    ],
+    "top_needs": [
+     {
+      "value": "understand_volatility",
+      "label": "Understand why returns look like this and what is normal",
+      "n": 1
+     }
+    ],
+    "low_sample": true
+   }
+  ]
+ },
+ "opportunities": [
+  {
+   "need": "neutral_help_when_unsure",
+   "label": "Neutral, non-advisory help at a moment of doubt",
+   "n": 61,
+   "threads": 61,
+   "sources": {
+    "reddit": 50,
+    "tradingqna": 2,
+    "youtube": 9
+   },
+   "share_of_relevant": 0.363,
+   "at_risk_share": 0.197,
+   "first_year_share": 0.443,
+   "indmoney_share": 0.0,
+   "controllability": 0.8,
+   "score": 0.347,
+   "linked_triggers": [
+    {
+     "label": "Returns flat/underwhelming vs what they expected",
+     "n": 5
+    },
+    {
+     "label": "Moving to another platform or fund (not quitting investing)",
+     "n": 3
+    },
+    {
+     "label": "Portfolio shows losses / market fell",
+     "n": 2
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Hidden charges, regular vs direct, unclear fees",
+     "n": 2
+    },
+    {
+     "label": "Hard to pause/skip/reduce/stop or unclear what it does",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "neutral guidance when I don't understand funds",
+    "reassurance about investing when income feels uncertain",
+    "know if my randomly chosen funds are okay",
+    "help choosing how to set up my first SIP",
+    "where to begin with irregular student money",
+    "confidence that changing plans is sensible",
+    "review of my first SIP plan",
+    "know which SIPs to keep after some turned red"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1xdrnwu",
+     "source": "reddit",
+     "quote": "Now it’s time to invest.",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1xdrnwu/thank_you_delhi_cleared_all_my_dads_debts_this/"
+    },
+    {
+     "id": "RE-1fn0wic",
+     "source": "reddit",
+     "quote": "Starting my investing journey.",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/1fn0wic/request_starting_my_investing_journey_kindly/"
+    },
+    {
+     "id": "RE-1wwr7lu",
+     "source": "reddit",
+     "quote": "As a beginner your comments and suggestions helps me",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1wwr7lu/i_need_a_straight_forward_answer_risk/"
+    },
+    {
+     "id": "RE-7qsaa9",
+     "source": "reddit",
+     "quote": "I have recently started my first job and have started a SIP.",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/7qsaa9/direct_investing_in_mutual_funds_am_i_doing_it/"
+    },
+    {
+     "id": "RE-1wlfexw",
+     "source": "reddit",
+     "quote": "I've been investing since around Nov 2024.",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1wlfexw/26_years_old_earning_83kmonth_looking_for_some/"
+    }
+   ],
+   "score_index": 100
+  },
+  {
+   "need": "flexible_control",
+   "label": "Pause/skip/reduce without losing the habit or penalties",
+   "n": 23,
+   "threads": 21,
+   "sources": {
+    "tradingqna": 6,
+    "reddit": 11,
+    "youtube": 5,
+    "play_store": 1
+   },
+   "share_of_relevant": 0.137,
+   "at_risk_share": 0.565,
+   "first_year_share": 0.043,
+   "indmoney_share": 0.087,
+   "controllability": 1.0,
+   "score": 0.227,
+   "linked_triggers": [
+    {
+     "label": "Job loss, salary delay, expenses, can't afford instalment",
+     "n": 4
+    },
+    {
+     "label": "Needed the money or goal reached",
+     "n": 2
+    },
+    {
+     "label": "Portfolio shows losses / market fell",
+     "n": 1
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Hard to pause/skip/reduce/stop or unclear what it does",
+     "n": 9
+    },
+    {
+     "label": "Setting up / limits / errors with autopay or mandate",
+     "n": 1
+    },
+    {
+     "label": "Hidden charges, regular vs direct, unclear fees",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "SIP rules that fit irregular income",
+    "pause a month without losing the habit",
+    "keep investing while saving for an expense with uncertain timing",
+    "cancel or change a SIP online",
+    "permission to invest when money allows",
+    "understand what adding or changing a SIP does",
+    "pause for a big purchase without derailing long-term goals",
+    "know what happens to my money if I cancel"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1w0umcg",
+     "source": "reddit",
+     "quote": "I don’t do fixed SIPs for most of my portfolio.",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1w0umcg/29_working_on_a_cruise_ship_portfolio_review/"
+    },
+    {
+     "id": "RE-1hcck6p",
+     "source": "reddit",
+     "quote": "I cannot edit the sip amount to zero",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1hcck6p/what_if_i_cancel_my_sip/"
+    },
+    {
+     "id": "RE-1jktepi",
+     "source": "reddit",
+     "quote": "i thought adding a new sip will overwrite old one",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1jktepi/multiple_sip_in_sme_fund/"
+    },
+    {
+     "id": "YO-Ugzzq6tB4c9m0uL9Z7p4AaABAg",
+     "source": "youtube",
+     "quote": "solution bolo kaise aur kahan se sip stop hoga",
+     "url": "https://www.youtube.com/watch?v=N8rRW54UdBk&lc=Ugzzq6tB4c9m0uL9Z7p4AaABAg"
+    },
+    {
+     "id": "RE-1vhvpz8",
+     "source": "reddit",
+     "quote": "Should I withdraw my mutual funds and start over from scratch?",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1vhvpz8/should_i_withdraw_my_mutual_funds_and_start_over/"
+    }
+   ],
+   "score_index": 65
+  },
+  {
+   "need": "understand_volatility",
+   "label": "Understand why returns look like this and what is normal",
+   "n": 13,
+   "threads": 13,
+   "sources": {
+    "reddit": 10,
+    "tradingqna": 2,
+    "play_store": 1
+   },
+   "share_of_relevant": 0.077,
+   "at_risk_share": 0.231,
+   "first_year_share": 0.308,
+   "indmoney_share": 0.077,
+   "controllability": 0.9,
+   "score": 0.083,
+   "linked_triggers": [
+    {
+     "label": "Portfolio shows losses / market fell",
+     "n": 6
+    },
+    {
+     "label": "Returns flat/underwhelming vs what they expected",
+     "n": 3
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Returns, XIRR or P&L shown confusingly or changed",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "stay steady through a market fall",
+    "realistic expectations of SIP returns",
+    "stay calm while SIP is at a loss",
+    "know if a fall in the first months matters long term",
+    "cope with a falling portfolio in year one",
+    "reassurance when first-year returns turn negative",
+    "stop tinkering when returns drop",
+    "know if a small early loss is normal"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1wbbqy9",
+     "source": "reddit",
+     "quote": "seeing the loss has made me anxious",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+    },
+    {
+     "id": "RE-1xd27xx",
+     "source": "reddit",
+     "quote": "Should i continue my SIPs and not worry about it",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+    },
+    {
+     "id": "RE-1x1sbbo",
+     "source": "reddit",
+     "quote": "But some times doubts creep in, about my current strategy.",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1x1sbbo/started_investing_since_last_one_year_and_the/"
+    },
+    {
+     "id": "RE-ngsr08q",
+     "source": "reddit",
+     "quote": "who told you that SIP is high growth, will surely beat inflation without risk",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1ntcmbi/the_harsh_reality_of_sips_not_what_you_think/ngsr08q/"
+    },
+    {
+     "id": "RE-o18luwp",
+     "source": "reddit",
+     "quote": "I won't stop it now. This too shall pass.",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1qkpf8q/what_the_hell_is_wrong_with_motilal_oswal/o18luwp/"
+    }
+   ],
+   "score_index": 24
+  },
+  {
+   "need": "reliable_payments",
+   "label": "Instalments that just work, and clear alerts when they don't",
+   "n": 15,
+   "threads": 15,
+   "sources": {
+    "play_store": 5,
+    "reddit": 3,
+    "tradingqna": 4,
+    "youtube": 2,
+    "app_store": 1
+   },
+   "share_of_relevant": 0.089,
+   "at_risk_share": 0.2,
+   "first_year_share": 0.0,
+   "indmoney_share": 0.467,
+   "controllability": 1.0,
+   "score": 0.078,
+   "linked_triggers": [
+    {
+     "label": "Autopay/mandate/instalment failed, often unnoticed",
+     "n": 5
+    },
+    {
+     "label": "Lost trust in the platform / money stuck / support",
+     "n": 2
+    },
+    {
+     "label": "Job loss, salary delay, expenses, can't afford instalment",
+     "n": 1
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Instalment failed, skipped, or deducted wrongly",
+     "n": 10
+    },
+    {
+     "label": "Setting up / limits / errors with autopay or mandate",
+     "n": 6
+    },
+    {
+     "label": "Support slow/unhelpful, money stuck",
+     "n": 3
+    }
+   ],
+   "need_phrases": [
+    "pay all manual SIP instalments in one go",
+    "know my autopay limit covers all SIPs",
+    "understand a mandate limit before approving it",
+    "SIP payments that don't keep failing",
+    "SIPs that don't silently disappear",
+    "know what happens if an instalment can't be paid",
+    "warning before missed payments cancel a SIP",
+    "know if a missed instalment costs me a fine"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1mtew9a",
+     "source": "reddit",
+     "quote": "will all transactions go through?",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1mtew9a/is_this_per_transaction_or_per_day_please_check/"
+    },
+    {
+     "id": "PL-4d6b5bb4-5a5b-4429-9a85-",
+     "source": "play_store",
+     "quote": "you deduct the amount twice and i didn't even know that",
+     "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=4d6b5bb4-5a5b-4429-9a85-a7a194626b84"
+    },
+    {
+     "id": "PL-61e5cdcd-424c-4a84-8e82-",
+     "source": "play_store",
+     "quote": "do manual sip. then no option to pay in one shot",
+     "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=61e5cdcd-424c-4a84-8e82-97907926fafc"
+    },
+    {
+     "id": "RE-1trqwed",
+     "source": "reddit",
+     "quote": "But the mandate show amount as full 1L INR.",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1trqwed/help_me_understand_autopaymandate/"
+    },
+    {
+     "id": "RE-b4j439",
+     "source": "reddit",
+     "quote": "in Kuvera I was having multiple payment failure for SIPs",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/b4j439/mfu_has_stopped_epayeezz_how_to_start_new_sip_for/"
+    }
+   ],
+   "score_index": 22
+  },
+  {
+   "need": "know_if_on_track",
+   "label": "Know whether my SIP is doing OK / on track for my goal",
+   "n": 14,
+   "threads": 13,
+   "sources": {
+    "reddit": 3,
+    "tradingqna": 1,
+    "youtube": 5,
+    "play_store": 2,
+    "app_store": 3
+   },
+   "share_of_relevant": 0.083,
+   "at_risk_share": 0.0,
+   "first_year_share": 0.071,
+   "indmoney_share": 0.5,
+   "controllability": 0.9,
+   "score": 0.039,
+   "linked_triggers": [
+    {
+     "label": "Someone (person or creator) told them to stop or switch",
+     "n": 1
+    },
+    {
+     "label": "Moving to another platform or fund (not quitting investing)",
+     "n": 1
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Returns, XIRR or P&L shown confusingly or changed",
+     "n": 7
+    },
+    {
+     "label": "Hard to pause/skip/reduce/stop or unclear what it does",
+     "n": 2
+    },
+    {
+     "label": "External portfolio sync/tracking wrong or missing",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "know if my SIPs are on the right track",
+    "know if an early negative XIRR is fine",
+    "one place to track, pause and redeem all SIPs",
+    "know if I'm on track for my target corpus",
+    "a way to show family the SIP is on track",
+    "see total units of a fund in one place",
+    "know if switching to direct breaks my SIP streak",
+    "understand why the app shows two SIPs"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1v9mzwx",
+     "source": "reddit",
+     "quote": "whether I'm on the right track",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1v9mzwx/29m_india_bank_employee_looking_for_advice_on/"
+    },
+    {
+     "id": "PL-e81f84d2-71b8-48bb-b451-",
+     "source": "play_store",
+     "quote": "I don't get to see XIRR, Net P&L etc. easily now on INDmoney easily.",
+     "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=e81f84d2-71b8-48bb-b451-af7a5ebdec76"
+    },
+    {
+     "id": "RE-1xb1bsb",
+     "source": "reddit",
+     "quote": "I'm still relatively early in my investing journey",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1xb1bsb/hey_im_looking_for_some_honest_feedback_on_my_mf/"
+    },
+    {
+     "id": "RE-1bk5ama",
+     "source": "reddit",
+     "quote": "i want to keep my mutual funds in one app",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1bk5ama/want_to_get_my_mutual_funds_under_one_app_to_keep/"
+    },
+    {
+     "id": "YO-UgzWZUYdlukbpJ0V4ZB4AaABAg",
+     "source": "youtube",
+     "quote": "IndMoney par mutual fund ki total units kha par show krta ha",
+     "url": "https://www.youtube.com/watch?v=Db9vZOArQqc&lc=UgzWZUYdlukbpJ0V4ZB4AaABAg"
+    }
+   ],
+   "score_index": 11
+  },
+  {
+   "need": "goal_link",
+   "label": "See the SIP connected to a personal goal",
+   "n": 4,
+   "threads": 4,
+   "sources": {
+    "reddit": 4
+   },
+   "share_of_relevant": 0.024,
+   "at_risk_share": 0.25,
+   "first_year_share": 0.25,
+   "indmoney_share": 0.0,
+   "controllability": 0.9,
+   "score": 0.026,
+   "linked_triggers": [],
+   "linked_pains": [
+    {
+     "label": "Instalment failed, skipped, or deducted wrongly",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "SIPs mapped to specific life goals",
+    "SIPs organised by goal buckets",
+    "handle a goal-linked SIP as the deadline nears",
+    "stay motivated when the SIP feels boring and every debit stings"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1u347it",
+     "source": "reddit",
+     "quote": "current XIRR is11.2% but it was 19% 6 months ago",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1u347it/sip_in_small_cap_for_7_yrswhen_does_stay_invested/"
+    },
+    {
+     "id": "RE-1w2b22n",
+     "source": "reddit",
+     "quote": "Goal: Marriage, Car and Long Term",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1w2b22n/risk_appetite_aggressive_23_1yr_into_first_job/"
+    },
+    {
+     "id": "RE-1wg512e",
+     "source": "reddit",
+     "quote": "Aged 22, 1Lakh/month investment guidance",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1wg512e/aged_22_1lakhmonth_investment_guidance/"
+    },
+    {
+     "id": "RE-1loqrht",
+     "source": "reddit",
+     "quote": "Something in me urged me to skip the SIP instalment this month.",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1loqrht/tired_of_mf_sips/"
+    }
+   ],
+   "score_index": 7
+  },
+  {
+   "need": "trust_support",
+   "label": "Trustworthy platform and responsive support",
+   "n": 7,
+   "threads": 7,
+   "sources": {
+    "play_store": 5,
+    "reddit": 2
+   },
+   "share_of_relevant": 0.042,
+   "at_risk_share": 0.0,
+   "first_year_share": 0.0,
+   "indmoney_share": 0.714,
+   "controllability": 0.7,
+   "score": 0.014,
+   "linked_triggers": [
+    {
+     "label": "Lost trust in the platform / money stuck / support",
+     "n": 5
+    },
+    {
+     "label": "Moving to another platform or fund (not quitting investing)",
+     "n": 1
+    },
+    {
+     "label": "Couldn't understand app, returns or how to modify",
+     "n": 1
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Support slow/unhelpful, money stuck",
+     "n": 5
+    },
+    {
+     "label": "Instalment failed, skipped, or deducted wrongly",
+     "n": 1
+    },
+    {
+     "label": "KYC, account opening, verification",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "confidence that money paid is invested, and support that responds",
+    "move SIPs to a new platform without them lapsing",
+    "a stable app that doesn't get worse with updates",
+    "be able to get my money out and reach support",
+    "a clear interface that prevents costly mistakes",
+    "consistent return figures I can trust",
+    "a platform I can trust, with reachable support"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1w7vfpp",
+     "source": "reddit",
+     "quote": "I recently ran into issues with Groww’s KYC process",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1w7vfpp/need_help_resuming_sips_after_moving_out_of_groww/"
+    },
+    {
+     "id": "PL-fde1d1df-ddf7-4bc0-b78e-",
+     "source": "play_store",
+     "quote": "by mistake redeemed my folio that I wanted to redeem the least",
+     "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=fde1d1df-ddf7-4bc0-b78e-8204c147973c"
+    },
+    {
+     "id": "PL-b5b4ab1d-bdba-472a-9621-",
+     "source": "play_store",
+     "quote": "Funds deducted but MF not credited or even shown as pending.",
+     "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=b5b4ab1d-bdba-472a-9621-53429237dbd7"
+    },
+    {
+     "id": "RE-1q5ggt4",
+     "source": "reddit",
+     "quote": "The UI has finally broken me",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1q5ggt4/moving_on_from_paytm_money_after_5_years_the_ui/"
+    },
+    {
+     "id": "PL-15744a50-001f-4047-bd3f-",
+     "source": "play_store",
+     "quote": "One thing I know now that they only value their own profit.",
+     "url": "https://play.google.com/store/apps/details?id=in.indwealth&reviewId=15744a50-001f-4047-bd3f-70c6e05d3379"
+    }
+   ],
+   "score_index": 4
+  },
+  {
+   "need": "clear_costs",
+   "label": "Clear costs and plan type",
+   "n": 4,
+   "threads": 4,
+   "sources": {
+    "reddit": 3,
+    "tradingqna": 1
+   },
+   "share_of_relevant": 0.024,
+   "at_risk_share": 0.0,
+   "first_year_share": 0.5,
+   "indmoney_share": 0.0,
+   "controllability": 0.6,
+   "score": 0.01,
+   "linked_triggers": [
+    {
+     "label": "Moving to another platform or fund (not quitting investing)",
+     "n": 1
+    }
+   ],
+   "linked_pains": [
+    {
+     "label": "Hidden charges, regular vs direct, unclear fees",
+     "n": 4
+    },
+    {
+     "label": "Setting up / limits / errors with autopay or mandate",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "know whether mandate charges repeat every month",
+    "a low-cost, clear way to start MFs after a bad product",
+    "move from regular to direct plans simply",
+    "clear account charges before starting"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1cqui8x",
+     "source": "reddit",
+     "quote": "canara bank has cut 177rs from my account stating ECS mandate SC",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/1cqui8x/what_are_ecs_mandate_sc_charges_and_should_i_pay/"
+    },
+    {
+     "id": "RE-1wo8i2w",
+     "source": "reddit",
+     "quote": "I also plan to stop the two regular plan SIPs",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1wo8i2w/mid_cap_or_multi_cap_for_my_4th_sip_40_already_in/"
+    },
+    {
+     "id": "RE-1wm28sc",
+     "source": "reddit",
+     "quote": "I want to start fresh with mutual funds",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1wm28sc/regret_buying_a_ulip_via_policybazaar_want_to/"
+    },
+    {
+     "id": "TR-34124-1",
+     "source": "tradingqna",
+     "quote": "I am very new in this field",
+     "url": "https://tradingqna.com/t/zerodha-new-account-opening/34124/1"
+    }
+   ],
+   "score_index": 3
+  }
+ ],
+ "opportunities_first_year": [
+  {
+   "need": "neutral_help_when_unsure",
+   "label": "Neutral, non-advisory help at a moment of doubt",
+   "n": 27,
+   "threads": 27,
+   "sources": {
+    "reddit": 26,
+    "youtube": 1
+   },
+   "share_of_relevant": 0.711,
+   "at_risk_share": 0.074,
+   "first_year_share": 1.0,
+   "indmoney_share": 0.0,
+   "controllability": 0.8,
+   "score": 0.318,
+   "linked_triggers": [
+    {
+     "label": "Moving to another platform or fund (not quitting investing)",
+     "n": 1
+    },
+    {
+     "label": "Returns flat/underwhelming vs what they expected",
+     "n": 1
+    }
+   ],
+   "linked_pains": [],
+   "need_phrases": [
+    "help choosing how to set up my first SIP",
+    "review of my first SIP plan",
+    "confidence my portfolio is okay after starting on friends' advice",
+    "help deciding how to structure a first SIP",
+    "someone to sanity-check my first plan",
+    "feedback on whether my first choices are sensible",
+    "review of a first-year SIP plan",
+    "a simple way for a beginner to start"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1wwr7lu",
+     "source": "reddit",
+     "quote": "As a beginner your comments and suggestions helps me",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1wwr7lu/i_need_a_straight_forward_answer_risk/"
+    },
+    {
+     "id": "RE-7qsaa9",
+     "source": "reddit",
+     "quote": "I have recently started my first job and have started a SIP.",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/7qsaa9/direct_investing_in_mutual_funds_am_i_doing_it/"
+    },
+    {
+     "id": "RE-1wh52tv",
+     "source": "reddit",
+     "quote": "I recently received the first salary of my life",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wh52tv/first_salary_of_life_how_to_start_financial/"
+    },
+    {
+     "id": "RE-1uut63h",
+     "source": "reddit",
+     "quote": "Just started working, first real paycheck",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1uut63h/24ish_first_job_65kmonth_to_invest_tear_my/"
+    },
+    {
+     "id": "RE-1xcfdvd",
+     "source": "reddit",
+     "quote": "First time investing in SIP.",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xcfdvd/first_time_investing_in_sip_can_someone_review/"
+    }
+   ],
+   "score_index": 100
+  },
+  {
+   "need": "understand_volatility",
+   "label": "Understand why returns look like this and what is normal",
+   "n": 4,
+   "threads": 4,
+   "sources": {
+    "reddit": 4
+   },
+   "share_of_relevant": 0.105,
+   "at_risk_share": 0.25,
+   "first_year_share": 1.0,
+   "indmoney_share": 0.0,
+   "controllability": 0.9,
+   "score": 0.082,
+   "linked_triggers": [
+    {
+     "label": "Portfolio shows losses / market fell",
+     "n": 4
+    }
+   ],
+   "linked_pains": [],
+   "need_phrases": [
+    "know if a fall in the first months matters long term",
+    "cope with a falling portfolio in year one",
+    "reassurance when first-year returns turn negative",
+    "know if a small early loss is normal"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1wbbqy9",
+     "source": "reddit",
+     "quote": "seeing the loss has made me anxious",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1wbbqy9/losses_in_nifty_50/"
+    },
+    {
+     "id": "RE-1xd27xx",
+     "source": "reddit",
+     "quote": "Should i continue my SIPs and not worry about it",
+     "url": "https://www.reddit.com/r/MutualfundsIndia/comments/1xd27xx/should_we_continue_midcap_and_smallcap_sip/"
+    },
+    {
+     "id": "RE-1x1sbbo",
+     "source": "reddit",
+     "quote": "But some times doubts creep in, about my current strategy.",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1x1sbbo/started_investing_since_last_one_year_and_the/"
+    },
+    {
+     "id": "RE-1ttixy6",
+     "source": "reddit",
+     "quote": "how to make up my mind so i feel this reality bearable??",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1ttixy6/dukh_dard_peeda_3_of_my_top_5_mf_picked_stocks/"
+    }
+   ],
+   "score_index": 26
+  },
+  {
+   "need": "flexible_control",
+   "label": "Pause/skip/reduce without losing the habit or penalties",
+   "n": 1,
+   "threads": 1,
+   "sources": {
+    "reddit": 1
+   },
+   "share_of_relevant": 0.026,
+   "at_risk_share": 1.0,
+   "first_year_share": 1.0,
+   "indmoney_share": 0.0,
+   "controllability": 1.0,
+   "score": 0.057,
+   "linked_triggers": [],
+   "linked_pains": [
+    {
+     "label": "Hard to pause/skip/reduce/stop or unclear what it does",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "cancel or change a SIP online"
+   ],
+   "quotes": [
+    {
+     "id": "RE-15qp5it",
+     "source": "reddit",
+     "quote": "Is this offline mode the only way to cancel first SIP?",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/15qp5it/kfinkart_showing_this_message_on_cancelling_first/"
+    }
+   ],
+   "score_index": 18
+  },
+  {
+   "need": "goal_link",
+   "label": "See the SIP connected to a personal goal",
+   "n": 1,
+   "threads": 1,
+   "sources": {
+    "reddit": 1
+   },
+   "share_of_relevant": 0.026,
+   "at_risk_share": 1.0,
+   "first_year_share": 1.0,
+   "indmoney_share": 0.0,
+   "controllability": 0.9,
+   "score": 0.051,
+   "linked_triggers": [],
+   "linked_pains": [
+    {
+     "label": "Instalment failed, skipped, or deducted wrongly",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "stay motivated when the SIP feels boring and every debit stings"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1loqrht",
+     "source": "reddit",
+     "quote": "Something in me urged me to skip the SIP instalment this month.",
+     "url": "https://www.reddit.com/r/mutualfunds/comments/1loqrht/tired_of_mf_sips/"
+    }
+   ],
+   "score_index": 16
+  },
+  {
+   "need": "clear_costs",
+   "label": "Clear costs and plan type",
+   "n": 2,
+   "threads": 2,
+   "sources": {
+    "reddit": 1,
+    "tradingqna": 1
+   },
+   "share_of_relevant": 0.053,
+   "at_risk_share": 0.0,
+   "first_year_share": 1.0,
+   "indmoney_share": 0.0,
+   "controllability": 0.6,
+   "score": 0.014,
+   "linked_triggers": [],
+   "linked_pains": [
+    {
+     "label": "Hidden charges, regular vs direct, unclear fees",
+     "n": 2
+    },
+    {
+     "label": "Setting up / limits / errors with autopay or mandate",
+     "n": 1
+    }
+   ],
+   "need_phrases": [
+    "know whether mandate charges repeat every month",
+    "clear account charges before starting"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1cqui8x",
+     "source": "reddit",
+     "quote": "canara bank has cut 177rs from my account stating ECS mandate SC",
+     "url": "https://www.reddit.com/r/IndiaInvestments/comments/1cqui8x/what_are_ecs_mandate_sc_charges_and_should_i_pay/"
+    },
+    {
+     "id": "TR-34124-1",
+     "source": "tradingqna",
+     "quote": "I am very new in this field",
+     "url": "https://tradingqna.com/t/zerodha-new-account-opening/34124/1"
+    }
+   ],
+   "score_index": 4
+  },
+  {
+   "need": "know_if_on_track",
+   "label": "Know whether my SIP is doing OK / on track for my goal",
+   "n": 1,
+   "threads": 1,
+   "sources": {
+    "reddit": 1
+   },
+   "share_of_relevant": 0.026,
+   "at_risk_share": 0.0,
+   "first_year_share": 1.0,
+   "indmoney_share": 0.0,
+   "controllability": 0.9,
+   "score": 0.01,
+   "linked_triggers": [],
+   "linked_pains": [],
+   "need_phrases": [
+    "know if an early negative XIRR is fine"
+   ],
+   "quotes": [
+    {
+     "id": "RE-1xb1bsb",
+     "source": "reddit",
+     "quote": "I'm still relatively early in my investing journey",
+     "url": "https://www.reddit.com/r/personalfinanceindia/comments/1xb1bsb/hey_im_looking_for_some_honest_feedback_on_my_mf/"
+    }
+   ],
+   "score_index": 3
+  }
+ ]
+}

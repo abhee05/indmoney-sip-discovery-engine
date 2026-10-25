@@ -20,6 +20,7 @@ def main():
                                     "analyze", "golden-score", "evidence-log", "all"])
     p.add_argument("--only", help="comma-separated sources for collect")
     p.add_argument("--limit", type=int, help="max records to code in this run")
+    p.add_argument("--golden", action="store_true", help="classify only the hand-labelled golden records")
     a = p.parse_args()
 
     if a.step in ("collect", "all"):
@@ -31,21 +32,25 @@ def main():
                 ALL[name]()
             except Exception as e:  # noqa: BLE001
                 print(f"[{name}] FAILED: {type(e).__name__}: {e} (other sources continue)")
-    if a.step in ("prefilter", "all"):
+    if a.step in ("prefilter", "all", "collect"):
         from engine.prefilter import run
         run()
-    if a.step in ("golden-sheet", "all"):
+    if a.step in ("golden-sheet", "all", "collect"):
         from engine import config as C
         from engine.golden import make_sheet
-        if a.step == "golden-sheet" or not (C.EVAL / "golden_ids.json").exists():
+        labelled = (C.EVAL / "golden_labels.xlsx").exists() or (C.EVAL / "golden_labels.csv").exists()
+        if a.step == "golden-sheet" or not labelled:
             make_sheet()
     if a.step in ("classify", "all"):
         from engine import config as C
         from engine.classify import classify
         from engine.prefilter import load_corpus
-        gold = C.EVAL / "golden_ids.json"
-        priority = json.loads(gold.read_text()) if gold.exists() else []
-        classify(load_corpus(), limit=a.limit, priority=priority)
+        from engine.golden import golden_ids
+        priority = golden_ids()
+        rows = load_corpus()
+        if a.golden:
+            rows = [r for r in rows if r["id"] in set(priority)]
+        classify(rows, limit=a.limit, priority=priority)
     if a.step in ("analyze", "all"):
         from engine.analyze import run
         run()

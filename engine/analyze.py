@@ -36,10 +36,22 @@ def _vals(r, field):
     return v if isinstance(v, list) else [v]
 
 
+def _num(v):
+    """Scores arrive as ints, or strings like '1.2K' from YouTube."""
+    if isinstance(v, (int, float)):
+        return v
+    try:
+        v = str(v).strip().upper()
+        mult = 1000 if v.endswith("K") else 1_000_000 if v.endswith("M") else 1
+        return float(v.rstrip("KM")) * mult
+    except (ValueError, AttributeError):
+        return 0
+
+
 def _quotes(rows, n=4):
     """A few illustrative, source-diverse quotes (one per thread)."""
     seen, out = set(), []
-    for r in sorted(rows, key=lambda r: -(r.get("score") or 0)):
+    for r in sorted(rows, key=lambda r: -_num(r.get("score"))):
         if r["thread_id"] in seen or not r.get("quote"):
             continue
         seen.add(r["thread_id"])

@@ -85,15 +85,44 @@ def make_sheet(n=20):
     return SHEET
 
 
+def normalise(field, v):
+    """Forgive human typing: case, stray spaces/newlines, blanks, 2.0 vs 2."""
+    import re
+    v = "" if v is None or str(v).lower() == "nan" else str(v)
+    v = re.sub(r"\s*_\s*", "_", v.strip().lower())
+    v = re.sub(r"\s+", "_", v)
+    if v.endswith(".0"):
+        v = v[:-2]
+    if not v:
+        vals = CB.FIELDS[field]["values"]
+        v = "none" if "none" in vals else ("unknown" if "unknown" in vals else "0")
+    return v
+
+
 def read_labels(path=None):
     import pandas as pd
     for p in ([path] if path else [C.EVAL / "golden_labels.xlsx", C.EVAL / "golden_labels.csv"]):
         if p and p.exists():
             df = pd.read_csv(p) if p.suffix == ".csv" else pd.read_excel(p, sheet_name=0)
-            df = df.fillna("")
-            return {str(r["id"]): {f: str(r[f]).strip().replace(".0", "") for f in GOLD_FIELDS}
-                    for _, r in df.iterrows() if any(str(r[f]).strip() for f in GOLD_FIELDS)}
+            out = {}
+            for _, r in df.iterrows():
+                if all(str(r.get(f, "")).lower() in ("", "nan") for f in GOLD_FIELDS):
+                    continue
+                out[str(r["id"])] = {f: normalise(f, r.get(f)) for f in GOLD_FIELDS}
+            bad = {(f, v) for h in out.values() for f, v in h.items() if v not in CB.FIELDS[f]["values"]}
+            if bad:
+                print("  ! labels not in the codebook (counted as written):", sorted(bad))
+            return out
     raise FileNotFoundError("Save your labelled sheet as data/eval/golden_labels.xlsx (or .csv)")
+
+
+def golden_ids():
+    """The ids the human actually labelled (falls back to the sheet that was generated)."""
+    try:
+        return list(read_labels())
+    except FileNotFoundError:
+        p = C.EVAL / "golden_ids.json"
+        return json.loads(p.read_text()) if p.exists() else []
 
 
 def kappa(pairs):
@@ -111,6 +140,16 @@ def score(path=None):
     human = read_labels(path)
     ai = load_done()
     corpus = {r["id"]: r for r in load_corpus()}
+    # records the code prefilter dropped count as the engine saying "not relevant"
+    from engine.prefilter import load_raw
+    for r in load_raw():
+        if r["id"] in human and r["id"] not in corpus:
+            corpus[r["id"]] = r
+            ai.setdefault(r["id"], {"relevance": "not_relevant", "product": "general",
+                                    "investor_experience": "unknown", "journey_stage": "unknown",
+                                    "drop_trigger": "none", "unmet_need": "none",
+                                    "continuation_risk": "0", "status": "prefilter_excluded",
+                                    "model": "code prefilter", "reason": "no SIP/MF terms"})
     per_field, items = {}, []
     for f in GOLD_FIELDS:
         pairs = []
@@ -134,15 +173,28 @@ def score(path=None):
                       "ai_reason": a.get("reason"), "ai_model": a.get("model"),
                       "ai_status": a.get("status", "not coded"),
                       "all_fields_agree": not diffs, "disagreements": diffs})
+    by_model = {}
+    for it in items:
+        m = by_model.setdefault(it["ai_model"] or "not coded", {"items": 0, "pairs": 0, "agree": 0})
+        m["items"] += 1
+        h = human[it["id"]]
+        for f in GOLD_FIELDS:
+            if h.get(f):
+                m["pairs"] += 1
+                m["agree"] += f not in it["disagreements"]
+    for m in by_model.values():
+        m["agreement"] = round(m["agree"] / m["pairs"], 3) if m["pairs"] else None
     total_pairs = sum(v["n"] for v in per_field.values())
     total_agree = sum(v["agree"] for v in per_field.values())
     report = {"items_labelled": len(human),
               "items_fully_agreed": sum(x["all_fields_agree"] for x in items),
               "field_level_agreement": round(total_agree / total_pairs, 3) if total_pairs else None,
-              "per_field": per_field, "items": items}
+              "per_field": per_field, "by_model": by_model, "items": items}
     (C.EVAL / "golden_report.json").write_text(json.dumps(report, indent=1, ensure_ascii=False))
     print(f"golden: {report['items_labelled']} items, field agreement "
           f"{report['field_level_agreement']}, fully agreed items {report['items_fully_agreed']}")
     for f, v in per_field.items():
         print(f"  {f:22s} {v['agree']}/{v['n']}  kappa={v['kappa']}")
+    for m, v in by_model.items():
+        print(f"  by labeller: {m:32s} {v['items']} items, agreement {v['agreement']}")
     return report

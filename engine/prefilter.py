@@ -23,12 +23,14 @@ def load_raw():
 
 
 def is_candidate(r, thread_titles):
-    text = f"{r.get('title', '')} {r['text']}"
+    text = r["text"] if r["source"] == "youtube" else f"{r.get('title', '')} {r['text']}"
     if len(r["text"]) < C.MIN_CHARS:
         return False
     if WORD_SIP.search(text) or TERM_RE.search(f" {text.lower()} "):
         return True
     # comments inside a SIP-focused thread can be relevant without the keyword
+    if r["source"] == "youtube":
+        return False
     ctx = thread_titles.get(r["thread_id"], "")
     return r["kind"] == "comment" and len(r["text"]) >= 60 and bool(WORD_SIP.search(ctx))
 
