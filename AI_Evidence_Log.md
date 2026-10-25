@@ -16,12 +16,12 @@ Six populated theme groups, one reserved Other / unclear category. Prepared assi
 Investor experience and journey stage are coded conservatively with exact supporting quotations and caveats. Current prepared coding has only one explicit investing beginner; contradictory or incomplete histories remain unknown. This sample cannot estimate first-time investor dropout, 12-month continuation or product impact.
 
 ## Reproducibility
-data/evidence.json is the active snapshot. data/prepared_analysis.json is assistant-prepared coding, not model evaluation or manual ground truth. Dataset SHA-256 is attached to predictions and evaluation references. discovery.py classifies every record in batches of five, with no prepared labels sent to Groq. Prompt version: indmoney-v2. Live results record model, elapsed time, errors and dataset hash. Exact source quotes and enumerated fields are validated before accepting each batch.
+data/evidence.json is the active snapshot. data/prepared_analysis.json is assistant-prepared coding, not model evaluation or manual ground truth. Dataset SHA-256 is attached to predictions and evaluation references. discovery.py classifies every record in batches of five, with no prepared labels sent to Groq. Prompt version: indmoney-v2. Live results record model, elapsed time, errors and dataset hash. Exact source quotes and enumerated fields are validated per record. Failed records can be retried without discarding accepted results. The saved run retains retry raw outputs and the initial error summary; the initial rejected batch raw text was not captured by the earlier build and cannot be reconstructed.
 
 Run locally: python -m streamlit run app.py. The standalone deploy_app.py bundles the same code and data for deployment. Run tests: python -m unittest discover -s tests. Set GROQ_API_KEY and GROQ_MODEL in server-side environment or Streamlit Secrets; never commit credentials.
 
 ## Evaluation status
-Independent human golden set: pending. Live Groq predictions: pending. Agreement, accuracy, live latency and failure rates: **not measured**. The 20 sheet labels were assistant-drafted at the user's request and are not represented as independently hand-labelled. A reference template and agreement calculator are available, with separate 12-item development and 8-item holdout reporting. Existing items are already exposed; use a fresh unseen holdout for stronger validation.
+Independent human golden set: pending. Live Groq run completed: **20/20 schema-and-quote-valid outputs after retry**, using openai/gpt-oss-120b. Cumulative API processing time: **16.18 seconds**, excluding time between attempts. Initial attempt accepted 10/20; one five-record batch failed validation and another hit HTTP 429. Retrying only the ten pending records in batches of two accepted all ten. This is output coverage, not accuracy. Independent human agreement and accuracy remain unmeasured. The 20 sheet labels were assistant-drafted at the user's request and are not represented as independently hand-labelled. A reference template and agreement calculator are available, with separate 12-item development and 8-item holdout reporting. Existing items are already exposed; use a fresh unseen holdout for stronger validation.
 
 Agreement requires declared independent human provenance and a matching live run. Missing/failed outputs count as disagreements. Syntactically valid quotes do not prove correct interpretations; human review is essential.
 
@@ -31,12 +31,22 @@ These are real assistant-workflow corrections, not fabricated discovery-model fa
 2. Seven separate comment URLs all landed in one discussion: replaced with seven different discussions to improve readability and diversity. The old comment links were not necessarily invalid.
 3. Removed Leather-Habit6272's direct-plan claim at the user's request; replaced with the SIP refund/portfolio discrepancy post, IND18. Unsupported universal product-policy conclusions are not made.
 
-Required 2–3 live engine-output corrections: pending actual model runs and independent review. Log the raw run ID, record ID, previous output, supporting source, corrected field and reason when available.
+## Three observed live-model corrections
+Review provenance: assistant review of actual Groq output; these are not independent human evaluation. Raw predictions remain unchanged in the downloadable saved run. Run timestamp: 2026-10-25T03:40:32.478565+00:00; prompt indmoney-v2; model openai/gpt-oss-120b.
+
+| Record | Actual model output | Corrected interpretation | Source evidence and reason |
+|---|---|---|---|
+| IND14 | stage = ongoing | considering_stop | “Should i cancel this?” explicitly considers cancellation. It does not establish that the SIP stopped. |
+| IND15 | first_time = explicit_beginner | unknown | Self-description says beginner, but the same post says Quant ELSS was purchased two years ago. The conflicting history does not establish a first-time investor. |
+| IND09 | first_time = unknown | experienced | “These SIPs are between 2-7 years old” explicitly establishes prior SIP experience. |
+
+These are three selected semantic failures, not the complete error count. Exact-quote validation passed but did not prevent incorrect interpretation. Reviewed interpretations are recorded here separately; the original model output is preserved for audit. Source URLs appear in the source index below.
+
 
 ## Validation and remaining gates
 Automated tests cover evidence integrity, quote/ID rejection, missing configuration, dataset-version mismatch, assistant-label rejection and failed-output denominators. UI tests cover startup, filtering and missing-configuration fallback. These are software checks, not model-quality results.
 
-19 software checks passed, plus standalone deployment startup. Before final submission: complete genuinely independent labels; run Groq and record real corrections; deploy; test public signed-out access and provider failure behaviour. Expand the sample where possible to fill the stated evidence gaps. The current build is not a fully validated Part 1 submission.
+Software checks pass, including standalone startup and retry preservation. Public engine: https://indmoney-sip-discovery.streamlit.app/ . Public sharing is enabled; a separate signed-out browser check is still outstanding. Live provider failure and recovery were observed. The engine and real-run evidence are delivered; the remaining submission gate is genuinely independent manual labels and measured agreement. Expand the small, single-platform sample to fill evidence gaps where possible.
 
 
 ## Source index
@@ -76,6 +86,10 @@ Automated tests cover evidence integrity, quote/ID rejection, missing configurat
 
 **Why these priorities:** one post considers cancelling over plan confusion; several report interrupted instalments or unclear recovery. Interviews must establish whether these issues affect continuation.
 
-**Quality and limits:** source quote checks and unknown handling implemented. Independent manual agreement and live AI corrections remain pending. No confirmed 12-month outcomes; source and selection bias limit inference.
+**Quality and limits:** source quote checks and unknown handling implemented. Live processing completed for 20/20 records after retry; three actual interpretation corrections are documented. Independent manual agreement remains pending. No confirmed 12-month outcomes; source and selection bias limit inference.
 
-**Links to add after deployment:** testable engine and public Evidence Log. Do not label the slide final until those links and measured evaluation results are available. No Fellow name. Use at least 14pt in PPT/Google Slides and count this within the final 10 slides.
+**Engine:** https://indmoney-sip-discovery.streamlit.app/
+
+**Evidence Log:** https://github.com/abhee05/indmoney-sip-discovery-engine/blob/main/AI_Evidence_Log.md
+
+Manual validation is outstanding. No Fellow name. Use at least 14pt in PPT/Google Slides and count this within the final 10 slides.
