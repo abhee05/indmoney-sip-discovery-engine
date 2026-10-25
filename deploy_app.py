@@ -73,7 +73,7 @@ def classify(rows, key, model, batch_size=5):
     if not key or not model:
         raise ValueError('Live AI is not configured. Saved evidence remains available.')
     started = time.monotonic()
-    results, errors = [], []
+    results, errors, attempts = [], [], []
     for start in range(0,len(rows),batch_size):
         batch = rows[start:start+batch_size]
         # No draft labels or human answers are sent to the model.
@@ -87,7 +87,16 @@ def classify(rows, key, model, batch_size=5):
         try:
             with urlopen(req, timeout=45) as response:
                 raw = json.load(response)['choices'][0]['message']['content']
-            results.extend(validate_items(json.loads(raw).get('items'),batch))
+            attempts.append({'ids':[r['id'] for r in batch],'raw_output':raw})
+            parsed=json.loads(raw).get('items')
+            if not isinstance(parsed,list):raise ValueError('Expected items list.')
+            ids=[p.get('id') for p in parsed if isinstance(p,dict)]
+            if len(ids)!=len(parsed) or len(set(ids))!=len(ids) or set(ids)!={r['id'] for r in batch}:
+                raise ValueError('Missing, duplicate or unknown IDs.')
+            by_id={p['id']:p for p in parsed}
+            for record in batch:
+                try:results.extend(validate_items([by_id[record['id']]],[record]))
+                except ValueError as exc:errors.append({'ids':[record['id']],'error':'ValidationError','detail':str(exc)})
         except HTTPError as exc:
             # Return only allowlisted codes; never echo provider messages, headers or credentials.
             known={'invalid_api_key','model_not_found','model_decommissioned','rate_limit_exceeded','invalid_request_error','json_validate_failed','insufficient_quota'}
@@ -97,13 +106,29 @@ def classify(rows, key, model, batch_size=5):
             if exc.code in (401,403,404,429):
                 if start+batch_size<len(rows):errors.append({'ids':[r['id'] for r in rows[start+batch_size:]],'error':'Skipped after provider rejection'})
                 break
+        except ValueError as exc:
+            errors.append({'ids':[r['id'] for r in batch], 'error':'ValidationError','detail':str(exc)[:150]})
         except Exception as exc:
             # Preserve failure IDs and safe category, never credentials or raw provider responses.
             errors.append({'ids':[r['id'] for r in batch], 'error':type(exc).__name__})
     return dict(origin='live_groq', model=model, prompt_version=PROMPT_VERSION,
         dataset_sha256=fingerprint(rows), created_at=datetime.now(timezone.utc).isoformat(),
         elapsed_seconds=round(time.monotonic()-started,2), total=len(rows),
-        classified=len(results), items=results, errors=errors)
+        classified=len(results), items=results, errors=errors, attempts=attempts)
+
+def retry_pending(rows, previous, key, model):
+    if previous.get('dataset_sha256')!=fingerprint(rows):raise ValueError('Dataset mismatch.')
+    done={r['id'] for r in previous.get('items',[])}
+    pending=[r for r in rows if r['id'] not in done]
+    if not pending:return previous
+    fresh=classify(pending,key,model,batch_size=2)
+    merged={**fresh,'dataset_sha256':fingerprint(rows),'total':len(rows),
+        'items':previous.get('items',[])+fresh['items'],
+        'attempts':previous.get('attempts',[])+fresh.get('attempts',[]),
+        'previous_errors':previous.get('previous_errors',[])+previous.get('errors',[]),
+        'elapsed_seconds':round(previous.get('elapsed_seconds',0)+fresh['elapsed_seconds'],2)}
+    merged['classified']=len(merged['items'])
+    return merged
 
 def theme_counts(items):
     counts = Counter(i['theme'] for i in items)
@@ -258,7 +283,13 @@ with live:
     if run['origin']=='live_groq':
         st.write(f"{run['classified']} / {run['total']} valid outputs · {run['elapsed_seconds']} seconds")
         if run['errors']:st.warning('Some batches failed. Failed records are excluded from counts.');st.json(run['errors'])
+        if run['classified']<len(rows) and st.button('Retry failed records',disabled=not configured):
+            with st.spinner('Retrying pending records…'):
+                st.session_state['run']=retry_pending(rows,run,secret('GROQ_API_KEY'),secret('GROQ_MODEL'))
+            st.rerun()
         download('Download live run',run,'indmoney_live_run.json')
+        with st.expander('Run details and rejected outputs'):
+            st.code(json.dumps(run,indent=2,ensure_ascii=False),language='json')
     st.divider();question=st.text_input('Ask a research question',max_chars=1000)
     if st.button('Find supporting evidence',disabled=not configured):
         matches=retrieve(question,rows)
