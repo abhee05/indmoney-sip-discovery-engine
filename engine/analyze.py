@@ -26,9 +26,15 @@ def load_coded():
     corpus = {r["id"]: r for r in load_corpus()}
     rows = []
     for cid, lab in load_done().items():
-        if cid in corpus:
+        if cid in corpus and not corpus[cid].get("is_staff"):  # staff replies are not investors
             rows.append({**corpus[cid], **lab})
     return rows
+
+
+def staff_excluded():
+    from engine.classify import load_done
+    done = load_done()
+    return sum(1 for r in load_corpus() if r.get("is_staff") and r["id"] in done)
 
 
 def _vals(r, field):
@@ -185,6 +191,7 @@ def run():
         "first_year_core": len(first_year),
         "models": dict(Counter(r.get("model") for r in coded)),
         "status": dict(Counter(r.get("status") for r in coded)),
+        "staff_replies_excluded": staff_excluded(),
     }
     funnel_path = C.PROCESSED / "funnel.json"
     result = {

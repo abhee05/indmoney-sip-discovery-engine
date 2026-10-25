@@ -1,35 +1,36 @@
 {
  "coverage": {
-  "coded": 545,
+  "coded": 530,
   "rejected_by_gates": 3,
   "relevance": {
-   "adjacent": 312,
-   "core": 168,
-   "not_relevant": 62
+   "adjacent": 300,
+   "core": 166,
+   "not_relevant": 61
   },
   "core_by_source": {
    "play_store": 14,
-   "tradingqna": 17,
+   "tradingqna": 15,
    "youtube": 32,
    "reddit": 101,
    "app_store": 4
   },
   "core_by_product": {
    "indmoney": 22,
-   "general": 126,
-   "other_platform": 20
+   "general": 125,
+   "other_platform": 19
   },
-  "core_threads": 151,
+  "core_threads": 149,
   "first_year_core": 38,
   "models": {
-   "claude-opus-5-5 (in-session)": 534,
+   "claude-opus-5-5 (in-session)": 519,
    "openai/gpt-oss-120b": 11
   },
   "status": {
-   "passed_first_try": 536,
+   "passed_first_try": 521,
    "passed_on_retry": 6,
    "rejected": 3
-  }
+  },
+  "staff_replies_excluded": 15
  },
  "funnel": {
   "app_store": {
@@ -71,9 +72,9 @@
      {
       "value": "specific_goal",
       "label": "A named goal (house, child, emergency fund, trip)",
-      "n": 14,
-      "threads": 14,
-      "share": 0.083,
+      "n": 13,
+      "threads": 13,
+      "share": 0.078,
       "quotes": [
        {
         "id": "RE-1u347it",
@@ -244,7 +245,7 @@
       "label": "Continuing an existing SIP",
       "n": 55,
       "threads": 52,
-      "share": 0.327,
+      "share": 0.331,
       "quotes": [
        {
         "id": "RE-1vz8whl",
@@ -275,9 +276,9 @@
      {
       "value": "considering_start",
       "label": "Thinking about starting",
-      "n": 23,
-      "threads": 23,
-      "share": 0.137,
+      "n": 22,
+      "threads": 22,
+      "share": 0.133,
       "quotes": [
        {
         "id": "RE-1xdrnwu",
@@ -310,7 +311,7 @@
       "label": "Asking or thinking about pausing, reducing or stopping (not yet done)",
       "n": 21,
       "threads": 19,
-      "share": 0.125,
+      "share": 0.127,
       "quotes": [
        {
         "id": "RE-1xd27xx",
@@ -343,7 +344,7 @@
       "label": "Setting up account / KYC / first SIP",
       "n": 14,
       "threads": 14,
-      "share": 0.083,
+      "share": 0.084,
       "quotes": [
        {
         "id": "RE-1fn0wic",
@@ -497,7 +498,7 @@
       "label": "Returns flat/underwhelming vs what they expected",
       "n": 12,
       "threads": 12,
-      "share": 0.071,
+      "share": 0.072,
       "quotes": [
        {
         "id": "RE-j8ng5ym",
@@ -772,7 +773,7 @@
       "label": "Total gain/loss or current value",
       "n": 19,
       "threads": 18,
-      "share": 0.113,
+      "share": 0.114,
       "quotes": [
        {
         "id": "RE-1wbbqy9",
@@ -893,7 +894,7 @@
       "label": "Hard to pause/skip/reduce/stop or unclear what it does",
       "n": 14,
       "threads": 13,
-      "share": 0.083,
+      "share": 0.084,
       "quotes": [
        {
         "id": "RE-1hcck6p",
@@ -924,9 +925,9 @@
      {
       "value": "failed_or_missed_instalment",
       "label": "Instalment failed, skipped, or deducted wrongly",
-      "n": 13,
-      "threads": 13,
-      "share": 0.077,
+      "n": 12,
+      "threads": 12,
+      "share": 0.072,
       "quotes": [
        {
         "id": "PL-4d6b5bb4-5a5b-4429-9a85-",
@@ -1167,7 +1168,7 @@
       "label": "Asks on Reddit or a forum",
       "n": 37,
       "threads": 37,
-      "share": 0.22,
+      "share": 0.223,
       "quotes": [
        {
         "id": "RE-1fn0wic",
@@ -1200,7 +1201,7 @@
       "label": "Watches YouTube / finfluencers",
       "n": 17,
       "threads": 13,
-      "share": 0.101,
+      "share": 0.102,
       "quotes": [
        {
         "id": "RE-1wwvay1",
@@ -1407,9 +1408,9 @@
      {
       "value": "neutral_help_when_unsure",
       "label": "Neutral, non-advisory help at a moment of doubt",
-      "n": 61,
-      "threads": 61,
-      "share": 0.363,
+      "n": 60,
+      "threads": 60,
+      "share": 0.361,
       "quotes": [
        {
         "id": "RE-1xdrnwu",
@@ -1442,7 +1443,7 @@
       "label": "Pause/skip/reduce without losing the habit or penalties",
       "n": 23,
       "threads": 21,
-      "share": 0.137,
+      "share": 0.139,
       "quotes": [
        {
         "id": "RE-1w0umcg",
@@ -1473,9 +1474,9 @@
      {
       "value": "reliable_payments",
       "label": "Instalments that just work, and clear alerts when they don't",
-      "n": 15,
-      "threads": 15,
-      "share": 0.089,
+      "n": 14,
+      "threads": 14,
+      "share": 0.084,
       "quotes": [
        {
         "id": "RE-1mtew9a",
@@ -1508,7 +1509,7 @@
       "label": "Know whether my SIP is doing OK / on track for my goal",
       "n": 14,
       "threads": 13,
-      "share": 0.083,
+      "share": 0.084,
       "quotes": [
        {
         "id": "RE-1v9mzwx",
@@ -1541,7 +1542,7 @@
       "label": "Understand why returns look like this and what is normal",
       "n": 13,
       "threads": 13,
-      "share": 0.077,
+      "share": 0.078,
       "quotes": [
        {
         "id": "RE-1wbbqy9",
@@ -2003,8 +2004,8 @@
    {
     "value": "stable_salaried",
     "label": "Salaried / stable",
-    "n": 19,
-    "at_risk_share": 0.053,
+    "n": 18,
+    "at_risk_share": 0.056,
     "top_triggers": [
      {
       "value": "switching",
@@ -2021,7 +2022,7 @@
      {
       "value": "neutral_help_when_unsure",
       "label": "Neutral, non-advisory help at a moment of doubt",
-      "n": 15
+      "n": 14
      },
      {
       "value": "know_if_on_track",
@@ -2299,19 +2300,19 @@
   {
    "need": "neutral_help_when_unsure",
    "label": "Neutral, non-advisory help at a moment of doubt",
-   "n": 61,
-   "threads": 61,
+   "n": 60,
+   "threads": 60,
    "sources": {
     "reddit": 50,
-    "tradingqna": 2,
+    "tradingqna": 1,
     "youtube": 9
    },
-   "share_of_relevant": 0.363,
-   "at_risk_share": 0.197,
-   "first_year_share": 0.443,
+   "share_of_relevant": 0.361,
+   "at_risk_share": 0.2,
+   "first_year_share": 0.45,
    "indmoney_share": 0.0,
    "controllability": 0.8,
-   "score": 0.347,
+   "score": 0.351,
    "linked_triggers": [
     {
      "label": "Returns flat/underwhelming vs what they expected",
@@ -2391,12 +2392,12 @@
     "youtube": 5,
     "play_store": 1
    },
-   "share_of_relevant": 0.137,
+   "share_of_relevant": 0.139,
    "at_risk_share": 0.565,
    "first_year_share": 0.043,
    "indmoney_share": 0.087,
    "controllability": 1.0,
-   "score": 0.227,
+   "score": 0.23,
    "linked_triggers": [
     {
      "label": "Job loss, salary delay, expenses, can't afford instalment",
@@ -2467,7 +2468,7 @@
      "url": "https://www.reddit.com/r/mutualfunds/comments/1vhvpz8/should_i_withdraw_my_mutual_funds_and_start_over/"
     }
    ],
-   "score_index": 65
+   "score_index": 66
   },
   {
    "need": "understand_volatility",
@@ -2479,12 +2480,12 @@
     "tradingqna": 2,
     "play_store": 1
    },
-   "share_of_relevant": 0.077,
+   "share_of_relevant": 0.078,
    "at_risk_share": 0.231,
    "first_year_share": 0.308,
    "indmoney_share": 0.077,
    "controllability": 0.9,
-   "score": 0.083,
+   "score": 0.084,
    "linked_triggers": [
     {
      "label": "Portfolio shows losses / market fell",
@@ -2548,21 +2549,21 @@
   {
    "need": "reliable_payments",
    "label": "Instalments that just work, and clear alerts when they don't",
-   "n": 15,
-   "threads": 15,
+   "n": 14,
+   "threads": 14,
    "sources": {
     "play_store": 5,
     "reddit": 3,
-    "tradingqna": 4,
+    "tradingqna": 3,
     "youtube": 2,
     "app_store": 1
    },
-   "share_of_relevant": 0.089,
-   "at_risk_share": 0.2,
+   "share_of_relevant": 0.084,
+   "at_risk_share": 0.214,
    "first_year_share": 0.0,
-   "indmoney_share": 0.467,
+   "indmoney_share": 0.5,
    "controllability": 1.0,
-   "score": 0.078,
+   "score": 0.077,
    "linked_triggers": [
     {
      "label": "Autopay/mandate/instalment failed, often unnoticed",
@@ -2580,7 +2581,7 @@
    "linked_pains": [
     {
      "label": "Instalment failed, skipped, or deducted wrongly",
-     "n": 10
+     "n": 9
     },
     {
      "label": "Setting up / limits / errors with autopay or mandate",
@@ -2597,9 +2598,9 @@
     "understand a mandate limit before approving it",
     "SIP payments that don't keep failing",
     "SIPs that don't silently disappear",
-    "know what happens if an instalment can't be paid",
     "warning before missed payments cancel a SIP",
-    "know if a missed instalment costs me a fine"
+    "know if a missed instalment costs me a fine",
+    "be told when my SIP stops"
    ],
    "quotes": [
     {
@@ -2647,12 +2648,12 @@
     "play_store": 2,
     "app_store": 3
    },
-   "share_of_relevant": 0.083,
+   "share_of_relevant": 0.084,
    "at_risk_share": 0.0,
    "first_year_share": 0.071,
    "indmoney_share": 0.5,
    "controllability": 0.9,
-   "score": 0.039,
+   "score": 0.04,
    "linked_triggers": [
     {
      "label": "Someone (person or creator) told them to stop or switch",

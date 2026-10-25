@@ -152,13 +152,18 @@ def tradingqna():
         for p in t.get("post_stream", {}).get("posts", []):
             import re
             text = re.sub(r"<[^>]+>", " ", p.get("cooked", ""))
-            rows.append(record(
+            rec = record(
                 "tradingqna", f"{tid}-{p['post_number']}", text,
                 f"{base}/t/{t.get('slug', '')}/{tid}/{p['post_number']}",
                 title=t.get("title", "") if p["post_number"] == 1 else "",
                 published_at=p.get("created_at", ""), thread_id=tid,
                 author=p.get("username"),
-                kind="post" if p["post_number"] == 1 else "comment"))
+                kind="post" if p["post_number"] == 1 else "comment")
+            # replies from the forum's own staff (Zerodha) are not investors
+            group = str(p.get("primary_group_name") or "").lower()
+            rec["is_staff"] = bool(p.get("staff") or p.get("admin") or p.get("moderator")
+                                   or "zerodha" in group or "staff" in group)
+            rows.append(rec)
     return save("tradingqna", rows, errors)
 
 
