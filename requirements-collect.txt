@@ -1,0 +1,4 @@
+-r requirements.txt
+google-play-scraper>=1.2.7
+yt-dlp>=2025.1.1
+youtube-comment-downloader>=0.1.76

@@ -1,37 +1,55 @@
-# INDmoney SIP Discovery Engine
+# INDmoney SIP Discovery Engine (v2)
 
-Research pilot for understanding 12-month SIP continuation among first-time mutual-fund investors in India. Research support only; no investment advice or fund recommendations.
+AI-powered discovery engine for the question: **why do first-time mutual-fund investors on INDmoney
+stop having an active SIP within 12 months, and which unmet needs matter most?**
 
-## Current status — 24 October 2026
+Research tool only. It never recommends funds or stocks and does not give investment advice.
 
-- Retrieved and keyword-screened 500 unique Indian App Store reviews (10 RSS pages).
-- Curated 38 pilot items: 33 App Store reviews, 3 Reddit items, 2 TradingQ&A items.
-- Prepared 20 blank human-labelling records. These are NOT a completed golden set.
-- Streamlit evidence explorer and Groq integration scaffold; live AI and deployment not yet validated.
-- No measured classification accuracy, latency or retention impact yet.
+## What it does
 
-## Run
+| Stage | How | Output |
+|---|---|---|
+| 1. Collect | Public sources, no login: Google Play + App Store reviews of INDmoney, Reddit (6 Indian investing subreddits, posts + comments), TradingQ&A, YouTube comments on SIP videos. Authors stored as one-way hashes. | `data/raw/*.jsonl` + manifests |
+| 2. Prefilter | Code: dedupe, keep records about SIPs / mutual funds | `data/processed/corpus.jsonl`, `funnel.json` |
+| 3. AI coding | Groq LLM labels every record on an 18-field codebook mapped to the brief's questions (`engine/codebook.py`) | `classified.jsonl` |
+| 4. Quality gates | Every output: allowed values only, exact supporting quote from the record, stage/risk consistency. One retry, then rejected and excluded. | status per record |
+| 5. Analysis | Code, not LLM: theme shares, continuers vs at-risk comparison, segment splits, opportunity score per unmet need | `analysis.json` |
+| 6. Golden set | 20 blind, source-stratified records hand-labelled by the researcher; agreement + Cohen's kappa per field | `data/eval/golden_report.json` |
+| 7. Ask the engine | Grounded Q&A with 4 visible gates: scope (no advice), enough evidence, exact-quote citations, numbers from code | in the app |
 
-Python 3.11+ recommended.
+Opportunity score = reach × closeness to a lapse × first-year share × controllability (adjustable in the app).
 
+## Run it (Mac)
+
+```bash
+bash run_mac.sh                 # full pipeline; asks for your Groq key once
+bash run_mac.sh classify        # resume AI coding (it skips records already coded)
+bash run_mac.sh golden-score    # after you label data/eval/golden_worksheet.xlsx
+source .venv/bin/activate && streamlit run app.py
 ```
-pip install -r requirements.txt
-streamlit run app.py
-python -m unittest discover -s tests
-```
 
-Set GROQ_API_KEY and GROQ_MODEL in server environment or Streamlit Secrets. Never put keys in GitHub or the browser UI. Model selection remains pending account availability and evaluation. With no key, source browsing still works; the app clearly labels AI as unavailable.
+Groq free-tier daily token limits may stop classification part-way. It is resumable: run
+`bash run_mac.sh classify` again later. If a model hits its daily limit, the next model in the fallback
+list is used and recorded per record (set `GROQ_MODELS` to control the list).
 
-## Data and methodology
+## Golden set workflow
 
-`data/pilot.json` contains source identifiers, short attributed excerpts and AI-assisted paraphrases. Paraphrases are not manual labels. `data/collection_manifest.json` records volume and limitations. Apple URLs point to the app's review listing; use the exact review ID, title and date to locate a review, or rerun the RSS collector. Review ordering changes over time.
+1. `data/eval/golden_worksheet.xlsx` is created before AI coding and shows no AI labels.
+2. Label the yellow columns by hand (dropdowns + `codebook` sheet), save as `data/eval/golden_labels.xlsx`.
+3. `bash run_mac.sh golden-score` → agreement report + updated `docs/AI_Evidence_Log_draft.md`.
 
-The pilot is purposive and heavily App Store weighted. Do not calculate population dropout rates, infer first-time status from age, treat redemption as SIP cancellation, count repeated comments as independent people, or mistake a reported product issue for a verified defect. Unknown publication dates remain unknown. Historic competitor forum posts are comparator evidence only.
+## Deploy (Streamlit Community Cloud)
 
-## Next gates
+Commit `data/processed/` and `data/eval/` (raw data is git-ignored), main file `app.py`, and set
+`GROQ_API_KEY` in the app's Secrets. Without a key, the dashboard still works and Ask the engine
+falls back to showing evidence.
 
-1. Expand toward 200–300 relevant records with stronger first-time, first-year, pause/stop/restart and continuation evidence. Log inaccessible or excluded sources.
-2. Refine the codebook; hand-label 20 items before exposing AI predictions. Use 12 development and 8 untouched holdout items, grouped by thread.
-3. Add batch structured classification, code-derived theme counts and segment comparisons. Do not use retrieved top-k items to estimate prevalence.
-4. Evaluate label agreement, citation support, unknown handling, hallucinations, refusals, errors and latency. Document 2–3 real corrections; never invent them.
-5. Deploy and test signed-out access and free-tier failures. The first scaffold is not a completed Part 1 submission.
+## Tests
+
+`python -m unittest discover -s tests -v` runs the full pipeline on synthetic records with a fake LLM.
+
+## Limitations
+
+Public feedback over-represents complaints; first-time status, age and income are rarely stated;
+post dates are not investor tenure; the engine ranks where to look and cannot measure retention rates.
+Version 1 (20-record pilot) is preserved in `archive/v1/`.
