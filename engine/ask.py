@@ -83,22 +83,36 @@ def counts_for(evidence):
 
 
 def _norm(s):
-    return re.sub(r"\s+", " ", s.replace("’", "'")).strip().lower()
+    """Same words in the same order; punctuation, quote style and case ignored."""
+    s = s.replace("\u2019", "'").replace("\u2018", "'").lower()
+    return " ".join(re.findall(r"[^\W_]+", s))
 
 
 def check_citations(answer, evidence, allowed_numbers=frozenset()):
+    """Keep a claim only if every quote it cites is in that record (word for word)
+    and every number it states appears in the code-computed counts or its quotes."""
     by_id = {r["id"]: _norm(f"{r.get('title', '')} {r['text']}") for r in evidence}
-    good, dropped = [], 0
+    good, failures = [], []
     for c in answer.get("claims", []) if isinstance(answer, dict) else []:
-        refs = [e for e in c.get("evidence", []) if isinstance(e, dict)
-                and e.get("id") in by_id and len(e.get("quote", "")) >= 8
-                and _norm(e["quote"]) in by_id[e["id"]]]
-        nums = set(re.findall(r"\d+", c.get("text", "") if isinstance(c.get("text"), str) else ""))
-        if isinstance(c.get("text"), str) and refs and nums <= allowed_numbers:
-            good.append({"text": c["text"], "evidence": refs})
+        text = c.get("text") if isinstance(c.get("text"), str) else ""
+        refs, bad = [], []
+        for e in c.get("evidence", []) if isinstance(c.get("evidence"), list) else []:
+            if not isinstance(e, dict):
+                continue
+            q = _norm(str(e.get("quote", "")))
+            if e.get("id") in by_id and len(q) >= 8 and q in by_id[e["id"]]:
+                refs.append(e)
+            else:
+                bad.append(e.get("id"))
+        quoted = set(re.findall(r"\d+", " ".join(str(e.get("quote", "")) for e in refs)))
+        nums = set(re.findall(r"\d+", text))
+        if not text or not refs:
+            failures.append({"claim": text[:120], "why": f"quote not found in record(s) {bad}"})
+        elif not nums <= (set(allowed_numbers) | quoted):
+            failures.append({"claim": text[:120], "why": f"number(s) {sorted(nums - set(allowed_numbers) - quoted)} not in the data"})
         else:
-            dropped += 1
-    return good, dropped
+            good.append({"text": text, "evidence": refs})
+    return good, failures
 
 
 def ask(question, rows, client=None):
@@ -126,13 +140,27 @@ def ask(question, rows, client=None):
         return {"status": "ai_unavailable", "gates": gates, "evidence": evidence, "counts": counts,
                 "message": "AI is unavailable right now; here is the matching evidence and its counts."}
     allowed = set(re.findall(r"\d+", json.dumps(counts) + " " + question))
-    claims, dropped = check_citations(answer, evidence, frozenset(allowed))
+    claims, failures = check_citations(answer, evidence, frozenset(allowed))
+    if failures:  # one retry, telling the model exactly which claims failed and why
+        try:
+            fix = dict(payload, failed_claims=failures, instruction=(
+                "These claims failed verification. Return the answer again. Copy each quote "
+                "character for character from the record's text, and state no number that is not in counts."))
+            answer2, model = client.chat_json(SYSTEM, json.dumps(fix, ensure_ascii=False), max_tokens=1500)
+            claims2, failures2 = check_citations(answer2, evidence, frozenset(allowed))
+            if len(claims2) > len(claims):
+                answer, claims, failures = answer2, claims2, failures2
+        except LLMUnavailable:
+            pass
+    dropped = len(failures)
     if not claims:
         gates.append(("G3 citation", "fail", f"no claim survived the citation check ({dropped} removed)"))
         return {"status": "ungrounded", "gates": gates, "evidence": evidence, "counts": counts,
+                "failures": failures,
                 "message": "The AI answer could not be verified against the records, so it is not shown."}
     gates.append(("G3 citation", "pass" if not dropped else "partial",
                   f"{len(claims)} claims verified" + (f", {dropped} unverifiable claims removed" if dropped else "")))
     gates.append(("G4 numbers", "pass", "all counts below are computed in code"))
     return {"status": "answered", "gates": gates, "claims": claims, "model": model,
+            "failures": failures,
             "caveats": answer.get("caveats", ""), "evidence": evidence, "counts": counts}

@@ -204,6 +204,10 @@ with tabs[4]:
                 st.caption("Caveats: " + res["caveats"])
         else:
             st.warning(res["message"])
+        if res.get("failures"):
+            with st.expander(f"Claims removed by the citation check ({len(res['failures'])})"):
+                for f in res["failures"]:
+                    st.caption(f"✗ {f['claim']} — {f['why']}")
         if res.get("counts"):
             with st.expander("Code-computed counts for the matched records"):
                 st.json(res["counts"])

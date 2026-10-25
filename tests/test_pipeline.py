@@ -129,13 +129,16 @@ class Pipeline(unittest.TestCase):
 
     def test_citation_check(self):
         ev = [{"id": "A", "title": "", "text": "The mandate failed silently"}]
-        good, dropped = ASK.check_citations({"claims": [
+        good, failed = ASK.check_citations({"claims": [
             {"text": "Mandates fail", "evidence": [{"id": "A", "quote": "mandate failed silently"}]},
             {"text": "Invented", "evidence": [{"id": "A", "quote": "this is not there"}]},
             {"text": "Most (87%) users", "evidence": [{"id": "A", "quote": "mandate failed silently"}]},
         ]}, ev)
         self.assertEqual(len(good), 1)
-        self.assertEqual(dropped, 2)
+        self.assertEqual(len(failed), 2)
+        good2, _ = ASK.check_citations({"claims": [
+            {"text": "Mandates fail", "evidence": [{"id": "A", "quote": "Mandate failed, silently!"}]}]}, ev)
+        self.assertEqual(len(good2), 1)  # punctuation and case differences are tolerated
 
     def test_golden_sheet_is_blind(self):
         from openpyxl import load_workbook
