@@ -34,6 +34,26 @@ REDDIT_POSTS_PER_QUERY = 50
 REDDIT_COMMENT_THREADS = 120          # threads whose comments we also pull
 REDDIT_COMMENTS_PER_THREAD = 60
 
+# targeted searches for the brief's thinly covered questions (Q2, Q4, Q8)
+TARGETED_SUBREDDITS = ["mutualfunds", "MutualfundsIndia", "IndiaInvestments",
+                       "personalfinanceindia", "IndianStreetBets", "FIREIndia"]
+TARGETED_QUERIES = {
+    "Q2_behaviour_change": [
+        "forgot about my SIP", "stopped checking my portfolio", "months after starting SIP",
+        "first year of SIP", "6 months into SIP", "increased my SIP", "step up SIP",
+        "kept changing funds", "started SIP last year", "after one year of SIP"],
+    "Q4_checking": [
+        "check my portfolio daily", "check portfolio every day", "how often check mutual fund",
+        "checking returns daily", "don't check my portfolio", "obsessively checking portfolio",
+        "check SIP returns", "looking at red portfolio"],
+    "Q8_segments": [
+        "freelancer SIP", "irregular income SIP", "variable income SIP", "student SIP",
+        "college student mutual fund", "first salary SIP", "parents told me to start SIP",
+        "dad started SIP for me", "pocket money SIP", "bonus SIP", "business income SIP",
+        "SIP in my 40s", "influencer recommended fund", "friend suggested SIP"],
+}
+TARGETED_PER_QUERY = 25
+
 # ---------------------------------------------------------------- tradingqna
 TQNA_QUERIES = [
     "stop sip", "pause sip", "sip loss", "first sip", "sip mandate",

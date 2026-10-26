@@ -184,7 +184,10 @@ with tabs[4]:
     st.caption("Answers are generated only from matching records, and pass four visible gates: "
                "scope (no investment advice), enough evidence, every claim cited with an exact quote, "
                "and numbers computed in code. If a gate fails you get the evidence, not an AI guess.")
-    examples = ["Why do people stop their SIP in the first year?",
+    examples = ["What changes in their behaviour in the months after starting?",
+                "What do investors check, and how often, once they have started?",
+                "How do these patterns differ across user segments?",
+                "Why do people stop their SIP in the first year?",
                 "What confuses users about returns in the app?",
                 "What happens when an autopay or mandate fails?",
                 "What do investors do when they are unsure whether to continue?"]
@@ -195,6 +198,9 @@ with tabs[4]:
             res = ask(q, view)
         st.markdown(" ".join(f"<span class='gate {s}'>{n}: {s} — {d}</span>" for n, s, d in res["gates"]),
                     unsafe_allow_html=True)
+        if res.get("strength"):
+            lvl, txt = res["strength"]["level"], res["strength"]["text"]
+            (st.warning if lvl == "thin" else st.info)(txt, icon="📊")
         if res["status"] == "answered":
             for c in res["claims"]:
                 st.markdown(f"- {c['text']}")

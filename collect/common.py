@@ -69,7 +69,7 @@ def get_json(session, url, params=None, tries=3, pause=1.5):
     last = RuntimeError('rate limited (429)')
     for attempt in range(tries):
         try:
-            r = session.get(url, params=params, timeout=30,
+            r = session.get(url, params=params, timeout=20,
                             headers={"User-Agent": UA, "Accept": "application/json"})
             if r.status_code == 403 and "www.reddit.com" in url:
                 url = url.replace("www.reddit.com", "old.reddit.com")  # fallback host

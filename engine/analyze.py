@@ -27,7 +27,13 @@ def load_coded():
     rows = []
     for cid, lab in load_done().items():
         if cid in corpus and not corpus[cid].get("is_staff"):  # staff replies are not investors
-            rows.append({**corpus[cid], **lab})
+            row = {**corpus[cid], **lab}
+            for f, spec in CB.FIELDS.items():  # fields added to the codebook later
+                if f not in row:
+                    vals = spec["values"]
+                    empty = "unknown" if "unknown" in vals else ("none" if "none" in vals else "0")
+                    row[f] = [empty] if spec["multi"] else empty
+            rows.append(row)
     return rows
 
 
@@ -164,7 +170,7 @@ def opportunities(rows, controllability=None, w_reach=1.0, w_risk=1.0, w_first=0
 
 QUESTION_FIELDS = [
     ("Why do people start a SIP, and what do they expect?", ["start_motivation", "expectation"]),
-    ("What changes in the months after starting?", ["journey_stage"]),
+    ("What changes in the months after starting?", ["behaviour_change", "journey_stage"]),
     ("What leads investors to pause, reduce or stop?", ["drop_trigger"]),
     ("What do investors check, and how often?", ["check_frequency", "what_checked"]),
     ("What confuses or worries them inside the app?", ["in_app_pain"]),
@@ -172,7 +178,7 @@ QUESTION_FIELDS = [
     ("What keeps continuers going?", ["continuation_driver"]),
     ("What unmet needs emerge consistently?", ["unmet_need"]),
 ]
-COMPARE_FIELDS = ["start_motivation", "expectation", "check_frequency", "what_checked",
+COMPARE_FIELDS = ["behaviour_change", "start_motivation", "expectation", "check_frequency", "what_checked",
                   "in_app_pain", "outside_app", "influencer", "income_stability",
                   "investor_experience", "continuation_driver"]
 

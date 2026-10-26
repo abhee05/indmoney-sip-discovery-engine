@@ -68,6 +68,21 @@ FIELDS = {
             "unknown": "Not stated",
         },
     },
+    "behaviour_change": {
+        "q": "Q2: What changed in their behaviour after starting?",
+        "multi": True,
+        "values": {
+            "checks_more": "Started checking returns more often / anxiously",
+            "checks_less_forgot": "Stopped checking or forgot about the SIP",
+            "increased_or_stepped_up": "Increased the amount, stepped up or added SIPs",
+            "reduced_skipped_paused": "Reduced, skipped or paused instalments",
+            "stopped_or_redeemed": "Stopped the SIP or redeemed",
+            "switched_fund_or_app": "Moved to another fund or platform",
+            "tinkering": "Keeps changing funds or allocation",
+            "sought_outside_help": "Started asking others or reading/watching more",
+            "none": "No change in behaviour described",
+        },
+    },
     "drop_trigger": {
         "q": "Q3: What leads investors to pause, reduce or stop? (primary reason)",
         "multi": False,

@@ -35,6 +35,10 @@ ABBR = {
                                  "sug": "someone_suggested", "hab": "discipline_habit", "trend": "trend"}),
     "expect": ("expectation", {"quick": "quick_visible_gains", "steady": "steady_long_term",
                                "noexp": "no_clear_expectation"}),
+    "chg": ("behaviour_change", {"more": "checks_more", "less": "checks_less_forgot",
+                                 "up": "increased_or_stepped_up", "down": "reduced_skipped_paused",
+                                 "stop": "stopped_or_redeemed", "sw": "switched_fund_or_app",
+                                 "tink": "tinkering", "help": "sought_outside_help"}),
     "trig": ("drop_trigger", {"inc": "income_cashflow", "ret": "returns_below_expectation",
                               "mkt": "market_fall_red_portfolio", "pay": "payment_mandate_failure",
                               "conf": "app_confusion", "need": "needs_money_goal", "trust": "distrust_platform",
@@ -130,6 +134,38 @@ def parse_line(line):
     return item
 
 
+def amend(path):
+    """Lines '<id> k=v ...' add or overwrite fields on an already-coded record; gates re-run."""
+    corpus = {r["id"]: r for r in load_corpus()}
+    done = load_done()
+    ok, bad = 0, []
+    with OUT.open("a", encoding="utf-8") as out:
+        for line in open(path, encoding="utf-8"):
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            head, rest = line.split(" ", 1) if " " in line else (line, "")
+            if head not in done or head not in corpus:
+                bad.append((head, "not coded yet"))
+                continue
+            item = {k: v for k, v in done[head].items()}
+            for tok in shlex.split(rest):
+                k, v = tok.split("=", 1)
+                field, m = ABBR[k]
+                vals = [m[x] for x in v.split(",")]
+                item[field] = vals if CB.FIELDS[field]["multi"] else vals[0]
+            errs = validate(item, corpus[head])
+            if errs:
+                bad.append((head, errs))
+                continue
+            item["amended_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            out.write(json.dumps(item, ensure_ascii=False) + "\n")
+            ok += 1
+    print(f"amended {ok}; failed: {len(bad)}")
+    for b in bad:
+        print("  ", b)
+
+
 def ingest(path):
     corpus = {r["id"]: r for r in load_corpus()}
     done = load_done()
@@ -173,3 +209,41 @@ if __name__ == "__main__":
         show(int(sys.argv[2]), int(sys.argv[3]))
     elif cmd == "ingest":
         ingest(sys.argv[2])
+    elif cmd == "amend":
+        amend(sys.argv[2])
+    elif cmd == "targeted":  # sample unlabelled targeted posts, N per brief question
+        per = int(sys.argv[2]) if len(sys.argv) > 2 else 40
+        done = load_done()
+        by = {}
+        for r in sorted(load_corpus(), key=lambda r: hashlib.md5(r["id"].encode()).hexdigest()):
+            q = str(r.get("query", ""))
+            if q.startswith("targeted:") and r["id"] not in done:
+                by.setdefault(q.split(":")[1], []).append(r)
+        ids, threads = [], Counter()
+        for k, rs in sorted(by.items()):
+            n = 0
+            for r in rs:
+                if n >= per:
+                    break
+                if threads[r["thread_id"]] >= 2:
+                    continue
+                ids.append(r["id"]); threads[r["thread_id"]] += 1; n += 1
+            print(f"{k}: {len(rs)} candidates, {n} sampled")
+        (C.PROCESSED / "targeted_sample.json").write_text(json.dumps(ids))
+    elif cmd == "tshow":
+        ids = json.loads((C.PROCESSED / "targeted_sample.json").read_text())[int(sys.argv[2]):int(sys.argv[3])]
+        corpus = {r["id"]: r for r in load_corpus()}
+        done = load_done()
+        for i in ids:
+            if i in done:
+                continue
+            r = corpus[i]
+            title = f" TITLE: {r['title'][:140]} |" if r.get("title") else ""
+            print(f"## {i} ({r['kind']}; {r['query'].split(': ')[0]}){title} {r['text'][:460]}")
+    elif cmd == "core":  # print core records compactly, for adding a field
+        from engine.analyze import load_coded
+        rows = [r for r in load_coded() if r.get("status") != "rejected" and r["relevance"] == "core"]
+        a, b = int(sys.argv[2]), int(sys.argv[3])
+        for r in rows[a:b]:
+            t = (r.get("title", "") + " | " if r.get("title") else "") + r["text"]
+            print(f"## {r['id']} [{r['journey_stage']}, risk {r['continuation_risk']}, trig {r['drop_trigger']}] {t[:420]}")

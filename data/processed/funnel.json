@@ -10,23 +10,23 @@
     "candidates": 203
   },
   "reddit": {
-    "collected": 8406,
-    "after_dedupe": 8112,
-    "candidates": 3652
+    "collected": 11358,
+    "after_dedupe": 10273,
+    "candidates": 5062
   },
   "tradingqna": {
     "collected": 1450,
-    "after_dedupe": 1440,
+    "after_dedupe": 1439,
     "candidates": 994
   },
   "youtube": {
     "collected": 2866,
-    "after_dedupe": 2638,
+    "after_dedupe": 2635,
     "candidates": 634
   },
   "_total": {
-    "collected": 15537,
-    "after_dedupe": 14816,
-    "candidates": 5513
+    "collected": 18489,
+    "after_dedupe": 16973,
+    "candidates": 6923
   }
 }

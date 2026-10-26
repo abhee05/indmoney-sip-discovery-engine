@@ -28,6 +28,10 @@ def is_candidate(r, thread_titles):
         return False
     if WORD_SIP.search(text) or TERM_RE.search(f" {text.lower()} "):
         return True
+    # a question-targeted search already scoped the topic (e.g. "check my portfolio daily")
+    if str(r.get("query", "")).startswith("targeted:") and len(r["text"]) >= 40 and re.search(
+            r"\b(portfolio|invest\w*|returns?|fund|salary|income)\b", text, re.I):
+        return True
     # comments inside a SIP-focused thread can be relevant without the keyword
     if r["source"] == "youtube":
         return False

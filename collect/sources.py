@@ -131,6 +131,50 @@ def reddit():
     return save("reddit", rows, errors)
 
 
+def reddit_targeted():
+    """Question-targeted posts (Q2, Q4, Q8), then the comments inside the best-matching threads."""
+    s, rows, errors, threads = requests.Session(), [], [], {}
+    subs = C.TARGETED_SUBREDDITS[:4]
+    for qkey, queries in C.TARGETED_QUERIES.items():
+        for q in queries:
+            for sub in subs:
+                try:
+                    data = get_json(s, f"{AS}/posts/search",
+                                    {"subreddit": sub, "query": q, "limit": C.TARGETED_PER_QUERY},
+                                    tries=2, pause=0.4)
+                except Exception as e:  # noqa: BLE001
+                    errors.append(f"{sub} {q}: {e}")
+                    continue
+                for d in data.get("data") or []:
+                    link = "https://www.reddit.com" + (d.get("permalink") or f"/comments/{d['id']}/")
+                    rows.append(record(
+                        "reddit", d["id"], d.get("selftext", "") or "", link, title=d.get("title", ""),
+                        published_at=_reddit_ts(d.get("created_utc")), thread_id=d["id"],
+                        author=d.get("author"), kind="post", score=d.get("score"),
+                        query=f"targeted:{qkey}: {q}"))
+                    threads.setdefault(d["id"], (d.get("num_comments") or 0, link, qkey, q))
+            print(f"  {qkey} | {q}: {len(rows)} posts so far ({len(errors)} errors)", flush=True)
+    top = sorted(threads.items(), key=lambda kv: -kv[1][0])[:60]
+    for i, (pid, (_, link, qkey, q)) in enumerate(top, 1):
+        try:
+            data = get_json(s, f"{AS}/comments/search", {"link_id": pid, "limit": 100}, tries=2, pause=0.4)
+        except Exception as e:  # noqa: BLE001
+            errors.append(str(e))
+            continue
+        for c in sorted(data.get("data") or [], key=lambda c: -(c.get("score") or 0))[:40]:
+            body = c.get("body", "")
+            if body in ("[deleted]", "[removed]"):
+                continue
+            rows.append(record(
+                "reddit", c["id"], body, f"{link.rstrip('/')}/{c['id']}/",
+                published_at=_reddit_ts(c.get("created_utc")), thread_id=pid,
+                author=c.get("author"), kind="comment", score=c.get("score"),
+                query=f"targeted:{qkey}: {q}"))
+        if i % 10 == 0:
+            print(f"  comments: {i}/{len(top)} threads", flush=True)
+    return save("reddit_targeted", rows, errors)
+
+
 # ------------------------------------------------------------------ TradingQ&A
 def tradingqna():
     s, rows, errors, topics = requests.Session(), [], [], set()
@@ -204,4 +248,5 @@ def youtube():
 
 
 ALL = {"play_store": play_store, "app_store": app_store, "reddit": reddit,
+       "reddit_targeted": reddit_targeted,
        "tradingqna": tradingqna, "youtube": youtube}

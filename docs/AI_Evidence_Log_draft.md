@@ -1,5 +1,5 @@
 # AI Evidence Log — INDmoney SIP Discovery Engine
-_Draft generated 2026-10-25 from engine outputs. Prompt version codebook-v3._
+_Draft generated 2026-10-26 from engine outputs. Prompt version codebook-v3._
 
 ## 1. Sources and volume analysed
 
@@ -7,16 +7,16 @@ _Draft generated 2026-10-25 from engine outputs. Prompt version codebook-v3._
 |---|---|---|---|---|
 | app_store | 243 | 237 | 30 | 4 |
 | play_store | 2572 | 2389 | 203 | 14 |
-| reddit | 8406 | 8112 | 3652 | 101 |
-| tradingqna | 1450 | 1440 | 994 | 16 |
-| youtube | 2866 | 2638 | 634 | 29 |
-| **Total** | **15537** | **14816** | **5513** | **164** |
+| reddit | 11358 | 10273 | 5062 | 172 |
+| tradingqna | 1450 | 1439 | 994 | 15 |
+| youtube | 2866 | 2635 | 634 | 33 |
+| **Total** | **18489** | **16973** | **6923** | **238** |
 
-- AI-coded records: 534; rejected by quality gates: 0
-- Relevance split: {'adjacent': 310, 'core': 164, 'not_relevant': 60}
-- Core evidence by product: {'indmoney': 22, 'general': 122, 'other_platform': 20}; distinct threads: 151
-- First-year investors (explicit) in core evidence: 38
-- Models used: {'claude-opus-5-5 (in-session)': 534}
+- AI-coded records: 676; rejected by quality gates: 3
+- Relevance split: {'adjacent': 348, 'core': 238, 'not_relevant': 87}
+- Core evidence by product: {'indmoney': 22, 'general': 195, 'other_platform': 21}; distinct threads: 213
+- First-year investors (explicit) in core evidence: 66
+- Models used: {'claude-opus-5-5 (in-session)': 665, 'openai/gpt-oss-120b': 11}
 
 Collection notes: TODO — list any source that failed or was thin (see data/raw/*.manifest.json).
 
@@ -26,9 +26,9 @@ Collect (public, no login) → prefilter in code → LLM coding against an 18-fi
 
 ## 3. Quality gate results
 
-- Passed first try: 533
-- Passed after one retry: 1
-- Rejected and excluded: 0
+- Passed first try: 665
+- Passed after one retry: 8
+- Rejected and excluded: 3
 
 | Run at | Coded OK | Retry OK | Rejected | API calls | Tokens |
 |---|---|---|---|---|---|
@@ -90,14 +90,14 @@ TODO — write these yourself from real cases (golden-set disagreements, explore
 
 | Unmet need | Mentions | Threads | % at/near lapse | % first-year | Score index |
 |---|---|---|---|---|---|
-| Neutral, non-advisory help at a moment of doubt | 61 | 61 | 20% | 44% | 100 |
-| Pause/skip/reduce without losing the habit or penalties | 23 | 21 | 56% | 4% | 65 |
-| Understand why returns look like this and what is normal | 13 | 13 | 23% | 31% | 24 |
-| Instalments that just work, and clear alerts when they don't | 15 | 15 | 20% | 0% | 22 |
-| Know whether my SIP is doing OK / on track for my goal | 13 | 13 | 0% | 8% | 10 |
-| See the SIP connected to a personal goal | 4 | 4 | 25% | 25% | 7 |
-| Trustworthy platform and responsive support | 7 | 7 | 0% | 0% | 4 |
-| Clear costs and plan type | 4 | 4 | 0% | 50% | 3 |
+| Neutral, non-advisory help at a moment of doubt | 87 | 87 | 15% | 52% | 100 |
+| Pause/skip/reduce without losing the habit or penalties | 30 | 27 | 47% | 10% | 59 |
+| Understand why returns look like this and what is normal | 26 | 24 | 12% | 35% | 28 |
+| Instalments that just work, and clear alerts when they don't | 14 | 14 | 21% | 0% | 16 |
+| Know whether my SIP is doing OK / on track for my goal | 16 | 15 | 0% | 12% | 10 |
+| See the SIP connected to a personal goal | 5 | 5 | 20% | 20% | 6 |
+| Trustworthy platform and responsive support | 7 | 7 | 0% | 0% | 3 |
+| Clear costs and plan type | 4 | 4 | 0% | 50% | 2 |
 
 ## 7. Limitations
 
@@ -115,6 +115,7 @@ TODO — write these yourself from real cases (golden-set disagreements, explore
 - **journey_stage** — Where in the first-12-month journey is the person?: considering_start, onboarding, first_months, ongoing, considering_stop, reduced_or_paused, stopped, restarted, unknown
 - **start_motivation** — Q1: Why do people start a SIP?: long_term_wealth, specific_goal, tax_saving, someone_suggested, discipline_habit, trend, unknown
 - **expectation** — Q1: What did they expect to happen?: quick_visible_gains, steady_long_term, no_clear_expectation, unknown
+- **behaviour_change** — Q2: What changed in their behaviour after starting?: checks_more, checks_less_forgot, increased_or_stepped_up, reduced_skipped_paused, stopped_or_redeemed, switched_fund_or_app, tinkering, sought_outside_help, none
 - **drop_trigger** — Q3: What leads investors to pause, reduce or stop? (primary reason): income_cashflow, returns_below_expectation, market_fall_red_portfolio, payment_mandate_failure, app_confusion, needs_money_goal, distrust_platform, advice_to_stop, switching, none
 - **check_frequency** — Q4: How often do they check?: daily_or_more, weekly, monthly, rarely, unknown
 - **what_checked** — Q4: What do they check?: total_returns, daily_change, xirr_cagr, instalment_status, compare_others, unknown

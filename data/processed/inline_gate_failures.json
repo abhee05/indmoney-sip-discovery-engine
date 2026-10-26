@@ -1,5 +1,11 @@
 {
  "RE-gl1rc0l": [
   "quote is not an exact substring of the record"
+ ],
+ "RE-1mh5seu": [
+  "a drop_trigger requires continuation_risk>=1"
+ ],
+ "RE-1s0nm0f": [
+  "a drop_trigger requires continuation_risk>=1"
  ]
 }
