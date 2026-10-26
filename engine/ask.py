@@ -205,7 +205,7 @@ def ask(question, rows, client=None):
     gates.append(("G2 evidence", "pass" if strg["level"] != "thin" else "partial",
                   f"{len(evidence)} records quoted from {len(counts['sources'])} sources"
                   + (f"; {len(pool)} posts state {rt['label']}" if rt else "")))
-    client = client or Groq()
+    client = client or Groq(budget=45)
     try:
         payload = {"question": question[:500], "counts": counts,
                    "records": [{"id": r["id"], "source": r["source"], "title": r.get("title", "")[:200],
@@ -221,7 +221,8 @@ def ask(question, rows, client=None):
     if not claims and not failures:  # model returned nothing: ask for what the records DO show
         failures = [{"claim": "", "why": "no claims returned; summarise what these records do show, "
                                          "even if they only partly answer the question"}]
-    if failures:  # one retry, telling the model exactly which claims failed and why
+    left = client.time_left() if hasattr(client, "time_left") else None
+    if failures and (left is None or left > 15):  # one retry, telling the model which claims failed and why
         try:
             fix = dict(payload, failed_claims=failures, instruction=(
                 "These claims failed verification. Return the answer again. Copy each quote "

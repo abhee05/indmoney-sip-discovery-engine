@@ -23,8 +23,14 @@ st.info("Research tool built on public user feedback. It does not give investmen
         "Quotes are unverified user claims.", icon="ℹ️")
 
 
+def _data_version():
+    files = [C.PROCESSED / "classified.jsonl", C.PROCESSED / "corpus.jsonl",
+             C.PROCESSED / "funnel.json", C.EVAL / "golden_report.json"]
+    return tuple(f.stat().st_mtime if f.exists() else 0 for f in files)
+
+
 @st.cache_data(show_spinner=False)
-def load():
+def load(_version=None):
     rows = A.load_coded()
     funnel_p = C.PROCESSED / "funnel.json"
     funnel = json.loads(funnel_p.read_text()) if funnel_p.exists() else {}
@@ -35,7 +41,7 @@ def load():
     return rows, funnel, runs, gold
 
 
-rows, funnel, runs, gold = load()
+rows, funnel, runs, gold = load(_data_version())
 if not rows:
     st.warning("No coded data yet. Run `python run.py all` locally, then commit data/processed.")
     st.stop()

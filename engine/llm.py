@@ -36,12 +36,17 @@ def _secret(name):
 
 
 class Groq:
-    def __init__(self, key=None, models=None):
+    def __init__(self, key=None, models=None, budget=None):
         self.key = key or _secret("GROQ_API_KEY")
         env_models = _secret("GROQ_MODELS") or _secret("GROQ_MODEL")
         self.models = models or ([m.strip() for m in env_models.split(",") if m.strip()] or FALLBACK)
         self.exhausted = set()
         self.calls, self.tokens, self.seconds = 0, 0, 0.0
+        self.budget = budget  # total seconds this client may spend (None = no limit)
+        self.started = time.monotonic()
+
+    def time_left(self):
+        return None if self.budget is None else self.budget - (time.monotonic() - self.started)
 
     @property
     def available(self):
@@ -58,6 +63,9 @@ class Groq:
             raise LLMUnavailable("GROQ_API_KEY is not set.")
         last = "unknown error"
         for attempt in range(12):
+            left = self.time_left()
+            if left is not None and left < 5:
+                raise LLMUnavailable("The AI service is busy right now (free tier). Showing the evidence instead.")
             model = self.model()
             body = {"model": model, "temperature": temperature,
                     "max_tokens": max_tokens * 2 if "gpt-oss" in model else max_tokens,
@@ -68,7 +76,7 @@ class Groq:
                 body["reasoning_effort"] = "low"
             t0 = time.monotonic()
             try:
-                r = requests.post(URL, json=body, timeout=90,
+                r = requests.post(URL, json=body, timeout=90 if left is None else max(5, min(90, left)),
                                   headers={"Authorization": f"Bearer {self.key}"})
             except requests.RequestException as e:
                 time.sleep(min(5 * (attempt + 1), 60))
@@ -85,7 +93,10 @@ class Groq:
                 m = re.search(r"try again in ([\d.]+)s", msg)
                 wait = float(wait) if wait else (float(m.group(1)) if m else 15)
                 print(f"  (rate limit, waiting {wait:.0f}s)")
-                time.sleep(min(wait + 1, 90))
+                wait = min(wait + 1, 90)
+                if left is not None and wait > left - 5:
+                    raise LLMUnavailable("The AI service is busy right now (free tier). Showing the evidence instead.")
+                time.sleep(wait)
                 continue
             if r.status_code in (401, 403):
                 raise LLMUnavailable("Groq rejected the API key (check .env).")
