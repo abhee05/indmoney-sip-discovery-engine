@@ -99,7 +99,8 @@ def search(query: str, limit: int = 25) -> list[dict]:
     return (good or results)[:limit]
 
 
-CATEGORY_WORDS = ("large", "small", "multi", "flexi", "focused", "value", "elss", "hybrid", "balanced", "index")
+CATEGORY_WORDS = ("large", "small", "multi", "flexi", "focused", "value", "elss", "hybrid", "balanced", "index",
+                  "etf", "nifty", "bse", "momentum")
 
 
 def _norm(text: str) -> str:
@@ -134,8 +135,34 @@ def search_terms(query: str) -> str:
 
 
 def find_scheme(query: str) -> dict | None:
-    """Search by the fund's name, then pick the Direct Growth plan whose name has every query word."""
-    return best_match(query, search(search_terms(query), limit=500))
+    """Search by the fund's name, then pick the Direct Growth plan whose name has every query word.
+
+    Some funds are listed several times under a bare name with no plan words (e.g. four codes all called
+    "Motilal Oswal Midcap Fund"). Then the active one with the highest NAV is the Direct Growth plan:
+    direct plans have lower costs than regular ones, and growth plans pay nothing out, unlike IDCW.
+    """
+    candidates = search(search_terms(query), limit=500)
+    match = best_match(query, candidates)
+    if match:
+        return match
+    core = search_terms(query)
+    bare = [c for c in candidates
+            if not re.search(r"direct|regular|growth|idcw|dividend|bonus|payout|reinvest", c["schemeName"], re.I)
+            and best_match(core, [c])]
+    recent = pd.Timestamp.now() - pd.Timedelta(days=30)
+    best = None
+    for c in bare[:8]:
+        try:
+            _, series = parse(fetch_live(c["schemeCode"]))
+        except Exception:  # noqa: BLE001
+            continue
+        if series.index[-1] < recent:
+            continue          # closed or merged plan
+        if best is None or series.iloc[-1] > best[0]:
+            best = (float(series.iloc[-1]), c)
+    if best is None:
+        return None
+    return {**best[1], "schemeName": best[1]["schemeName"] + " (Direct Growth: highest NAV of its plans)"}
 
 
 def load_presets() -> dict:
