@@ -237,7 +237,7 @@ with tab_try:
             st.info("This fund has no past moment where a SIP this long was more than 3% in the red. Showing today.")
         else:
             dip = st.selectbox("Pick a past moment", dips,
-                               format_func=lambda d: f"{d[0]:%b %Y}: a {months}-month SIP was about {d[2]}% "
+                               format_func=lambda d: f"{d[0]:%b %Y}: a {months}-month SIP was about {abs(d[2])}% "
                                                      f"below what had been invested")
             as_of = dip[0] - pd.Timedelta(days=1)
             start_month = dip[1].date()
@@ -346,7 +346,7 @@ with tab_try:
                 st.session_state.choice = "Skip next instalment"
         with o2:
             st.markdown("**Pause**  \nNo instalments until the month you pick.")
-            restart_options = [(latest + pd.DateOffset(months=i)).strftime("%b %Y") for i in range(2, 8)]
+            restart_options = [(res.as_of + pd.DateOffset(months=i)).strftime("%b %Y") for i in range(2, 8)]
             restart = st.selectbox("Restart in", restart_options, label_visibility="collapsed")
             if st.button(f"Pause until {restart}"):
                 st.session_state.choice = f"Pause until {restart}"
