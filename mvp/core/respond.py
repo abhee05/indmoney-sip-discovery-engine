@@ -23,7 +23,7 @@ AI_INTENTS = {"opening", "doubt", "stop", "cash"}
 class Answer:
     text: str
     intent: str
-    mode: str                     # ai | template | decline_advice | decline_prediction | fallback
+    mode: str                     # ai | fixed | template (AI fallback) | decline_advice | decline_prediction | fallback
     checks: list = field(default_factory=list)
     sources: list = field(default_factory=list)
     model: str | None = None
@@ -253,4 +253,6 @@ def respond(question: str, facts: dict, llm=None, intent: str | None = None) -> 
                   {"name": "Safe fallback used", "passed": True, "detail": "template answer shown instead"}]
         return Answer(text, intent, "template", checks + run_gates(text, facts, question), sources, rule=rule)
 
+    if mode == "template" and intent not in AI_INTENTS:
+        mode = "fixed"            # written answer by design (options, XIRR), not an AI fallback
     return Answer(text, intent, mode, run_gates(text, facts, question), sources, rule=rule)

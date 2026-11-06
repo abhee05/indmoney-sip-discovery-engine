@@ -27,7 +27,7 @@ from core import respond as resp  # noqa: E402
 from core import sip  # noqa: E402
 from core.llm import Groq  # noqa: E402
 
-ANSWER_MODES = {"ai", "template"}
+ANSWER_MODES = {"ai", "fixed", "template"}
 PIPELINE_CHECKS = {"AI available", "AI draft passed checks", "Safe fallback used"}
 
 

@@ -25,6 +25,7 @@ BLUE, GREY = "#1f6feb", "#8b949e"
 MODE_LABEL = {
     "ai": "Written by AI, checked by code",
     "template": "Template answer (AI off or blocked)",
+    "fixed": "Fixed answer, checked by code",
     "decline_advice": "Declined: investment advice",
     "decline_prediction": "Declined: prediction",
     "fallback": "Safe fallback",
@@ -232,7 +233,11 @@ with tab_try:
                          "known at that time.")
     as_of, start_month, replay_label = latest, month_start(latest, months - 1), None
     if when == "Replay a real past dip":
-        dips = sip.find_dips(series, months)
+        dips = []
+        for when_ts, start_ts, _ in sip.find_dips(series, months):
+            r = sip.simulate(series, start_ts.date(), float(amount), when_ts - pd.Timedelta(days=1))
+            if r.gain_pct < 0:   # label with the same valuation the card will show
+                dips.append((when_ts, start_ts, round(r.gain_pct, 1)))
         if not dips:
             st.info("This fund has no past moment where a SIP this long was more than 3% in the red. Showing today.")
         else:
