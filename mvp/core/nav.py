@@ -99,6 +99,9 @@ def search(query: str, limit: int = 25) -> list[dict]:
     return (good or results)[:limit]
 
 
+CATEGORY_WORDS = ("large", "small", "multi", "flexi", "focused", "value", "elss", "hybrid", "balanced", "index")
+
+
 def _norm(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (text or "").lower()).strip()
 
@@ -106,6 +109,7 @@ def _norm(text: str) -> str:
 def best_match(query: str, candidates: list[dict]) -> dict | None:
     """Pick the scheme whose name contains every query word, preferring direct growth plans."""
     words = _norm(query).split()
+    q_squashed = "".join(words)
     scored = []
     for c in candidates:
         name = _norm(c.get("schemeName", ""))
@@ -114,6 +118,10 @@ def best_match(query: str, candidates: list[dict]) -> dict | None:
         if hits < len(words):
             continue
         if re.search(r"idcw|dividend|bonus|payout|regular", name):
+            continue
+        # a fund-type word in the name that the query didn't ask for means a different fund
+        # (e.g. "midcap" must not match "Large and Midcap")
+        if any(t in name.split() and t not in q_squashed for t in CATEGORY_WORDS):
             continue
         scored.append((len(name), c))
     scored.sort(key=lambda t: t[0])
