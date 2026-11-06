@@ -93,7 +93,7 @@ def chart_path(path: pd.DataFrame):
             tooltip=[alt.Tooltip("date:T", title="Date"), alt.Tooltip("series:N", title=" "),
                      alt.Tooltip("amount:Q", title="₹", format=",.0f")],
         ).properties(height=260)
-        st.altair_chart(chart, use_container_width=True)
+        st.altair_chart(chart, width="stretch")
     except Exception:  # noqa: BLE001
         st.line_chart(path.set_index("date")[["invested", "value"]])
 
@@ -111,7 +111,7 @@ def chart_outcomes(outcomes: list, you: float):
         line = alt.Chart(mark).mark_rule(color=BLUE, size=3).encode(x="x:Q")
         text = alt.Chart(mark).mark_text(align="left", dx=5, dy=-6, color=BLUE, fontWeight="bold").encode(
             x="x:Q", y=alt.value(12), text="label:N")
-        st.altair_chart((bars + zero + line + text).properties(height=220), use_container_width=True)
+        st.altair_chart((bars + zero + line + text).properties(height=220), width="stretch")
     except Exception:  # noqa: BLE001
         counts = pd.cut(df["ret"], bins=20).value_counts().sort_index()
         st.bar_chart(pd.Series(counts.to_numpy(), index=[f"{i.mid:.0f}%" for i in counts.index]))
@@ -174,7 +174,7 @@ with tab_how:
         g3.metric("All checks passed", f"{s['checks_clean']} of {s['total']}")
         st.caption(f"Run on {report['run_at']} · answers by: {report['mode']} · labels: {report['labels']}")
         st.dataframe(pd.DataFrame(report["cases"])[["id", "question", "expected", "got", "pass", "note"]],
-                     use_container_width=True, hide_index=True)
+                     width="stretch", hide_index=True)
     else:
         st.caption("No evaluation report yet. Run: python mvp/eval/run_eval.py")
     st.subheader("Status")
@@ -368,7 +368,7 @@ with tab_try:
         rows = st.session_state.get("log", [])
         if rows:
             df = pd.DataFrame(rows)
-            st.dataframe(df, use_container_width=True, hide_index=True)
+            st.dataframe(df, width="stretch", hide_index=True)
             st.download_button("Download this session as CSV", df.to_csv(index=False).encode("utf-8"),
                                file_name="before_you_pause_session.csv", mime="text/csv")
         else:
