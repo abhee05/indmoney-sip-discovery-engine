@@ -128,6 +128,16 @@ def best_match(query: str, candidates: list[dict]) -> dict | None:
     return scored[0][1] if scored else None
 
 
+def search_terms(query: str) -> str:
+    """mfapi.in search works best on the fund's name alone, without plan words."""
+    return " ".join(w for w in _norm(query).split() if w not in ("direct", "growth", "plan", "option"))
+
+
+def find_scheme(query: str) -> dict | None:
+    """Search by the fund's name, then pick the Direct Growth plan whose name has every query word."""
+    return best_match(query, search(search_terms(query), limit=500))
+
+
 def load_presets() -> dict:
     return json.loads(PRESETS_FILE.read_text())
 
@@ -136,7 +146,7 @@ def resolve_preset_code(fund: dict) -> int:
     """Use the saved scheme code; otherwise look it up by name on mfapi.in."""
     if fund.get("scheme_code"):
         return int(fund["scheme_code"])
-    match = best_match(fund["query"], search(fund["query"], limit=200))
+    match = find_scheme(fund["query"])
     if not match:
         raise NavUnavailable(f"Couldn't find '{fund['label']}' on mfapi.in.")
     return int(match["schemeCode"])

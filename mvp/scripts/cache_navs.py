@@ -19,9 +19,11 @@ def main():
     nav.CACHE_DIR.mkdir(parents=True, exist_ok=True)
     for key, fund in presets["funds"].items():
         try:
-            match = nav.best_match(fund["query"], nav.search(fund["query"], limit=200))
+            match = nav.find_scheme(fund["query"])
             if not match:
                 print(f"  {key}: NOT FOUND for '{fund['query']}', edit the query in data/presets.json")
+                fund["scheme_code"] = None          # never keep an old, possibly wrong code
+                fund.pop("resolved_name", None)
                 continue
             code = int(match["schemeCode"])
             payload = nav.fetch_live(code)
