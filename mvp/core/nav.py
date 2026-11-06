@@ -1,0 +1,179 @@
+"""NAV history from mfapi.in (free public API of AMFI NAVs), with an on-disk cache.
+
+Order of preference when loading a fund:
+  1. live fetch from mfapi.in (so "today" is really today)
+  2. cached JSON in mvp/data/navs/<scheme_code>.json (written by scripts/cache_navs.py)
+If both fail, NavUnavailable is raised and the app shows a clear message.
+"""
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+import pandas as pd
+import requests
+
+MFAPI = "https://api.mfapi.in/mf"
+ROOT = Path(__file__).resolve().parent.parent
+CACHE_DIR = ROOT / "data" / "navs"
+PRESETS_FILE = ROOT / "data" / "presets.json"
+TIMEOUT = 12
+
+
+class NavUnavailable(Exception):
+    pass
+
+
+def parse(payload: dict) -> tuple[dict, pd.Series]:
+    """mfapi payload -> (meta, NAV series indexed by date, oldest first)."""
+    rows = payload.get("data") or []
+    if not rows:
+        raise NavUnavailable("No NAV data in the response.")
+    df = pd.DataFrame(rows)
+    df["date"] = pd.to_datetime(df["date"], format="%d-%m-%Y", errors="coerce")
+    df["nav"] = pd.to_numeric(df["nav"], errors="coerce")
+    df = df.dropna().query("nav > 0").drop_duplicates("date").sort_values("date")
+    if df.empty:
+        raise NavUnavailable("NAV data could not be read.")
+    series = pd.Series(df["nav"].to_numpy(), index=pd.DatetimeIndex(df["date"]), name="nav")
+    meta = dict(payload.get("meta") or {})
+    return meta, series
+
+
+def clean_category(raw: str) -> str:
+    """'Equity Scheme - Mid Cap Fund' -> 'Mid Cap Fund'."""
+    raw = (raw or "").strip()
+    if " - " in raw:
+        raw = raw.split(" - ", 1)[1]
+    return raw or "Mutual fund"
+
+
+def cache_path(code) -> Path:
+    return CACHE_DIR / f"{int(code)}.json"
+
+
+def fetch_live(code) -> dict:
+    r = requests.get(f"{MFAPI}/{int(code)}", timeout=TIMEOUT)
+    r.raise_for_status()
+    payload = r.json()
+    if not payload.get("data"):
+        raise NavUnavailable(f"mfapi.in returned no data for scheme {code}.")
+    return payload
+
+
+def load_cached(code) -> dict | None:
+    p = cache_path(code)
+    if p.exists():
+        return json.loads(p.read_text())
+    return None
+
+
+def get_nav(code) -> tuple[dict, pd.Series, str]:
+    """Returns (meta, series, source) where source is 'live' or 'cached'."""
+    try:
+        payload = fetch_live(code)
+        source = "live"
+    except Exception:  # noqa: BLE001 - any network/API problem falls back to cache
+        payload = load_cached(code)
+        source = "cached"
+        if payload is None:
+            raise NavUnavailable(
+                "Couldn't reach mfapi.in and there's no saved copy of this fund. Try again in a minute, "
+                "or pick one of the scenarios.") from None
+    meta, series = parse(payload)
+    return meta, series, source
+
+
+def search(query: str, limit: int = 25) -> list[dict]:
+    query = (query or "").strip()
+    if len(query) < 3:
+        return []
+    r = requests.get(f"{MFAPI}/search", params={"q": query}, timeout=TIMEOUT)
+    r.raise_for_status()
+    results = r.json() or []
+    # Prefer direct-growth plans and drop payout variants, but keep anything if that empties the list.
+    good = [x for x in results if not re.search(r"idcw|dividend|bonus|payout", x.get("schemeName", ""), re.I)]
+    good.sort(key=lambda x: (not re.search(r"direct", x["schemeName"], re.I),
+                             not re.search(r"growth", x["schemeName"], re.I), len(x["schemeName"])))
+    return (good or results)[:limit]
+
+
+CATEGORY_WORDS = ("large", "small", "multi", "flexi", "focused", "value", "elss", "hybrid", "balanced", "index",
+                  "etf", "nifty", "bse", "momentum")
+
+
+def _norm(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", (text or "").lower()).strip()
+
+
+def best_match(query: str, candidates: list[dict]) -> dict | None:
+    """Pick the scheme whose name contains every query word, preferring direct growth plans."""
+    words = _norm(query).split()
+    q_squashed = "".join(words)
+    scored = []
+    for c in candidates:
+        name = _norm(c.get("schemeName", ""))
+        squashed = name.replace(" ", "")
+        hits = sum(1 for w in words if w in name or w in squashed)
+        if hits < len(words):
+            continue
+        if re.search(r"idcw|dividend|bonus|payout|regular", name):
+            continue
+        # a fund-type word in the name that the query didn't ask for means a different fund
+        # (e.g. "midcap" must not match "Large and Midcap")
+        if any(t in name.split() and t not in q_squashed for t in CATEGORY_WORDS):
+            continue
+        scored.append((len(name), c))
+    scored.sort(key=lambda t: t[0])
+    return scored[0][1] if scored else None
+
+
+def search_terms(query: str) -> str:
+    """mfapi.in search works best on the fund's name alone, without plan words."""
+    return " ".join(w for w in _norm(query).split() if w not in ("direct", "growth", "plan", "option"))
+
+
+def find_scheme(query: str) -> dict | None:
+    """Search by the fund's name, then pick the Direct Growth plan whose name has every query word.
+
+    Some funds are listed several times under a bare name with no plan words (e.g. four codes all called
+    "Motilal Oswal Midcap Fund"). Then the active one with the highest NAV is the Direct Growth plan:
+    direct plans have lower costs than regular ones, and growth plans pay nothing out, unlike IDCW.
+    """
+    candidates = search(search_terms(query), limit=500)
+    match = best_match(query, candidates)
+    if match:
+        return match
+    core = search_terms(query)
+    bare = [c for c in candidates
+            if not re.search(r"direct|regular|growth|idcw|dividend|bonus|payout|reinvest", c["schemeName"], re.I)
+            and best_match(core, [c])]
+    recent = pd.Timestamp.now() - pd.Timedelta(days=30)
+    best = None
+    for c in bare[:8]:
+        try:
+            _, series = parse(fetch_live(c["schemeCode"]))
+        except Exception:  # noqa: BLE001
+            continue
+        if series.index[-1] < recent:
+            continue          # closed or merged plan
+        if best is None or series.iloc[-1] > best[0]:
+            best = (float(series.iloc[-1]), c)
+    if best is None:
+        return None
+    return {**best[1], "schemeName": best[1]["schemeName"] + " (Direct Growth: highest NAV of its plans)"}
+
+
+def load_presets() -> dict:
+    return json.loads(PRESETS_FILE.read_text())
+
+
+def resolve_preset_code(fund: dict) -> int:
+    """Use the saved scheme code; otherwise look it up by name on mfapi.in."""
+    if fund.get("scheme_code"):
+        return int(fund["scheme_code"])
+    match = find_scheme(fund["query"])
+    if not match:
+        raise NavUnavailable(f"Couldn't find '{fund['label']}' on mfapi.in.")
+    return int(match["schemeCode"])
