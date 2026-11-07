@@ -335,7 +335,7 @@ with tab_try:
                 if hist.sufficient:
                     h1, h2, h3 = st.columns(3)
                     h1.metric(f"Past {hist.months}-month SIPs below invested", f"{hist.pct_below}%")
-                    h2.metric("Of those, above after 12 more months",
+                    h2.metric("Back above 12 months later",
                               f"{hist.pct_above_after_follow}%" if hist.pct_above_after_follow is not None else "n/a")
                     h3.metric("Longest to get back above",
                               f"{hist.max_months_to_recover} months" if hist.max_months_to_recover is not None
