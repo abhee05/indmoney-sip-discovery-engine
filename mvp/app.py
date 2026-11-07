@@ -53,7 +53,7 @@ def preset_code(key: str) -> int:
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def search_funds(query: str):
-    return navmod.search(query)
+    return navmod.find_funds(query)
 
 
 @st.cache_resource
@@ -116,6 +116,10 @@ def chart_outcomes(outcomes: list, you: float):
     except Exception:  # noqa: BLE001
         counts = pd.cut(df["ret"], bins=20).value_counts().sort_index()
         st.bar_chart(pd.Series(counts.to_numpy(), index=[f"{i.mid:.0f}%" for i in counts.index]))
+
+
+def fund_name_hint_safe(meta: dict) -> str:
+    return str(meta.get("scheme_name") or "")
 
 
 def month_start(ts: pd.Timestamp, months_back: int):
@@ -189,6 +193,8 @@ with tab_how:
                f"Code: {REPO_URL}")
 
 with tab_try:
+    st.info("**How to try it:** 1. Keep the scenario below (or pick another). 2. Scroll down and tap **Pause SIP** "
+            "or **Stop SIP**. 3. Say why, read what it shows you, ask anything, then choose an option.")
     st.subheader("1. Set up a SIP to test")
     presets = navmod.load_presets()
     source_choice = st.radio("Start from", ["A scenario from our research", "Your own fund"], horizontal=True)
@@ -207,7 +213,8 @@ with tab_try:
             st.error(f"Couldn't load this scenario's fund: {e}")
             st.stop()
     else:
-        query = st.text_input("Search for your fund by name", placeholder="e.g. parag parikh flexi cap")
+        query = st.text_input("Search for your fund by name",
+                              placeholder="e.g. hdfc mid cap, parag parikh flexi cap, sbi small cap")
         results = []
         if query.strip():
             try:
@@ -216,7 +223,7 @@ with tab_try:
                 st.error("Fund search isn't reachable right now. Try a scenario instead.")
         if not results:
             if query.strip():
-                st.warning("No funds found. Try fewer words, like 'nifty 50 index'.")
+                st.warning("No matching fund. Type the fund house and type, like 'hdfc mid cap' or 'axis small cap'.")
             st.stop()
         choice = st.selectbox("Fund", results, format_func=lambda r: r["schemeName"])
         code = int(choice["schemeCode"])
@@ -234,21 +241,32 @@ with tab_try:
     fund_name = meta.get("scheme_name") or name_hint or "Your fund"
     category = navmod.clean_category(meta.get("scheme_category", ""))
     latest = series.index[-1]
+    if latest < pd.Timestamp.now() - pd.Timedelta(days=30):
+        st.error(f"This plan stopped publishing prices on {latest:%d %b %Y}, so it has probably closed or merged. "
+                 f"Pick another plan from the list.")
+        st.stop()
+    if navmod.NON_EQUITY.search(meta.get("scheme_category", "") + " " + fund_name_hint_safe(meta)):
+        st.warning(f"This is a {category.lower()}. This prototype is built for equity and hybrid funds, the kind "
+                   f"whose value can fall below what you put in. Pick an equity or hybrid fund to try it.")
+        st.stop()
 
-    when = st.radio("When", ["Today", "Replay a real past dip"], horizontal=True,
-                    help="Replay shows a past moment when a SIP like this was in the red, using only prices "
-                         "known at that time.")
+    when = st.radio("When", ["A past moment when it was in the red", "Today"], horizontal=True,
+                    help="This screen is built for the moment a SIP is below what you put in. 'A past moment' "
+                         "goes back to a real date when this SIP was in the red, using only prices known then.")
+    st.caption("We start at a real past moment when this SIP was in the red, because that's when people tap Pause.")
     as_of, start_month, replay_label = latest, month_start(latest, months - 1), None
-    if when == "Replay a real past dip":
+    if when == "A past moment when it was in the red":
         dips = []
         for when_ts, start_ts, _ in sip.find_dips(series, months):
             r = sip.simulate(series, start_ts.date(), float(amount), when_ts - pd.Timedelta(days=1))
-            if r.gain_pct < 0:   # label with the same valuation the card will show
+            if r.gain_pct < -1:   # label with the same valuation the card will show
                 dips.append((when_ts, start_ts, round(r.gain_pct, 1)))
         if not dips:
-            st.info("This fund has no past moment where a SIP this long was more than 3% in the red. Showing today.")
+            st.warning(f"A {months}-month SIP in this fund has never been more than 1% below what was invested, so "
+                       f"there's no red moment to show. Choose **Today**, or try a different fund or length.")
+            st.stop()
         else:
-            dip = st.selectbox("Pick a past moment", dips,
+            dip = st.selectbox("Which moment", dips,
                                format_func=lambda d: f"{d[0]:%b %Y}: a {months}-month SIP was about {abs(d[2])}% "
                                                      f"below what had been invested")
             as_of = dip[0] - pd.Timedelta(days=1)
@@ -285,8 +303,8 @@ with tab_try:
         chart_path(res.path)
         st.caption(f"Prices: {'live from mfapi.in' if source == 'live' else 'saved copy (mfapi.in unreachable)'}.")
     if not f["is_down"] and not replay_label:
-        st.caption("This SIP is above what was invested today. To see the moment this screen is built for, "
-                   "choose **Replay a real past dip** above, then tap Pause.")
+        st.info(f"This SIP is **above** what was invested today ({f['gain_pct']}), so there's no loss to explain. "
+                f"To see the moment this screen is built for, choose **A past moment when it was in the red** above.")
 
     b1, b2, b3 = st.columns(3)
     if b1.button("Pause SIP"):
@@ -334,13 +352,17 @@ with tab_try:
                 if history_first:
                     st.markdown("**Is this normal for this fund?**")
                 if hist.sufficient:
-                    h1, h2, h3 = st.columns(3)
-                    h1.metric(f"Past {hist.months}-month SIPs below invested", f"{hist.pct_below}%")
-                    h2.metric("Back above 12 months later",
-                              f"{hist.pct_above_after_follow}%" if hist.pct_above_after_follow is not None else "n/a")
-                    h3.metric("Longest to get back above",
-                              f"{hist.max_months_to_recover} months" if hist.max_months_to_recover is not None
-                              else "n/a")
+                    if hist.n_below == 0:
+                        st.markdown(f"None of the {hist.n_windows} past {hist.months}-month SIPs in this fund were "
+                                    f"below what had been invested at this point.")
+                    else:
+                        tiles = [(f"Past {hist.months}-month SIPs below invested", f"{hist.pct_below}%")]
+                        if hist.pct_above_after_follow is not None:
+                            tiles.append(("Back above 12 months later", f"{hist.pct_above_after_follow}%"))
+                        if hist.max_months_to_recover is not None:
+                            tiles.append(("Longest to get back above", f"{hist.max_months_to_recover} months"))
+                        for col, (label, value) in zip(st.columns(len(tiles)), tiles):
+                            col.metric(label, value)
                     chart_outcomes(hist.outcomes, round(res.gain_pct, 2))
                     st.caption(f"Each bar counts past SIPs of {hist.months} months in this fund, by their return at the "
                                f"same point; there are {hist.n_windows} of them, using prices up to {f['as_of']}. "

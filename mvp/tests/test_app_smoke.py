@@ -31,7 +31,7 @@ def fake_data(monkeypatch):
     meta = {"scheme_name": "Test Midcap Fund - Direct Plan - Growth", "scheme_category": "Equity Scheme - Mid Cap Fund"}
     monkeypatch.setattr(navmod, "get_nav", lambda code: (meta, young if int(code) == 999 else series, "cached"))
     monkeypatch.setattr(navmod, "resolve_preset_code", lambda fund: 101)
-    monkeypatch.setattr(navmod, "search", lambda q, limit=25: [{"schemeCode": 999, "schemeName": "Young Fund Direct Growth"},
+    monkeypatch.setattr(navmod, "find_funds", lambda q, limit=50: [{"schemeCode": 999, "schemeName": "Young Fund Direct Growth"},
                                                                {"schemeCode": 101, "schemeName": "Old Fund Direct Growth"}])
     stub.reset()
     stub.fresh_session()
@@ -90,7 +90,7 @@ def test_pause_flow_full_path():
 
 
 def test_replay_past_dip():
-    stub.CHOOSE["When"] = "Replay a real past dip"
+    stub.CHOOSE["When"] = "A past moment when it was in the red"
     calls = run()
     caps = " ".join(texts(calls, "caption"))
     assert "replay of" in caps
@@ -101,6 +101,7 @@ def test_own_fund_with_little_history_shows_uncertainty():
     stub.CHOOSE["Start from"] = "Your own fund"
     stub.TEXT["Search for your fund by name"] = "young"
     stub.CHOOSE["Months since your first instalment"] = 6
+    stub.CHOOSE["When"] = "Today"
     run()
     stub.CLICK.add("Stop SIP")
     stub.CHOOSE["What's making you want to stop?"] = "volatility"
@@ -140,3 +141,44 @@ def test_lower_amount_option():
     stub.CLICK.add("Lower to ₹2,000 a month")
     calls = run()
     assert any("Lower to ₹2,000 a month" in t for t in texts(calls, "success"))
+
+
+def _own_fund(monkeypatch, series, category="Equity Scheme - Mid Cap Fund", name="Some Fund Direct Growth"):
+    monkeypatch.setattr(navmod, "get_nav", lambda code: ({"scheme_name": name, "scheme_category": category},
+                                                         series, "live"))
+    stub.CHOOSE["Start from"] = "Your own fund"
+    stub.TEXT["Search for your fund by name"] = "some fund"
+
+
+def test_closed_fund_is_explained_not_shown(monkeypatch):
+    _own_fund(monkeypatch, synthetic_series(start="2012-01-01").loc[:"2019-05-10"])
+    calls = run()
+    assert any("stopped publishing prices" in t for t in texts(calls, "error"))
+    assert "Invested" not in texts(calls, "metric")
+
+
+def test_liquid_fund_is_explained_not_shown(monkeypatch):
+    _own_fund(monkeypatch, synthetic_series(), category="Debt Scheme - Liquid Fund", name="HDFC Liquid Fund")
+    calls = run()
+    assert any("built for equity and hybrid" in t for t in texts(calls, "warning"))
+    assert "Invested" not in texts(calls, "metric")
+
+
+def test_no_red_moment_stops_with_explanation(monkeypatch):
+    idx = pd.bdate_range("2013-01-01", "2026-11-05")
+    _own_fund(monkeypatch, pd.Series(np.linspace(10, 40, len(idx)), index=idx))
+    calls = run()
+    assert any("no red moment" in t for t in texts(calls, "warning"))
+    assert "Invested" not in texts(calls, "metric")
+
+
+def test_history_without_losses_shows_sentence_not_na(monkeypatch):
+    idx = pd.bdate_range("2013-01-01", "2026-11-05")
+    _own_fund(monkeypatch, pd.Series(np.linspace(10, 40, len(idx)), index=idx))
+    stub.CHOOSE["When"] = "Today"
+    run()
+    stub.CLICK.add("Ask a question")
+    calls = run()
+    md = " ".join(texts(calls, "markdown"))
+    assert "None of the" in md
+    assert not any(c[0] == "metric" and len(c[1]) > 1 and c[1][1] == "n/a" for c in calls)

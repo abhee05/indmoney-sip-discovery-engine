@@ -99,6 +99,48 @@ def search(query: str, limit: int = 25) -> list[dict]:
     return (good or results)[:limit]
 
 
+PLAN_WORDS = {"direct", "regular", "growth", "plan", "option", "fund", "scheme", "the", "of", "and", "india"}
+NON_EQUITY = re.compile(r"liquid|overnight|money market|gilt|debt|bond|duration|credit risk|banking and psu|"
+                        r"floater|corporate|fixed maturity|fmp|interval", re.I)
+
+
+def find_funds(query: str, limit: int = 50) -> list[dict]:
+    """User-facing search: ask mfapi.in for the fund house's schemes, then keep those whose name contains
+    every word the user typed (spaces and hyphens ignored, so "midcap" finds "Mid-Cap"), Direct Growth first."""
+    words = [w for w in _norm(query).split() if w not in PLAN_WORDS] or _norm(query).split()
+    if not words or len(" ".join(words)) < 3:
+        return []
+    candidates: dict = {}
+    for q in {words[0], " ".join(words[:2])}:
+        try:
+            for c in search_raw(q):
+                candidates[c["schemeCode"]] = c
+        except Exception:  # noqa: BLE001
+            continue
+    picked = []
+    for c in candidates.values():
+        name = c.get("schemeName", "")
+        squashed = _norm(name).replace(" ", "")
+        if re.search(r"idcw|dividend|bonus|payout|reinvest", name, re.I):
+            continue
+        if all(w in squashed for w in words):
+            picked.append(c)
+    q_squashed = "".join(words)
+
+    def extra_types(name):   # fund-type words the user didn't type ("large" in "Large and Mid Cap")
+        return sum(1 for t in CATEGORY_WORDS if t in _norm(name).split() and t not in q_squashed)
+
+    picked.sort(key=lambda x: (extra_types(x["schemeName"]), not re.search(r"direct", x["schemeName"], re.I),
+                               not re.search(r"growth", x["schemeName"], re.I), len(x["schemeName"])))
+    return picked[:limit]
+
+
+def search_raw(query: str) -> list[dict]:
+    r = requests.get(f"{MFAPI}/search", params={"q": query}, timeout=TIMEOUT)
+    r.raise_for_status()
+    return r.json() or []
+
+
 CATEGORY_WORDS = ("large", "small", "multi", "flexi", "focused", "value", "elss", "hybrid", "balanced", "index",
                   "etf", "nifty", "bse", "momentum")
 
