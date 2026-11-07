@@ -344,6 +344,8 @@ with tab_try:
                     st.caption(f"Each bar counts past SIPs of {hist.months} months in this fund, by their return at the "
                                f"same point; there are {hist.n_windows} of them, using prices up to {f['as_of']}. "
                                f"The blue line is you. Past performance doesn't guarantee future returns.")
+                elif st.session_state.opening.mode == "fallback":
+                    st.caption("Not enough history for this fund yet, as explained above.")
                 else:
                     st.warning(resp.insufficient_sentence(f))
 

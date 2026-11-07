@@ -106,8 +106,8 @@ def test_own_fund_with_little_history_shows_uncertainty():
     stub.CHOOSE["What's making you want to stop?"] = "volatility"
     calls = run()
     assert "Before you stop" in texts(calls, "subheader")
-    warn = " ".join(texts(calls, "warning"))
-    assert "isn't enough to say what's normal" in warn
+    shown = " ".join(texts(calls, "markdown") + texts(calls, "warning") + texts(calls, "caption"))
+    assert "isn't enough to say what's normal" in shown
 
 
 def test_own_fund_without_query_stops_cleanly():
