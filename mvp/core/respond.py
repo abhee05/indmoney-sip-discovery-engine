@@ -71,8 +71,9 @@ def template_answer(intent: str, f: dict, question: str = "") -> tuple[str, str,
     if intent == "advice":
         return ("I can't tell you which funds to pick, keep, add to or drop. That would be investment advice, "
                 "and this tool only explains your own SIP. A SEBI-registered investment adviser can help with "
-                "choosing funds. What I can do: show how past SIPs like yours behaved in this fund, and explain "
-                "what continuing, skipping, pausing or stopping each mean.", "decline_advice", [SEBI_INVESTOR])
+                "choosing funds, and every fund's official risk level (its riskometer) is on its factsheet. What I can "
+                "do: show how past SIPs like yours behaved in this fund, and explain what continuing, skipping, "
+                "pausing or stopping each mean.", "decline_advice", [SEBI_INVESTOR])
     if intent == "prediction":
         text = "Nobody can know when, or whether, your SIP gets back above what you've invested, so I won't guess."
         if hist:

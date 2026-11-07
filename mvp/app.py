@@ -193,8 +193,11 @@ with tab_how:
                f"Code: {REPO_URL}")
 
 with tab_try:
-    st.info("**How to try it:** 1. Keep the scenario below (or pick another). 2. Scroll down and tap **Pause SIP** "
-            "or **Stop SIP**. 3. Say why, read what it shows you, ask anything, then choose an option.")
+    st.info("**How to try it**  \n"
+            "1. **Choose a SIP:** keep a scenario from our research, or pick **Your own fund**.  \n"
+            "2. **Choose when:** *A past moment when it was in the red* (recommended) or *Today*.  \n"
+            "3. **Scroll down and tap Pause SIP, Stop SIP or Ask a question.**  \n"
+            "4. **Say why**, read what it shows you, ask anything, then pick an option. Nothing real changes.")
     st.subheader("1. Set up a SIP to test")
     presets = navmod.load_presets()
     source_choice = st.radio("Start from", ["A scenario from our research", "Your own fund"], horizontal=True)
@@ -283,7 +286,8 @@ with tab_try:
 
     fkey = f"{code}|{amount}|{res.instalments}|{res.as_of.date()}"
     if st.session_state.get("fkey") != fkey:
-        st.session_state.update(fkey=fkey, flow=None, answers=[], opening=None, choice=None, reason=None)
+        st.session_state.update(fkey=fkey, flow=None, answers=[], opening=None, choice=None, reason=None,
+                                logged_choice=None)
         log("scenario", fund=fund_name, amount=int(amount), months=res.instalments, as_of=f["as_of"],
             replay=bool(replay_label))
 
@@ -418,7 +422,8 @@ with tab_try:
                 st.session_state.choice = "Stop SIP"
         if st.session_state.get("choice"):
             choice = st.session_state.choice
-            if not st.session_state.get("log") or st.session_state.log[-1].get("choice") != choice:
+            if st.session_state.get("logged_choice") != choice:
+                st.session_state.logged_choice = choice
                 log("decided", choice=choice)
             st.success(f"Prototype: nothing was changed. You chose: **{choice}**.")
             fb = st.radio("Did this screen help you decide?",

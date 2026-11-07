@@ -13,6 +13,9 @@ RULES: list[tuple[str, list[str]]] = [
         r"\bshould i (buy|sell|redeem|withdraw|invest in|put)\b", r"\b(put|add|invest|buy) more\b",
         r"\btop[- ]?up\b", r"\bincrease (my )?(sip|amount|instal)", r"\bwaste of money\b",
         r"\b(kill|drop|dump)\b.*\bfund", r"\bredeem\b", r"\bwithdraw\b", r"\bbuy the dip\b", r"\bkaunsa fund\b",
+        r"\b(good|bad|right|wrong|safe)\b.*\b(choice|pick|fund|sip|option|investment)\b",
+        r"\b(is|was|am)\b.{0,25}\b(choice|pick|fund|sip|investment)\b.{0,15}\b(good|bad|right|wrong)\b\W*$",
+        r"\b(choice|pick|fund|sip)\b.*\b(good or bad|bad or good)\b", r"\bsafe (mf|mutual fund|fund)s?\b",
     ]),
     ("prediction", [
         r"\bwhen\b.*\b(will|would)\b", r"\bwill (it|my|the|this)\b.*\b(recover|come back|go up|go down|rise|fall|turn green|bounce|grow|be)\b",
