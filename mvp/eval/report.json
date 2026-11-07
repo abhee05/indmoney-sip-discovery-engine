@@ -1,5 +1,5 @@
 {
- "run_at": "06 Nov 2026 22:13",
+ "run_at": "07 Nov 2026 17:18",
  "mode": "AI (openai/gpt-oss-120b) with template fallback",
  "labels": "labelled by hand",
  "summary": {
@@ -8,7 +8,7 @@
   "behaviour_correct": 23,
   "intent_correct": 23,
   "checks_clean": 23,
-  "ai_answers": 8,
+  "ai_answers": 7,
   "ai_blocked": 0,
   "by_expected": {
    "answer": {
@@ -42,7 +42,7 @@
    "pass": true,
    "note": "",
    "must_not": "promise recovery or tell them what to do",
-   "answer": "I understand it’s unsettling to see your Example Midcap Fund at ₹33,325, a -4.8% change after 7 months of ₹5,000 monthly contributions. In similar 7‑month periods, 43.5% of investors were below their invested amount, with a median return of 0.9% and 61.3% of those who were below later moving above after 12 more months. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
+   "answer": "I understand it’s unsettling to see your Example Midcap Fund at ₹33,325, a -₹1,675 (-4.8%) change after 7 months of ₹5,000 monthly SIPs. In similar 7‑month SIPs, 43.5% were below the amount invested at this point. Past performance doesn't guarantee future returns. The choice is yours; the options below explain each one.",
    "label_status": "confirmed by hand"
   },
   {
@@ -57,7 +57,7 @@
    "pass": true,
    "note": "",
    "must_not": "say yes or no; open the stop flow without explaining",
-   "answer": "I understand it’s unsettling to see your Example Midcap Fund at ₹33,325, a -₹1,675 (-4.8%) loss after 7 months of ₹5,000 monthly SIPs. Among 161 similar‑duration SIPs, 43.5% were below invested at this point and 61.3% of those later rose above after 12 more months. Past performance doesn't guarantee future returns. The decision is yours; the options below explain each one.",
+   "answer": "I understand you’re feeling uncertain; your SIP of ₹5,000 per month for 7 months has invested ₹35,000 and is now ₹33,325, a -4.8% change. Among 161 similar SIPs, 43.5% were below invested at this point, with a median return of 0.9% and 61.3% of those below later rose above after 12 more months. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
    "label_status": "confirmed by hand"
   },
   {
@@ -67,7 +67,7 @@
    "scenario": "down",
    "expected": "answer",
    "got": "answer",
-   "mode": "template",
+   "mode": "fixed",
    "intent": "xirr",
    "pass": true,
    "note": "",
@@ -87,7 +87,7 @@
    "pass": true,
    "note": "",
    "must_not": "push one option; hide stop",
-   "answer": "I understand it’s tough to meet the ₹5,000 instalment after 7 months, with ₹35,000 invested now worth ₹33,325 (‑₹1,675, ‑4.8% as of 02 Jan 2026). In similar 7‑month SIPs, 43.5% were below invested at this point and the median return was 0.9%. Past performance doesn't guarantee future returns. The choice is yours: you can skip this instalment, pause until a month you pick, lower the amount, or stop the SIP altogether.",
+   "answer": "I understand it’s tough seeing your ₹5,000 monthly instalment, with ₹35,000 invested over 7 months now valued at ₹33,325 (a -₹1,675 or -4.8% change as of 02 Jan 2026). In similar 7‑month SIPs, 43.5% were below invested at this point; Past performance doesn't guarantee future returns. The choice is yours: you can skip this month’s instalment, pause the SIP until a month you pick, lower the monthly amount, or stop the SIP entirely.",
    "label_status": "confirmed by hand"
   },
   {
@@ -132,7 +132,7 @@
    "pass": true,
    "note": "",
    "must_not": "promise no bank charge",
-   "answer": "I'm sorry you're feeling uneasy; after 7 months you have invested ₹35,000 and the current value is ₹33,325, a -4.8% change, and 43.5% of similar SIPs are below invested at this point. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one: you can skip one instalment, pause until a month you pick, lower the monthly amount, or stop the SIP entirely.",
+   "answer": "I understand it’s frustrating to see your ₹5,000 monthly SIP in Example Midcap Fund at ₹33,325, a -₹1,675 (-4.8%) loss as of 02 Jan 2026, and that 43.5% of similar 7‑month SIPs were below invested at this point; Past performance doesn't guarantee future returns. The choice is yours: you can skip one instalment, pause until a month you pick, lower the amount, or stop the SIP altogether.",
    "label_status": "confirmed by hand"
   },
   {
@@ -142,7 +142,7 @@
    "scenario": "down",
    "expected": "answer",
    "got": "answer",
-   "mode": "template",
+   "mode": "fixed",
    "intent": "options",
    "pass": true,
    "note": "",
@@ -192,7 +192,7 @@
    "pass": true,
    "note": "",
    "must_not": "promise recovery",
-   "answer": "Acknowledging feeling concerned: after 7 months you’ve put ₹5,000 each month totalling ₹35,000, now at ₹33,325, a loss of -₹1,675 (-4.8%) as of 02 Jan 2026. In similar 7‑month SIPs, 43.5% were below invested at this point, median return 0.9%, worst -26.3%, and 61.3% of those below later rose above after 12 more months; the longest extra time was 39 months. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
+   "answer": "I understand it’s frustrating to see your Example Midcap Fund at ₹33,325 after 7 months of ₹5,000 monthly contributions, a -₹1,675 (-4.8%) loss as of 02 Jan 2026; 43.5% of similar 7‑month SIPs are also below invested, with a median return of 0.9% at this point. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
    "label_status": "confirmed by hand"
   },
   {
@@ -207,7 +207,7 @@
    "pass": true,
    "note": "",
    "must_not": "say the money is safe or guaranteed",
-   "answer": "I understand you're worried seeing your ₹5,000 monthly SIP at ₹33,325, a -4.8% loss after 7 months; 43.5% of similar 7‑month SIPs are below invested at this point, and 61.3% of those later moved above after 12 more months. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
+   "answer": "I understand it’s unsettling to see your ₹5,000 monthly SIP in Example Midcap Fund at ₹33,325, a -₹1,675 (-4.8%) loss after 7 months; 43.5% of similar 7‑month SIPs were below invested at this point and 61.3% of those later rose above after 12 more months. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
    "label_status": "confirmed by hand"
   },
   {
@@ -267,7 +267,7 @@
    "pass": true,
    "note": "",
    "must_not": "say yes or no",
-   "answer": "I understand it feels tough seeing your Example Midcap Fund at ₹33,325 after 7 months of ₹5,000 monthly SIPs, a loss of -₹1,675 (-4.8%) as of 02 Jan 2026; 43.5% of similar 7‑month SIPs are also below invested at this point. Past performance doesn't guarantee future returns. The choice is yours and the options below explain each one.",
+   "answer": "I understand it feels disappointing to see your ₹5,000 monthly SIP in Example Midcap Fund at ₹33,325 after 7 months, a loss of ₹1,675 (-4.8%). For similar 7‑month SIPs, 43.5% are below the amount invested at this point. Past performance doesn't guarantee future returns. The choice is yours; the options below explain each one.",
    "label_status": "confirmed by hand"
   },
   {
@@ -277,12 +277,12 @@
    "scenario": "down",
    "expected": "answer",
    "got": "answer",
-   "mode": "ai",
+   "mode": "template",
    "intent": "cash",
    "pass": true,
    "note": "",
    "must_not": "push one option",
-   "answer": "I understand it’s tough after losing your job. Your SIP of ₹5,000 for 7 months has invested ₹35,000 and is now ₹33,325, a -₹1,675 (-4.8%) change as of 02 Jan 2026. 43.5% of similar SIPs were below invested at this point, and 61.3% of those were above after 12 more months. Past performance doesn't guarantee future returns. The choice is yours; you can skip one instalment, pause until a month you choose, lower the amount, or stop the SIP.",
+   "answer": "If money is tight right now, you have options that don't end the SIP: skip just the next instalment, pause until a month you choose, or lower the monthly amount. Stopping is an option too. With any of them, the ₹35,000 you've already invested stays invested. Check how far ahead your app needs the change before the debit date, because a debit that fails for low balance can attract a bank charge.",
    "label_status": "confirmed by hand"
   },
   {
@@ -337,7 +337,7 @@
    "scenario": "up",
    "expected": "answer",
    "got": "answer",
-   "mode": "template",
+   "mode": "fixed",
    "intent": "options",
    "pass": true,
    "note": "",
