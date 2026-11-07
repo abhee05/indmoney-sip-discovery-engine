@@ -256,3 +256,44 @@ def respond(question: str, facts: dict, llm=None, intent: str | None = None) -> 
     if mode == "template" and intent not in AI_INTENTS:
         mode = "fixed"            # written answer by design (options, XIRR), not an AI fallback
     return Answer(text, intent, mode, run_gates(text, facts, question), sources, rule=rule)
+
+
+# ---------------------------------------------------------------- "what's making you want to pause?"
+# Reasons adapted from the reasons INDmoney asks for after a stop. Here they are asked before the decision.
+REASONS = {
+    "loss": ("My SIP is showing a loss, or returns are lower than I expected", "doubt"),
+    "volatility": ("I'm not comfortable with the ups and downs", "doubt"),
+    "cash": ("Money is tight right now", "cash"),
+    "restart": ("I'll restart after a few months", "restart"),
+    "elsewhere": ("I want to invest elsewhere or change funds", "elsewhere"),
+    "goal": ("I've reached my goal or need the money", "goal"),
+    "failed": ("An instalment failed, or a bank or mandate issue", "failed"),
+    "other": ("Something else, or I'd rather not say", "doubt"),
+}
+HISTORY_FIRST = {"loss", "volatility", "other"}
+
+
+def reason_answer(key: str, facts: dict, llm=None) -> Answer:
+    """The explanation shown after the user says why they want to pause or stop."""
+    label, intent = REASONS[key]
+    f = facts
+    fixed = {
+        "restart": (f"Pausing until a month you pick does exactly that: no instalments until then, and the SIP "
+                    f"restarts on its own. Stopping instead means setting up a new SIP later. Either way, the "
+                    f"{f['invested']} you've already invested stays invested."),
+        "elsewhere": (f"That's your decision, and stopping is quick. I can't suggest other funds, as that would be "
+                      f"investment advice; a SEBI-registered adviser can help with that. Stopping this SIP doesn't "
+                      f"sell the {f['invested']} already invested; that stays in this fund until you redeem it."),
+        "goal": (f"Stopping the SIP only ends future instalments. It doesn't sell anything: the {f['current_value']} "
+                 f"this SIP is worth stays invested until you redeem it separately. If you need the money, "
+                 f"redeeming is a separate step in your app."),
+    }
+    if intent in fixed:
+        text = fixed[intent]
+        return Answer(text, intent, "fixed", run_gates(text, f, label),
+                      [SEBI_INVESTOR] if intent == "elsewhere" else [], rule="reason")
+    if intent == "doubt" and key != "other":
+        return respond(label, f, llm, intent="doubt")
+    if key == "other":
+        return respond("", f, llm, intent="opening")
+    return respond(label, f, llm, intent=intent)

@@ -68,6 +68,11 @@ def test_pause_flow_full_path():
     subs = texts(calls, "subheader")
     assert "Before you pause" in subs
     md = " ".join(texts(calls, "markdown"))
+    assert "Your options" in md and "You've invested" not in md          # options visible before any reason
+    stub.CLICK.clear()
+    stub.CHOOSE["What's making you want to pause?"] = "loss"
+    calls = run()
+    md = " ".join(texts(calls, "markdown"))
     assert "You've invested" in md and "doesn't guarantee" in md
     # ask a question and pick an option, across reruns
     stub.CLICK.clear()
@@ -98,6 +103,7 @@ def test_own_fund_with_little_history_shows_uncertainty():
     stub.CHOOSE["Months since your first instalment"] = 6
     run()
     stub.CLICK.add("Stop SIP")
+    stub.CHOOSE["What's making you want to stop?"] = "volatility"
     calls = run()
     assert "Before you stop" in texts(calls, "subheader")
     warn = " ".join(texts(calls, "warning"))
@@ -109,3 +115,28 @@ def test_own_fund_without_query_stops_cleanly():
     calls = run()
     assert "Invested" not in texts(calls, "metric")                            # no portfolio card
     assert any("Golden set results" == t for t in texts(calls, "subheader"))   # explainer tab still rendered
+
+
+@pytest.mark.parametrize("reason,expect", [
+    ("cash", "skip"), ("restart", "Pausing until a month"), ("elsewhere", "can't suggest other funds"),
+    ("goal", "doesn't sell anything"), ("failed", "can't see your bank"),
+])
+def test_each_reason_gets_its_own_explanation(reason, expect):
+    run()
+    stub.CLICK.add("Stop SIP")
+    stub.CHOOSE["What's making you want to stop?"] = reason
+    calls = run()
+    md = " ".join(texts(calls, "markdown"))
+    assert expect.lower() in md.lower()
+    assert "Your options" in md
+
+
+def test_lower_amount_option():
+    run()
+    stub.CLICK.add("Pause SIP")
+    run()
+    stub.CLICK.clear()
+    stub.CHOOSE["New monthly amount (₹)"] = 2000
+    stub.CLICK.add("Lower to ₹2,000 a month")
+    calls = run()
+    assert any("Lower to ₹2,000 a month" in t for t in texts(calls, "success"))

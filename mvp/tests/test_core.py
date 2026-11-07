@@ -163,3 +163,10 @@ def test_gates_catch_each_rule(down_facts):
         assert checks[rule] is False, rule
     ok = {c["name"]: c["passed"] for c in respond.run_gates("Past performance doesn't guarantee future returns.", f, "")}
     assert ok["No predictions or promises"]
+
+
+def test_every_reason_answer_passes_gates(down_facts):
+    for key in respond.REASONS:
+        a = respond.reason_answer(key, down_facts, None)
+        bad = [c for c in a.checks if not c["passed"]]
+        assert not bad, (key, bad)

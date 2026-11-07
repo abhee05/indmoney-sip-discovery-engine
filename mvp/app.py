@@ -140,14 +140,20 @@ with tab_how:
     st.markdown(
         "First-time investors often hit **Pause** or **Stop** the first time their SIP shows less than they put "
         "in. In our research, none of them got a useful explanation inside their app: they went to YouTube, "
-        "Reddit, colleagues or ChatGPT, or decided alone. INDmoney's own assistant answered *\"Should I stop my "
-        "SIP?\"* by showing the stop button.\n\n"
+        "Reddit, colleagues or ChatGPT, or decided alone. INDmoney's own assistant answers *\"Should I stop my "
+        "SIP?\"* with \"I can't decide that for you\", then goes straight to \"Reply Yes to stop it\" (tested 3 and "
+        "7 Nov 2026). Its stop screen says \"You'll miss out\" and asks *why* only after the SIP is stopped.\n\n"
         "This screen sits between the tap and the decision:\n"
+        "0. **What's making you want to pause?** Asked *before* the decision, so the explanation fits the reason.\n"
         "1. **Where you stand:** your real invested amount, current value and return, from real NAVs.\n"
         "2. **Is this normal?** How every past SIP of the same length in this fund looked at the same point, "
         "including the bad cases.\n"
         "3. **Ask anything:** plain answers about your own SIP. Fund picks and predictions are declined.\n"
-        "4. **Your options:** continue, skip once, pause until a month, or stop. Stop is never hidden.")
+        "4. **Your options:** continue, skip once, pause until a month, lower the amount, or stop. Stop is never "
+        "hidden and never slowed down.\n\n"
+        "**Compared with INDmoney today:** it has no skip or pause button (the only workaround is moving the debit "
+        "date, about a month at most), and lowering the amount is inside Edit SIP. *Skip once* and *Pause until* are "
+        "proposed features; *Lower the amount* points to what already exists.")
     st.subheader("Where AI earns its place")
     st.markdown(
         "A static chart or FAQ shows everyone the same thing. The AI reads *why* someone came (\"it's red\" vs "
@@ -258,7 +264,7 @@ with tab_try:
 
     fkey = f"{code}|{amount}|{res.instalments}|{res.as_of.date()}"
     if st.session_state.get("fkey") != fkey:
-        st.session_state.update(fkey=fkey, flow=None, answers=[], opening=None, choice=None)
+        st.session_state.update(fkey=fkey, flow=None, answers=[], opening=None, choice=None, reason=None)
         log("scenario", fund=fund_name, amount=int(amount), months=res.instalments, as_of=f["as_of"],
             replay=bool(replay_label))
 
@@ -283,13 +289,13 @@ with tab_try:
 
     b1, b2, b3 = st.columns(3)
     if b1.button("Pause SIP"):
-        st.session_state.flow = "pause"
+        st.session_state.update(flow="pause", opening=None, reason=None)
         log("tapped", button="Pause SIP")
     if b2.button("Stop SIP"):
-        st.session_state.flow = "stop"
+        st.session_state.update(flow="stop", opening=None, reason=None)
         log("tapped", button="Stop SIP")
     if b3.button("Ask a question"):
-        st.session_state.flow = "ask"
+        st.session_state.update(flow="ask", opening=None, reason=None)
         log("tapped", button="Ask a question")
 
     flow = st.session_state.get("flow")
@@ -298,28 +304,48 @@ with tab_try:
         title = {"pause": "Before you pause", "stop": "Before you stop", "ask": "Your SIP, explained"}[flow]
         st.subheader(title)
 
-        st.markdown("**Where you stand**")
-        if st.session_state.get("opening") is None:
-            with st.spinner("Writing your explanation..."):
-                st.session_state.opening = resp.respond("", f, llm, intent="opening")
-            log("opening", mode=st.session_state.opening.mode)
-        with st.container(border=True):
-            show_answer(st.session_state.opening)
+        reason_key = None
+        if flow in ("pause", "stop"):
+            verb = "pause" if flow == "pause" else "stop"
+            reason_key = st.radio(f"What's making you want to {verb}?", list(resp.REASONS),
+                                  format_func=lambda k: resp.REASONS[k][0], index=None,
+                                  key=f"reason_{st.session_state.fkey}_{flow}")
+            if reason_key is None:
+                st.caption("Pick one to see an explanation for it, or go straight to your options below.")
+            elif st.session_state.get("reason") != reason_key:
+                st.session_state.reason = reason_key
+                st.session_state.opening = None
+                log("reason", reason=resp.REASONS[reason_key][0])
+        show_explainer = flow == "ask" or reason_key is not None
+        if show_explainer:
+            st.markdown("**Where you stand**")
+            if st.session_state.get("opening") is None:
+                with st.spinner("Writing your explanation..."):
+                    st.session_state.opening = (resp.reason_answer(reason_key, f, llm) if reason_key
+                                                else resp.respond("", f, llm, intent="opening"))
+                log("opening", mode=st.session_state.opening.mode)
+            with st.container(border=True):
+                show_answer(st.session_state.opening)
 
-        st.markdown("**Is this normal for this fund?**")
-        if hist.sufficient:
-            h1, h2, h3 = st.columns(3)
-            h1.metric(f"Past {hist.months}-month SIPs below invested", f"{hist.pct_below}%")
-            h2.metric("Of those, above after 12 more months",
-                      f"{hist.pct_above_after_follow}%" if hist.pct_above_after_follow is not None else "n/a")
-            h3.metric("Longest to get back above",
-                      f"{hist.max_months_to_recover} months" if hist.max_months_to_recover is not None else "n/a")
-            chart_outcomes(hist.outcomes, round(res.gain_pct, 2))
-            st.caption(f"Each bar counts past SIPs of {hist.months} months in this fund, by their return at the same "
-                       f"point; there are {hist.n_windows} of them, using prices up to {f['as_of']}. "
-                       f"The blue line is you. Past performance doesn't guarantee future returns.")
-        else:
-            st.warning(resp.insufficient_sentence(f))
+            history_first = flow == "ask" or reason_key in resp.HISTORY_FIRST
+            box = st.container() if history_first else st.expander("Is this normal for this fund? (history)")
+            with box:
+                if history_first:
+                    st.markdown("**Is this normal for this fund?**")
+                if hist.sufficient:
+                    h1, h2, h3 = st.columns(3)
+                    h1.metric(f"Past {hist.months}-month SIPs below invested", f"{hist.pct_below}%")
+                    h2.metric("Of those, above after 12 more months",
+                              f"{hist.pct_above_after_follow}%" if hist.pct_above_after_follow is not None else "n/a")
+                    h3.metric("Longest to get back above",
+                              f"{hist.max_months_to_recover} months" if hist.max_months_to_recover is not None
+                              else "n/a")
+                    chart_outcomes(hist.outcomes, round(res.gain_pct, 2))
+                    st.caption(f"Each bar counts past SIPs of {hist.months} months in this fund, by their return at the "
+                               f"same point; there are {hist.n_windows} of them, using prices up to {f['as_of']}. "
+                               f"The blue line is you. Past performance doesn't guarantee future returns.")
+                else:
+                    st.warning(resp.insufficient_sentence(f))
 
         st.markdown("**Ask anything about your SIP**")
         st.caption("Try: \"Is this loss normal?\" · \"What happens if I pause?\" · \"Money is tight this month\" · "
@@ -340,7 +366,7 @@ with tab_try:
                 show_answer(a)
 
         st.markdown("**Your options**")
-        st.caption("All four are always here. None of them sells the units you already hold.")
+        st.caption("All five are always here. None of them sells the units you already hold.")
         o1, o2 = st.columns(2)
         with o1:
             st.markdown("**Continue**  \nThe next instalment goes in as usual.")
@@ -349,6 +375,13 @@ with tab_try:
             st.markdown("**Skip once**  \nOnly the next instalment is skipped. The SIP carries on after.")
             if st.button("Skip next instalment"):
                 st.session_state.choice = "Skip next instalment"
+            st.markdown("**Lower the amount**  \nFuture instalments are smaller. The SIP keeps running.")
+            low_max = max(100, int(res.amount) - 100)
+            low_default = max(100, min(low_max, int(round(res.amount / 2 / 100) * 100)))
+            lower_to = st.number_input("New monthly amount (₹)", min_value=100, max_value=low_max,
+                                       value=low_default, step=100, label_visibility="collapsed")
+            if st.button(f"Lower to {factsmod.inr(lower_to)} a month"):
+                st.session_state.choice = f"Lower to {factsmod.inr(lower_to)} a month"
         with o2:
             st.markdown("**Pause**  \nNo instalments until the month you pick.")
             restart_options = [(res.as_of + pd.DateOffset(months=i)).strftime("%b %Y") for i in range(2, 8)]
