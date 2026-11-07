@@ -197,7 +197,8 @@ with tab_try:
     if source_choice.startswith("A scenario"):
         scen = presets["scenarios"]
         pick = st.selectbox("Scenario", scen, format_func=lambda s: s["label"])
-        st.caption(f"Story: {pick['story']} (Fund shown as an example, not a recommendation.)")
+        st.caption(f"Fund: {presets['funds'][pick['fund']]['label']}. Story: {pick['story']} "
+                   f"(Fund shown as an example, not a recommendation.)")
         amount, months = pick["amount"], pick["months_ago"]
         name_hint = presets["funds"][pick["fund"]]["label"]
         try:
